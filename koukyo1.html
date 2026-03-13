@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>公共：①現代社会と青年の生き方</title>
+    <style>
+        :root { 
+            --primary-color: #2c3e50; 
+            --bg-color: #f8f9fa; 
+            --drop-zone-bg: #fff9c4; 
+            --line-green: #06C755;
+            --btn-blue: #3498db;
+        }
+        body { font-family: sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* ページリンクナビゲーション */
+        .page-nav {
+            background: #fff; padding: 10px; border-bottom: 1px solid #ddd;
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+        }
+        .nav-btn {
+            text-decoration: none; padding: 8px 15px; background: #eee; color: #333;
+            border-radius: 4px; font-size: 0.85em; font-weight: bold; border: 1px solid #ccc;
+            transition: 0.2s;
+        }
+        .nav-btn:hover { background: #ddd; }
+        .nav-btn.active { background: var(--btn-blue); color: white; border-color: #2980b9; }
+
+        /* 固定ヘッダー */
+        .sticky-header { 
+            position: sticky; top: 0; background: var(--bg-color); 
+            padding: 10px 0; z-index: 1000; border-bottom: 2px solid #ddd; 
+        }
+        .challenge-panel { 
+            background: #333; color: #fff; padding: 10px; border-radius: 8px; 
+            display: flex; justify-content: space-around; align-items: center; 
+            max-width: 1050px; margin: 0 auto 5px; 
+        }
+        .timer { font-size: 1.5em; color: #f1c40f; font-family: monospace; }
+        
+        /* 音声コントロールエリア */
+        .audio-summary-area {
+            background: #fff3e0; padding: 12px; border-radius: 8px; margin: 0 auto 10px;
+            display: flex; align-items: center; justify-content: space-between;
+            border: 1px solid #ffe0b2; max-width: 1050px;
+        }
+        .speaker-btn-large { 
+            background: #e67e22; color: white; border: none; cursor: pointer; 
+            padding: 10px 25px; border-radius: 30px; font-weight: bold;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+        .speaker-btn-large:hover { background: #d35400; }
+        .speaker-btn-large.playing { background: #c0392b; }
+
+        .volume-control { display: flex; align-items: center; gap: 10px; }
+        input[type="range"] { cursor: pointer; width: 120px; }
+
+        /* 語群コンテナ */
+        .word-bank-container { 
+            background: #eee; padding: 15px; border-radius: 8px; border: 1px solid #ccc; 
+            max-width: 1050px; margin: 0 auto; 
+        }
+        .word-bank { display: flex; flex-wrap: wrap; gap: 8px; min-height: 40px; }
+        .drag-item { 
+            background: #fff; color: #ff0000; border: 1px solid #333; padding: 4px 12px; 
+            cursor: pointer; font-weight: bold; font-size: 0.9em; 
+        }
+        .drag-item.selected { background: #f1c40f; color: #333; }
+
+        .container { max-width: 1050px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; }
+        .section-box { margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .section-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; border-left: 6px solid #2c3e50; padding-left: 10px; }
+
+        .drop-zone-inline { 
+            display: inline-block; min-width: 100px; height: 1.5em; 
+            background: var(--drop-zone-bg); border: 1px solid #333; 
+            vertical-align: middle; cursor: pointer; text-align: center;
+            font-weight: bold; color: #ff0000; padding: 2px 5px;
+            white-space: nowrap;
+        }
+        .drop-zone-inline.correct { background: #d4edda !important; }
+        .drop-zone-inline.wrong { background: #f8d7da !important; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #333; padding: 12px; vertical-align: middle; line-height: 1.6; }
+        th { background: #f2f2f2; }
+        .scholar-img { width: 80px; height: auto; display: block; margin: 5px auto; border: 1px solid #ccc; background: #fff; }
+
+        .controls { text-align: center; margin-top: 30px; padding-bottom: 100px; }
+        .main-btn { padding: 15px 30px; font-size: 1.1rem; cursor: pointer; border: none; border-radius: 8px; font-weight: bold; color: white; margin: 0 10px; }
+        
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+    </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<nav class="page-nav">
+    <a href="koukyo1.html" class="nav-btn active">① 青年の生き方 (本編)</a>
+    <a href="koukyo1-1.html" class="nav-btn">① 練習問題</a>
+    <a href="koukyo2.html" class="nav-btn">② 発達課題と欲求 (本編)</a>
+    <a href="koukyo2-1.html" class="nav-btn">② 練習問題</a>
+</nav>
+
+<div class="sticky-header">
+    <div class="challenge-panel">
+        <div>TIME: <span id="timerDisplay" class="timer">00:00.0</span></div>
+        <div id="recordDisplay" style="font-size:0.8em;">記録なし</div>
+    </div>
+
+    <div class="audio-summary-area">
+        <button id="playBtn" class="speaker-btn-large" onclick="toggleAudio()">
+            <span id="btnIcon">📢</span> <span id="btnText">解説を聴く</span>
+        </button>
+        <div class="volume-control">
+            <span style="font-size:0.8em; font-weight:bold; color:#e67e22;">音量</span>
+            <input type="range" id="volSlider" min="0" max="1" step="0.01" value="1">
+            <span id="volNum" style="font-size:0.8em; min-width:35px;">100%</span>
+        </div>
+    </div>
+
+    <div class="word-bank-container"><div id="wordBank" class="word-bank">「チャレンジ開始」をクリックしてください。</div></div>
+</div>
+
+<div class="container">
+    <div class="section-box">
+        <div class="section-title">現代社会と青年の生き方</div>
+        <p>1.青年期のとらえ方……喜怒哀楽の感情の起伏の激しい青年期を哲学書や心理学者は次のようにとらえました。</p>
+        <p style="line-height: 2;">
+            <div class="drop-zone-inline" data-ans="第二次性徴" onclick="zCl(this)"></div>……青年期には，身体的な変化があらわれて男性はより男性らしい体つきに，<br>
+            女性はより女性らしい体つきになることを<div class="drop-zone-inline" data-ans="第二次性徴" onclick="zCl(this)"></div>といいます。
+        </p>
+
+        <table>
+            <tr><th style="width:180px;">学者名</th><th>象徴的言葉と内容</th></tr>
+            <tr>
+                <td style="text-align:center;">
+                    <img src="レビン.png" class="scholar-img" alt="レビン">
+                    <div class="drop-zone-inline" data-ans="レビン" onclick="zCl(this)"></div>
+                </td>
+                <td>
+                    <div class="drop-zone-inline" data-ans="マージナルマン" onclick="zCl(this)"></div> (境界人)<br>
+                    青年はこどもと大人の境界にいる。
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">
+                    <img src="エリクソン.png" class="scholar-img" alt="エリクソン">
+                    <div class="drop-zone-inline" data-ans="エリクソン" onclick="zCl(this)"></div>
+                </td>
+                <td>
+                    <div class="drop-zone-inline" data-ans="モラトリアム" onclick="zCl(this)"></div><br>
+                    江戸時代では 8 歳ぐらいから働いていました。現代では科学技術が発達したので，専門学校，大学まで勉強しなければなりません。このように働く時期が青年になるまで待たれていることを，金融用語の（支払い猶予）＝<div class="drop-zone-inline" data-ans="モラトリアム" onclick="zCl(this)"></div>を使って表現しました。
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">
+                    <img src="ルソー.png" class="scholar-img" alt="ルソー">
+                    <div class="drop-zone-inline" data-ans="ルソー" onclick="zCl(this)"></div>
+                </td>
+                <td>
+                    <div class="drop-zone-inline" data-ans="第二の誕生" onclick="zCl(this)"></div><br>
+                    著書「<div class="drop-zone-inline" data-ans="エミール" onclick="zCl(this)"></div>」で次のように述べています。<br>
+                    「我々はいわば 2 度生まれる。一度は生存するため。二度は生きるために」<br>
+                    お母さんから生まれた。→第一の誕生，<br>
+                    成長し，社会的に自立すること。→<div class="drop-zone-inline" data-ans="第二の誕生" onclick="zCl(this)"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-box">
+        <div class="section-title">2.親からの精神的離乳</div>
+        <table>
+            <tr>
+                <td style="width:100px; text-align:center;">
+                    <img src="ホリングワース.png" class="scholar-img" alt="ホリングワース">
+                </td>
+                <td>
+                    <div class="drop-zone-inline" data-ans="心理的離乳" onclick="zCl(this)"></div> アメリカの心理学者<div class="drop-zone-inline" data-ans="ホリングワース" onclick="zCl(this)"></div>の言葉。親からの精神的自立の意味。
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center; font-weight:bold;">
+                    <div class="drop-zone-inline" data-ans="第二次" onclick="zCl(this)"></div>反抗期
+                </td>
+                <td>
+                    第一次反抗期……1 歳から 4 歳「イヤイヤ期」自我が芽生える「わがまま」な時期<br>
+                    <div class="drop-zone-inline" data-ans="第二次" onclick="zCl(this)"></div>反抗期……中学生以降の 13 歳から 19 歳までの間に見られる反抗期を<br>
+                    <div class="drop-zone-inline" data-ans="第二次" onclick="zCl(this)"></div>反抗期といいます。この時期に子どもたちは自己確立や独立の思いが強くなり，自分自身の<div class="drop-zone-inline" data-ans="アイデンティティ" onclick="zCl(this)"></div>を確立しようとします。その結果，命令されることや決めつけられることを嫌い，大人と摩擦が生じます。<br><br>
+                    <span style="border-left: 3px solid #e74c3c; padding-left: 10px; display: block;">
+                    アメリカの学者<div class="drop-zone-inline" data-ans="エリクソン" onclick="zCl(this)"></div>は，青年期の不安定な精神状態を安定させるためには<div class="drop-zone-inline" data-ans="アイデンティティ" onclick="zCl(this)"></div>の確立が必要であると述べています。
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="controls">
+        <button class="main-btn" onclick="stCh()" style="background:#e67e22;">チャレンジ開始！</button>
+        <button class="main-btn" onclick="chAn()" style="background:#27ae60;">答え合わせ</button>
+        <button class="main-btn" onclick="shMo()" style="background:#95a5a6;">お手本に戻す</button>
+    </div>
+</div>
+
+<audio id="mainAudio" src="seinenki.wav"></audio>
+
+<script>
+    const words = ["第二次性徴","レビン","マージナルマン","エリクソン","モラトリアム","ルソー","エミール","第二の誕生","心理的離乳","ホリングワース","第二次","アイデンティティ"];
+    let sT, tI, isR = false, sW = null;
+    const audio = document.getElementById('mainAudio');
+    const playBtn = document.getElementById('playBtn');
+    const volSlider = document.getElementById('volSlider');
+    const volNum = document.getElementById('volNum');
+
+    function toggleAudio() {
+        if (audio.paused) { audio.play(); updateUI(true); } 
+        else { audio.pause(); updateUI(false); }
+    }
+    audio.onended = () => updateUI(false);
+
+    function updateUI(isPlaying) {
+        document.getElementById('btnIcon').innerText = isPlaying ? "⏸" : "📢";
+        document.getElementById('btnText').innerText = isPlaying ? "再生中..." : "解説を聴く";
+        playBtn.classList.toggle('playing', isPlaying);
+    }
+
+    volSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+        volNum.innerText = Math.round(e.target.value * 100) + "%";
+    });
+
+    function zCl(z){ if(isR && sW){ z.innerText = sW.innerText; sW.classList.remove('selected'); sW = null; } }
+    
+    function stCh(){
+        isR = true; sT = Date.now();
+        tI = setInterval(()=> { document.getElementById('timerDisplay').innerText = ((Date.now()-sT)/1000).toFixed(1)+"s"; }, 100);
+        document.querySelectorAll('.drop-zone-inline').forEach(z=>{ z.innerText=""; z.className="drop-zone-inline"; });
+        const b = document.getElementById('wordBank'); b.innerHTML = "";
+        [...new Set(words)].sort(()=>Math.random()-0.5).forEach(w=>{
+            const d = document.createElement('div'); d.className='drag-item'; d.innerText=w;
+            d.onclick=function(){ if(sW)sW.classList.remove('selected'); sW=this; this.classList.add('selected'); };
+            b.appendChild(d);
+        });
+    }
+
+    function chAn(){
+        let ok=true;
+        document.querySelectorAll('.drop-zone-inline').forEach(z=>{
+            if(z.innerText.trim()===z.getAttribute('data-ans')) z.classList.add('correct');
+            else { z.classList.add('wrong'); ok=false; }
+        });
+        if(ok && isR){ clearInterval(tI); isR=false; startCnf(); }
+    }
+
+    function shMo(){
+        clearInterval(tI); isR = false;
+        document.querySelectorAll('.drop-zone-inline').forEach(z=>{ z.innerText=z.getAttribute('data-ans'); z.className="drop-zone-inline"; });
+        document.getElementById('wordBank').innerHTML = "お手本表示中。";
+    }
+
+    const cvs = document.getElementById("confetti-canvas"); const ctx = cvs.getContext("2d"); let pts = [];
+    function startCnf() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; pts=[]; for (let i = 0; i < 150; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height-cvs.height, s: Math.random()*8+4, c: `hsl(${Math.random()*360},70%,70%)`, sp: Math.random()*3+2 }); updateCnf(); }
+    function updateCnf() { if (pts.length === 0) return; ctx.clearRect(0, 0, cvs.width, cvs.height); pts.forEach(p => { p.y += p.sp; ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, p.s, p.s); if (p.y > cvs.height) p.y = -20; }); requestAnimationFrame(updateCnf); }
+    shMo();
+</script>
+</body>
+</html>

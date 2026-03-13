@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>公共：③練習問題（マズロー）</title>
+    <style>
+        :root { 
+            --primary-color: #2c3e50; 
+            --bg-color: #f8f9fa; 
+            --drop-zone-bg: #fff9c4; 
+            --line-green: #06C755;
+            --btn-blue: #3498db;
+        }
+        body { font-family: sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* ページリンクナビゲーション */
+        .page-nav {
+            background: #fff; padding: 10px; border-bottom: 1px solid #ddd;
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+        }
+        .nav-btn {
+            text-decoration: none; padding: 8px 15px; background: #eee; color: #333;
+            border-radius: 4px; font-size: 0.85em; font-weight: bold; border: 1px solid #ccc;
+            transition: 0.2s;
+        }
+        .nav-btn:hover { background: #ddd; }
+        .nav-btn.active { background: var(--btn-blue); color: white; border-color: #2980b9; }
+
+        /* 固定ヘッダー */
+        .sticky-header { 
+            position: sticky; top: 0; background: var(--bg-color); 
+            padding: 10px 0; z-index: 1000; border-bottom: 2px solid #ddd; 
+        }
+        .challenge-panel { 
+            background: #333; color: #fff; padding: 10px; border-radius: 8px; 
+            display: flex; justify-content: space-around; align-items: center; 
+            max-width: 1050px; margin: 0 auto 10px; 
+        }
+        .timer { font-size: 1.5em; color: #f1c40f; font-family: monospace; }
+        
+        .word-bank-container { 
+            background: #eee; padding: 15px; border-radius: 8px; border: 1px solid #ccc; 
+            max-width: 1050px; margin: 0 auto; 
+        }
+        .word-bank { display: flex; flex-wrap: wrap; gap: 8px; min-height: 40px; }
+        .drag-item { 
+            background: #fff; color: #ff0000; border: 1px solid #333; padding: 4px 12px; 
+            cursor: pointer; font-weight: bold; font-size: 0.9em; 
+        }
+        .drag-item.selected { background: #f1c40f; color: #333; }
+
+        .container { max-width: 1050px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px; }
+        .section-box { margin-bottom: 30px; padding: 25px; border: 1px solid #ddd; border-radius: 8px; }
+        .section-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; border-left: 6px solid #e74c3c; padding-left: 10px; }
+
+        /* レイアウト調整：画像と文の重なりを防止 */
+        .content-flex { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
+        .question-main { flex: 1; }
+        
+        .q-box { background: #fdfdfd; border: 1px solid #eee; padding: 15px; margin-bottom: 12px; line-height: 1.6; border-radius: 5px; }
+        .q-label { font-weight: bold; color: #c0392b; margin-right: 10px; }
+
+        .pyramid-side { width: 250px; border: 1px solid #ddd; padding: 10px; background: #fff; border-radius: 5px; }
+        .pyramid-side img { width: 100%; height: auto; }
+
+        .options-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 15px; 
+            margin: 20px 0;
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .opt-item { font-size: 0.95rem; font-weight: bold; }
+
+        .drop-zone-ans { 
+            display: inline-block; min-width: 60px; height: 1.8em; 
+            background: var(--drop-zone-bg); border: 2px solid #333;
+            vertical-align: middle; cursor: pointer; text-align: center;
+            font-weight: bold; color: #ff0000; padding: 2px 10px; margin-left: 10px;
+        }
+        .drop-zone-ans.correct { background: #d4edda !important; border-color: #28a745 !important; }
+        .drop-zone-ans.wrong { background: #f8d7da !important; border-color: #dc3545 !important; }
+
+        .controls { text-align: center; margin-top: 30px; padding-bottom: 100px; }
+        .main-btn { padding: 15px 30px; font-size: 1.1rem; cursor: pointer; border: none; border-radius: 8px; font-weight: bold; color: white; margin: 0 10px; }
+        
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+    </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<nav class="page-nav">
+    <a href="koukyo1.html" class="nav-btn">① 生き方</a>
+    <a href="koukyo1-1.html" class="nav-btn">① 練習1</a>
+    <a href="koukyo2.html" class="nav-btn">② 課題と欲求</a>
+    <a href="koukyo2-1.html" class="nav-btn">② 練習2</a>
+    <a href="koukyo3.html" class="nav-btn">③ 5段階説</a>
+    <a href="koukyo3-1.html" class="nav-btn active">③ 練習3</a>
+    <a href="koukyo4.html" class="nav-btn">④ 葛藤</a>
+    <a href="koukyo5.html" class="nav-btn">⑤ 適応</a>
+</nav>
+
+<div class="sticky-header">
+    <div class="challenge-panel">
+        <div>TIME: <span id="timerDisplay" class="timer">00:00.0</span></div>
+        <div id="recordDisplay" style="font-size:0.8em;">記録なし</div>
+    </div>
+    <div class="word-bank-container"><div id="wordBank" class="word-bank">「チャレンジ開始」をクリックしてください。</div></div>
+</div>
+
+<div class="container">
+    <div class="section-box">
+        <div class="section-title">【マズローの欲求階層説】 練習問題</div>
+        
+        <div class="content-flex">
+            <div class="question-main">
+                <p style="margin-top:0; line-height:1.6;">
+                    マズローの欲求階層説を，低次から高次までの五つの欲求が積み重なるものと考えたとき，次のA～Cの記述は低次から何番目の欲求に該当するか。最も適当な番号を【語群】から選びなさい。
+                </p>
+                <div class="q-box"><span class="q-label">A</span>人は，全般に，人々との愛情に満ちた関係に飢えているのであり，すなわち所属する集団や家族においても居場所を切望している……</div>
+                <div class="q-box"><span class="q-label">B</span>人は，自分がなりうるものにならなければならない。人は，自分自身の本性に忠実でなければならない。</div>
+                <div class="q-box"><span class="q-label">C</span>社会的場面で緊急に必要となるのは，法律や秩序や社会的権威が現実に脅かされる時である。</div>
+            </div>
+            
+            <div class="pyramid-side">
+                <p style="text-align:center; font-size:0.8em; margin-top:0; font-weight:bold;">【欲求階層図】</p>
+                <img src="欲求階層説.png" alt="欲求階層図">
+            </div>
+        </div>
+
+        <div class="options-grid">
+            <div class="opt-item">① A－2　B－3　C－4</div>
+            <div class="opt-item">② A－2　B－4　C－3</div>
+            <div class="opt-item">③ A－2　B－4　C－5</div>
+            <div class="opt-item">④ A－3　B－4　C－2</div>
+            <div class="opt-item">⑤ A－3　B－5　C－2</div>
+            <div class="opt-item">⑥ A－3　B－5　C－4</div>
+            <div class="opt-item">⑦ A－4　B－2　C－3</div>
+            <div class="opt-item">⑧ A－4　B－5　C－2</div>
+            <div class="opt-item">⑨ A－5　B－3　C－4</div>
+        </div>
+
+        <div style="font-size: 1.2rem; font-weight: bold; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
+            解答番号：［ <div class="drop-zone-ans" data-ans="⑤" onclick="zCl(this)"></div> ］
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="main-btn challenge-btn" onclick="stCh()" style="background:#e67e22;">チャレンジ開始！</button>
+        <button class="main-btn check-btn" onclick="chAn()" style="background:#27ae60;">答え合わせ</button>
+        <button class="main-btn reset-btn" onclick="shMo()" style="background:#95a5a6;">お手本に戻す</button>
+    </div>
+</div>
+
+<script>
+    const words = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
+    let sT, tI, isR = false, sW = null;
+
+    function zCl(z){ if(isR && sW){ z.innerText = sW.innerText; sW.classList.remove('selected'); sW = null; } }
+    
+    function stCh(){
+        isR = true; sT = Date.now();
+        tI = setInterval(()=> { document.getElementById('timerDisplay').innerText = ((Date.now()-sT)/1000).toFixed(1)+"s"; }, 100);
+        document.querySelectorAll('.drop-zone-ans').forEach(z=>{ z.innerText=""; z.classList.remove('correct','wrong'); });
+        const b = document.getElementById('wordBank'); b.innerHTML = "";
+        words.forEach(w=>{
+            const d = document.createElement('div'); d.className='drag-item'; d.innerText=w;
+            d.onclick=function(){ if(sW)sW.classList.remove('selected'); sW=this; this.classList.add('selected'); };
+            b.appendChild(d);
+        });
+    }
+
+    function chAn(){
+        let ok=true;
+        document.querySelectorAll('.drop-zone-ans').forEach(z=>{
+            if(z.innerText.trim()===z.getAttribute('data-ans')) z.classList.add('correct');
+            else { z.classList.add('wrong'); ok=false; }
+        });
+        if(ok && isR){ clearInterval(tI); isR=false; startCnf(); }
+    }
+
+    function shMo(){
+        clearInterval(tI); isR = false;
+        document.querySelectorAll('.drop-zone-ans').forEach(z=>{ z.innerText=z.getAttribute('data-ans'); z.classList.remove('correct','wrong'); });
+        document.getElementById('wordBank').innerHTML = "お手本表示中。";
+    }
+
+    const cvs = document.getElementById("confetti-canvas"); const ctx = cvs.getContext("2d"); let pts = [];
+    function startCnf() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; pts=[]; for (let i = 0; i < 150; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height-cvs.height, s: Math.random()*8+4, c: `hsl(${Math.random()*360},70%,70%)`, sp: Math.random()*3+2 }); updateCnf(); }
+    function updateCnf() { if (pts.length === 0) return; ctx.clearRect(0, 0, cvs.width, cvs.height); pts.forEach(p => { p.y += p.sp; ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, p.s, p.s); if (p.y > cvs.height) p.y = -20; }); requestAnimationFrame(updateCnf); }
+    shMo();
+</script>
+</body>
+</html>
