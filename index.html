@@ -259,12 +259,18 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
    単元マスターデータ
 ━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const SEIYOU_UNITS = [
-  {id:'seiyou1', num:'①', title:'古代ギリシア思想', links:[{label:'📖 開く', url:'koukyo_seiyou1.html', main:true}]},
-  {id:'seiyou2', num:'②', title:'経験論・合理論（ベーコン・デカルト）', links:[{label:'📖 開く', url:'koukyo_seiyou2.html', main:true}]},
-  {id:'seiyou3', num:'③', title:'ドイツ観念論（カント・ヘーゲル）', links:[{label:'📖 開く', url:'koukyo_seiyou3.html', main:true}]},
-  {id:'seiyou4', num:'④', title:'功利主義（ベンサム・ミル）', links:[{label:'📖 開く', url:'koukyo_seiyou4.html', main:true}]},
-  {id:'seiyou5', num:'⑤', title:'実存主義（キルケゴール・ニーチェ・サルトル）', links:[{label:'📖 開く', url:'koukyo_seiyou5.html', main:true}]},
-  {id:'seiyou6', num:'⑥', title:'プラグマティズム（パース・ジェームズ・デューイ）', links:[{label:'📖 開く', url:'koukyo_seiyou6.html', main:true}]},
+  {id:'seiyou1', num:'①', title:'古代ギリシア思想',
+   links:[{label:'📖 説明を読む', url:'koukyo_seiyou1.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou1.html?mode=quiz', main:false}]},
+  {id:'seiyou2', num:'②', title:'経験論・合理論（ベーコン・デカルト）',
+   links:[{label:'📖 説明を読む', url:'koukyo_seiyou2.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou2.html?mode=quiz', main:false}]},
+  {id:'seiyou3', num:'③', title:'ドイツ観念論（カント・ヘーゲル）',
+   links:[{label:'📖 説明を読む', url:'koukyo_seiyou3.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou3.html?mode=quiz', main:false}]},
+  {id:'seiyou4', num:'④', title:'功利主義（ベンサム・ミル）',
+   links:[{label:'📖 説明を読む', url:'koukyo_seiyou4.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou4.html?mode=quiz', main:false}]},
+  {id:'seiyou5', num:'⑤', title:'実存主義（キルケゴール・ニーチェ・サルトル）',
+   links:[{label:'📖 説明を読む', url:'koukyo_seiyou5.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou5.html?mode=quiz', main:false}]},
+  {id:'seiyou6', num:'⑥', title:'プラグマティズム（パース・ジェームズ・デューイ）',
+   links:[{label:'📖 説明を読む', url:'koukyo_seiyou6.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou6.html?mode=quiz', main:false}]},
 ];
 
 const ALL_UNIT_IDS = ['koukyo1','koukyo2','seiyou1','seiyou2','seiyou3','seiyou4','seiyou5','seiyou6'];
@@ -272,15 +278,15 @@ const ALL_UNIT_IDS = ['koukyo1','koukyo2','seiyou1','seiyou2','seiyou3','seiyou4
 /* ━━━ バッジ定義 ━━━ */
 const BADGES = [
   {id:'first',    icon:'🌱', name:'はじめの一歩',  cond: d => getTotalCount(d) >= 1},
-  {id:'study5',   icon:'📚', name:'5回学習',        cond: d => getTotalCount(d) >= 5},
-  {id:'study20',  icon:'🏃', name:'20回学習',       cond: d => getTotalCount(d) >= 20},
-  {id:'study50',  icon:'💪', name:'50回学習',       cond: d => getTotalCount(d) >= 50},
+  {id:'study5',   icon:'📚', name:'3回学習',        cond: d => getTotalCount(d) >= 3},
+  {id:'study20',  icon:'🏃', name:'5回学習',        cond: d => getTotalCount(d) >= 5},
+  {id:'study50',  icon:'💪', name:'7回学習',        cond: d => getTotalCount(d) >= 7},
   {id:'allC',     icon:'🗒️', name:'全単元チェック', cond: d => ALL_UNIT_IDS.every(id => getGrade(d,id))},
   {id:'allB',     icon:'⭐', name:'全単元B以上',    cond: d => ALL_UNIT_IDS.every(id => ['A','B'].includes(getGrade(d,id)))},
   {id:'allA',     icon:'👑', name:'全単元A達成',    cond: d => ALL_UNIT_IDS.every(id => getGrade(d,id)==='A')},
-  {id:'streak3',  icon:'🔥', name:'3日連続',         cond: d => getStreak() >= 3},
-  {id:'streak7',  icon:'🌟', name:'7日連続',         cond: d => getStreak() >= 7},
-  {id:'streak30', icon:'🏆', name:'30日連続',        cond: d => getStreak() >= 30},
+  {id:'streak3',  icon:'🔥', name:'3日連続',          cond: d => getStreak() >= 3},
+  {id:'streak7',  icon:'🌟', name:'5日連続',          cond: d => getStreak() >= 5},
+  {id:'streak30', icon:'🏆', name:'7日連続',          cond: d => getStreak() >= 7},
 ];
 
 /* ━━━ localStorage キー ━━━ */
@@ -342,7 +348,7 @@ function buildSeiyouCards(){
       <div class="unit-top">
         <div class="unit-num red">${u.num}</div>
         <div class="unit-title">${u.title}</div>
-        <span class="unit-type type-main">本編</span>
+        <span class="unit-type type-quiz">説明＋練習</span>
       </div>
       <div class="abc-row">
         <span class="abc-lbl">理解度</span>
@@ -366,7 +372,7 @@ function buildSeiyouCards(){
 function renderDots(id, cnt, grade){
   const el=document.getElementById('dots-'+id);
   if(!el) return;
-  const max=5;
+  const max=7;
   let html='';
   for(let i=0;i<max;i++){
     const done=i<cnt;

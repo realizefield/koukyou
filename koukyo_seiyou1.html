@@ -174,6 +174,22 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
 
 #cnv{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
 </style>
+
+<script>
+// URLパラメータ mode=quiz のとき練習問題に直接ジャンプ
+(function(){
+  if(new URLSearchParams(location.search).get('mode')==='quiz'){
+    // DOMContentLoaded後に実行
+    window.addEventListener('DOMContentLoaded', function(){
+      // goQuizDirect関数が定義されているので呼び出す
+      setTimeout(function(){
+        if(typeof goQuizDirect==='function') goQuizDirect();
+        else if(typeof goQuiz==='function') goQuiz();
+      }, 100);
+    });
+  }
+})();
+</script>
 </head>
 <body>
 
