@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公共：西洋哲学6　プラグマティズム</title>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a2236;--paper:#f5f3ee;--card:#fffefb;
+  --gold:#c8972a;--gold2:#f0c040;--red:#b83232;
+  --blue:#1e4d8c;--green:#1e7a4a;--muted:#7a8299;
+  --border:#ddd8cc;--drop:#fff8dc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.95}
+.hdr{background:var(--ink);color:#fff;padding:0 18px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 3px 14px rgba(0,0,0,.42)}
+.hdr-sub{font-size:.7em;opacity:.5;letter-spacing:.1em}
+.hdr-title{font-size:1em;font-weight:700;letter-spacing:.04em}
+.hdr-timer{font-size:1.2em;font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums;letter-spacing:.06em;min-width:68px;text-align:right}
+.tab-bar{background:#253060;border-bottom:2px solid var(--gold);display:flex;gap:4px;padding:6px 12px;flex-wrap:wrap;position:sticky;top:52px;z-index:290}
+.tab-btn{font-family:'BIZ UDGothic',sans-serif;font-size:.76em;font-weight:700;padding:5px 12px;border:none;border-radius:4px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;transition:.15s;text-decoration:none;display:inline-block}
+.tab-btn:hover{background:rgba(255,255,255,.22);color:#fff}
+.tab-btn.active{background:var(--gold);color:var(--ink)}
+.phase-bar{background:#fff;border-bottom:2px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:94px;z-index:280}
+.phase-label{font-size:.75em;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.phase-step{display:flex;align-items:center;gap:6px}
+.phase-dot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:.3s;flex-shrink:0}
+.phase-dot.on{background:var(--gold)}
+.phase-txt{font-size:.78em;color:var(--muted);font-weight:700}
+.phase-txt.on{color:var(--ink)}
+.phase-arr{font-size:.85em;color:var(--border);margin:0 4px}
+.wb-bar{background:#fff;border-bottom:2px solid var(--border);padding:10px 16px;display:none;position:sticky;top:132px;z-index:270;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.wb-bar.visible{display:block}
+.wb-label{font-size:.7em;color:var(--muted);font-weight:700;letter-spacing:.1em;margin-bottom:7px}
+.wb-chips{display:flex;flex-wrap:wrap;gap:7px;min-height:34px;align-items:center}
+.chip{font-family:'BIZ UDGothic',sans-serif;font-size:.87em;font-weight:700;background:var(--ink);color:#fff;border:none;padding:5px 13px;border-radius:4px;cursor:pointer;transition:.13s}
+.chip:hover{background:#2d4080;transform:translateY(-1px)}
+.chip.sel{background:var(--gold);color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.main{max-width:860px;margin:0 auto;padding:22px 14px 140px}
+.view{display:none}.view.on{display:block}
+.s-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:22px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.s-head-e{background:var(--blue);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.s-head-q{background:var(--red);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.s-icon{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.86em;flex-shrink:0}
+.s-ht{font-size:.94em;font-weight:700;letter-spacing:.04em;flex:1}
+.aud-btn{background:rgba(255,255,255,.18);color:#fff;border:1.5px solid rgba(255,255,255,.45);border-radius:6px;padding:5px 11px;font-size:.78em;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s;white-space:nowrap;flex-shrink:0;font-family:'BIZ UDGothic',sans-serif}
+.aud-btn:hover{background:rgba(255,255,255,.32)}
+.aud-btn.playing{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.aud-btn svg{width:14px;height:14px;fill:currentColor}
+.s-body{padding:18px 20px}
+.person-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.person-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.pbadge{background:var(--blue);color:#fff;font-size:.73em;font-weight:700;padding:4px 10px;border-radius:4px;white-space:nowrap;align-self:flex-start;margin-top:3px;letter-spacing:.05em;flex-shrink:0}
+.pcont{flex:1;font-size:.94em}
+.pcont p{margin-bottom:9px}
+.pcont strong{color:var(--blue)}
+.pt{display:inline-block;background:var(--blue);color:#fff;font-size:.72em;font-weight:700;padding:2px 9px;border-radius:3px;margin-bottom:5px;letter-spacing:.05em}
+#vChallE .pt{display:none}
+/* ━━━ 練習進むボタン ━━━ */
+.f-goq{background:#e67e22;color:#fff}
+
+/* ━━━ 中断モーダル ━━━ */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:14px;padding:28px 32px;max-width:340px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.3);text-align:center}
+.modal-title{font-size:1.1em;font-weight:700;color:var(--ink);margin-bottom:18px;letter-spacing:.04em}
+.modal-btns{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.modal-btn{font-family:'BIZ UDGothic',sans-serif;font-size:.92em;font-weight:700;border:none;border-radius:8px;padding:12px 0;cursor:pointer;transition:.13s}
+.modal-btn:hover{opacity:.88}
+.mb-resume{background:var(--green);color:#fff}
+.mb-back{background:var(--muted);color:#fff}
+.mb-cancel{background:#eee;color:var(--ink)}
+
+/* ━━━ タイム記録パネル ━━━ */
+.record-panel{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:22px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.rp-title{font-size:.8em;font-weight:700;color:var(--muted);letter-spacing:.1em;margin-bottom:10px}
+.rp-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dashed var(--border);font-size:.92em}
+.rp-row:last-child{border-bottom:none}
+.rp-rank{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78em;flex-shrink:0}
+.rp-rank.r1{background:#f0c040;color:var(--ink)}
+.rp-rank.r2{background:#b0bec5;color:#fff}
+.rp-rank.r3{background:#cd7f32;color:#fff}
+.rp-time{font-weight:700;font-variant-numeric:tabular-nums;color:var(--blue);flex:1}
+.rp-date{font-size:.78em;color:var(--muted)}
+.rp-empty{font-size:.85em;color:var(--muted);text-align:center;padding:6px 0}
+
+/* 中断中バッジ */
+.pause-badge{display:none;background:#8e44ad;color:#fff;font-size:.78em;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.06em;margin-left:8px;vertical-align:middle}
+.pause-badge.show{display:inline-block}
+
+
+.qt{display:inline-block;background:var(--red);color:#fff;font-size:.72em;font-weight:700;padding:2px 9px;border-radius:3px;margin-bottom:6px;letter-spacing:.05em}
+.q-item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px dashed var(--border);font-size:.95em}
+.q-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.blank{display:inline-flex;align-items:center;justify-content:center;min-width:108px;height:27px;background:var(--drop);border:none;border-bottom:2.5px solid var(--ink);margin:0 3px;padding:0 8px;cursor:pointer;font-family:'BIZ UDGothic',sans-serif;font-size:.92em;font-weight:700;color:var(--red);border-radius:3px 3px 0 0;transition:.13s;vertical-align:middle}
+.blank:hover{background:#fff3b0}
+.blank.show{background:#eef3ff;border-color:var(--blue);color:var(--blue);cursor:default;pointer-events:none}
+.blank.ok{background:#d4f5e2;border-color:var(--green);color:var(--green)}
+.blank.ng{background:#ffe0e0;border-color:var(--red);color:var(--red)}
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mcol-lbl{font-size:.7em;color:var(--muted);font-weight:700;letter-spacing:.1em;margin-bottom:5px}
+.mitems{display:flex;flex-direction:column;gap:7px}
+.mi{font-family:'BIZ UDGothic',sans-serif;font-size:.86em;font-weight:700;background:#f0f4ff;border:1.5px solid var(--border);border-radius:6px;padding:8px 12px;cursor:pointer;transition:.13s;text-align:center;user-select:none}
+.mi:hover{border-color:var(--blue);background:#e8f0ff}
+.mi.sl{background:var(--gold);border-color:var(--ink);color:var(--ink)}
+.mi.ok{background:#d4f5e2;border-color:var(--green);color:var(--green);cursor:default}
+.mi.ng{background:#ffe0e0;border-color:var(--red);color:var(--red)}
+.mnote{margin-top:10px;font-size:.87em;font-weight:700}
+.note-box{font-size:.8em;color:var(--muted);margin-top:10px;padding:8px 12px;background:#f0f4ff;border-radius:4px;border-left:3px solid var(--blue);line-height:1.6}
+.foot{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);padding:10px 14px;display:flex;gap:8px;justify-content:center;align-items:center;z-index:200;box-shadow:0 -4px 18px rgba(0,0,0,.09);flex-wrap:wrap}
+.fbtn{font-family:'BIZ UDGothic',sans-serif;font-size:.88em;font-weight:700;border:none;border-radius:6px;padding:10px 20px;cursor:pointer;transition:.13s;letter-spacing:.04em}
+.fbtn:hover{transform:translateY(-1px);opacity:.88}
+.f-challenge{background:#e67e22;color:#fff}
+.f-hint{background:#8e44ad;color:#fff}
+.f-judge{background:var(--green);color:#fff}
+.f-retry{background:var(--blue);color:#fff}
+.f-back{background:var(--muted);color:#fff}
+.f-go{background:var(--green);color:#fff}
+.score-pill{background:var(--ink);color:#fff;padding:6px 14px;border-radius:20px;font-size:.84em;font-weight:700}
+.jbanner{display:none;position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:600;padding:16px 36px;border-radius:12px;font-size:1.22em;font-weight:700;letter-spacing:.06em;text-align:center;white-space:nowrap;box-shadow:0 6px 28px rgba(0,0,0,.28);animation:pop .35s cubic-bezier(.17,.67,.37,1.4)}
+@keyframes pop{from{transform:translateX(-50%) scale(.5);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+.ban-pass{background:#1e7a4a;color:#fff}
+.ban-ng{background:#b83232;color:#fff}
+#cnv{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+
+<style>
+.home-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;pointer-events:none}
+.home-btn{
+  position:fixed;bottom:130px;right:16px;
+  font-family:'BIZ UDGothic','Meiryo',sans-serif;
+  font-size:.82em;font-weight:700;
+  background:#1a2236;color:#fff;
+  border:none;border-radius:24px;
+  padding:10px 18px 10px 14px;
+  cursor:pointer;pointer-events:all;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);
+  display:flex;align-items:center;gap:7px;
+  transition:.15s;z-index:500;
+  text-decoration:none;
+}
+.home-btn:hover{background:#253060;transform:translateY(-2px)}
+.home-btn .hb-icon{font-size:1.1em}
+</style>
+<a class="home-btn" href="index.html"><span class="hb-icon">🏠</span>単元表に戻る</a>
+
+<canvas id="cnv"></canvas>
+<header class="hdr">
+  <div><div class="hdr-sub">江原予備校　公共</div><div class="hdr-title">西洋哲学⑥　プラグマティズム</div></div>
+  <div class="hdr-timer" id="timerDisp">00:00</div>
+</header>
+<nav class="tab-bar">
+  <a class="tab-btn" href="koukyo_seiyou1.html">① 古代ギリシア</a>
+  <a class="tab-btn" href="koukyo_seiyou2.html">② 経験論・合理論</a>
+  <a class="tab-btn" href="koukyo_seiyou3.html">③ ドイツ観念論</a>
+  <a class="tab-btn" href="koukyo_seiyou4.html">④ 功利主義</a>
+  <a class="tab-btn" href="koukyo_seiyou5.html">⑤ 実存主義</a>
+  <a class="tab-btn active" href="koukyo_seiyou6.html">⑥ プラグマティズム</a>
+</nav>
+
+
+<div class="phase-bar">
+  <span class="phase-label">STEP</span>
+  <div class="phase-step"><div class="phase-dot on" id="d0"></div><span class="phase-txt on" id="t0">① 説明を読む</span></div>
+  <span class="phase-arr">▶</span>
+  <div class="phase-step"><div class="phase-dot" id="d1"></div><span class="phase-txt" id="t1">② 説明で挑戦</span></div>
+  <span class="phase-arr">▶</span>
+  <div class="phase-step"><div class="phase-dot" id="d2"></div><span class="phase-txt" id="t2">③ 練習問題</span></div>
+</div>
+
+<div class="wb-bar" id="wbBar">
+  <div class="wb-label">▶ 語群　― タップして選択 → 空欄をタップで入力　／　入力済みの空欄を再タップするとクリア</div>
+  <div class="wb-chips" id="wbChips"></div>
+</div>
+<div class="main">
+<div class="view on" id="vRead">
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">①</div>
+    <div class="s-ht">プラグマティズムとは</div>
+    <button class="aud-btn" data-akey="pragma" onclick="playAudio('pragma')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">プラグマティズム</div>
+      <div class="pcont">
+<div class="pt">プラグマティズムとは</div>
+<p>19世紀アメリカで形成された哲学思想で、ピューリタン（清教徒）たちの西部開拓から生まれた<span class="blank show" data-ans="フロンティア精神" >フロンティア精神</span>が根底にある哲学思想を<span class="blank show" data-ans="プラグマティズム" >プラグマティズム</span>（実用主義）といいます。</p>
+<p>「pragma」とはギリシア語で「<span class="blank show" data-ans="行為・行動" >行為・行動</span>」を意味します。代表的人物は<strong>パース・ジェームズ・デューイ</strong>です。</p>
+<p>真理は固定されたものではなく、絶えず<span class="blank show" data-ans="検証" >検証</span>され修正されるものとしました。</p>
+</div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">②</div>
+    <div class="s-ht">パース（米）　論文『われわれの観念を明確にする方法について』</div>
+    <button class="aud-btn" data-akey="peirce" onclick="playAudio('peirce')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">パース</div>
+      <div class="pcont">
+<div class="pt">ポイント①　プラグマティズムの格率</div>
+<p>パースは「概念の意味は実際に行動した時の<span class="blank show" data-ans="結果" >結果</span>によって捉えるべきだ」という<span class="blank show" data-ans="プラグマティズムの格率" >プラグマティズムの格率</span>（原則）を提唱しました。</p>
+<p>【例】ダイヤモンドが硬いことを知るためには、他のモノをこすってダイヤモンドが傷つかないことで確認できる。</p>
+</div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">③</div>
+    <div class="s-ht">ジェームズ（米）　著書『プラグマティズム』</div>
+    <button class="aud-btn" data-akey="james" onclick="playAudio('james')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">ジェームズ</div>
+      <div class="pcont">
+<div class="pt">ポイント①　真理は有用性にある</div>
+<p>ジェームズは観念や思想が真理であるかどうかは、その<span class="blank show" data-ans="有用性" >有用性</span>によって決まるとしました。「真理であるから<span class="blank show" data-ans="有用" >有用</span>、有用であるから<span class="blank show" data-ans="真理" >真理</span>である」と述べました。</p>
+</div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">④</div>
+    <div class="s-ht">デューイ（米）　著書『民主主義と教育』</div>
+    <button class="aud-btn" data-akey="dewey" onclick="playAudio('dewey')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">デューイ</div>
+      <div class="pcont">
+<div class="pt">ポイント①　問題解決学習</div>
+<p>デューイはダーウィンの進化論の影響を受け、人間は環境に対し受動的・能動的に適応しながら生きる存在だと考えました。</p>
+<p>教育は知識の暗記に終始する受動的学習ではなく、「<span class="blank show" data-ans="為すことによって学ぶ" >為すことによって学ぶ</span>」能動的学習を重視しました。これを<span class="blank show" data-ans="問題解決学習" >問題解決学習</span>といいます。主著は『<span class="blank show" data-ans="民主主義と教育" >民主主義と教育</span>』です。</p>
+</div>
+    </div>
+  </div>
+</div></div>
+<div class="view" id="vChallE">
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">①</div>
+    <div class="s-ht">プラグマティズムとは</div>
+    <button class="aud-btn" data-akey="pragma" onclick="playAudio('pragma')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">プラグマティズム</div>
+      <div class="pcont">
+<div class="pt">プラグマティズムとは</div>
+<p>19世紀アメリカで形成され、<span class="blank" data-ans="フロンティア精神" onclick="fillBlank(this)" ></span>が根底にある哲学思想を<span class="blank" data-ans="プラグマティズム" onclick="fillBlank(this)" ></span>（実用主義）といいます。真理は絶えず<span class="blank" data-ans="検証" onclick="fillBlank(this)" ></span>され修正されるものとしました。</p>
+</div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">②</div>
+    <div class="s-ht">パース（米）</div>
+    <button class="aud-btn" data-akey="peirce" onclick="playAudio('peirce')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">パース</div>
+      <div class="pcont">
+<div class="pt">ポイント①　プラグマティズムの格率</div>
+<p>パースは「概念の意味は実際に行動した時の<span class="blank" data-ans="結果" onclick="fillBlank(this)" ></span>によって捉えるべきだ」という<span class="blank" data-ans="プラグマティズムの格率" onclick="fillBlank(this)" style="min-width:190px"></span>を提唱しました。</p>
+</div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">③</div>
+    <div class="s-ht">ジェームズ（米）</div>
+    <button class="aud-btn" data-akey="james" onclick="playAudio('james')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">ジェームズ</div>
+      <div class="pcont">
+<div class="pt">ポイント①　真理は有用性にある</div>
+<p>ジェームズは思想の真理性はその<span class="blank" data-ans="有用性" onclick="fillBlank(this)" ></span>によって決まるとしました。「真理であるから<span class="blank" data-ans="有用" onclick="fillBlank(this)" ></span>、有用であるから<span class="blank" data-ans="真理" onclick="fillBlank(this)" ></span>である」と述べました。</p>
+</div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">④</div>
+    <div class="s-ht">デューイ（米）</div>
+    <button class="aud-btn" data-akey="dewey" onclick="playAudio('dewey')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">デューイ</div>
+      <div class="pcont">
+<div class="pt">ポイント①　問題解決学習</div>
+<p>デューイは「<span class="blank" data-ans="為すことによって学ぶ" onclick="fillBlank(this)" style="min-width:190px"></span>」能動的学習を重視し、これを<span class="blank" data-ans="問題解決学習" onclick="fillBlank(this)" ></span>といいます。主著は『<span class="blank" data-ans="民主主義と教育" onclick="fillBlank(this)" style="min-width:150px"></span>』です。</p>
+</div>
+    </div>
+  </div>
+</div></div>
+<div class="view" id="vQ">
+<!-- タイム記録パネル -->
+<div class="record-panel" id="recordPanel">
+  <div class="rp-title">🏅 本日のタイム記録（最大3回・速い順）</div>
+  <div id="recordList"><div class="rp-empty">まだ記録がありません</div></div>
+</div>
+
+<div class="s-card">
+  <div class="s-head-q">
+    <div class="s-icon">1</div>
+    <div class="s-ht">人物選択 ── 説明に当てはまる人物を語群から選びなさい。</div>
+  </div>
+  <div class="s-body">
+<div class="q-item"><div class="qt">問 1</div>「概念の意味は実際の行動の<strong>結果</strong>によって捉えるべきだ」とする<strong>プラグマティズムの格率</strong>を提唱したのは誰ですか。→ <span class="blank" data-ans="パース" onclick="fillBlank(this)"></span></div>
+<div class="q-item"><div class="qt">問 2</div>「真理であるから有用、有用であるから真理である」と述べ、思想の真理性は<strong>有用性</strong>で決まるとしたのは誰ですか。→ <span class="blank" data-ans="ジェームズ" onclick="fillBlank(this)"></span></div>
+<div class="q-item"><div class="qt">問 3</div>「為すことによって学ぶ」能動的学習＝<strong>問題解決学習</strong>を提唱し、教育に大きな影響を与えたのは誰ですか。→ <span class="blank" data-ans="デューイ" onclick="fillBlank(this)"></span></div>
+<div class="note-box">【語群】パース ・ ジェームズ ・ デューイ</div>
+</div>
+</div>
+<div class="s-card">
+  <div class="s-head-q">
+    <div class="s-icon">2</div>
+    <div class="s-ht">キーワード穴埋め ── 当てはまる語句を語群から選びなさい。</div>
+  </div>
+  <div class="s-body">
+<div class="q-item"><div class="qt">プラグマティズム</div>
+19世紀アメリカで生まれた<span class="blank" data-ans="プラグマティズム" onclick="fillBlank(this)" ></span>（実用主義）は、<span class="blank" data-ans="フロンティア精神" onclick="fillBlank(this)" ></span>を根底に持ちます。真理は絶えず<span class="blank" data-ans="検証" onclick="fillBlank(this)" ></span>され修正されるものとしました。
+</div>
+<div class="q-item"><div class="qt">パース</div>
+パースは「概念の意味は実際の行動の<span class="blank" data-ans="結果" onclick="fillBlank(this)" ></span>によって捉えるべきだ」とする<span class="blank" data-ans="プラグマティズムの格率" onclick="fillBlank(this)" style="min-width:180px"></span>を提唱しました。
+</div>
+<div class="q-item"><div class="qt">ジェームズ</div>
+ジェームズは思想の真理性はその<span class="blank" data-ans="有用性" onclick="fillBlank(this)" ></span>によって決まるとし、「真理であるから<span class="blank" data-ans="有用" onclick="fillBlank(this)" ></span>、有用であるから<span class="blank" data-ans="真理" onclick="fillBlank(this)" ></span>である」と述べました。
+</div>
+<div class="q-item"><div class="qt">デューイ</div>
+デューイは「<span class="blank" data-ans="為すことによって学ぶ" onclick="fillBlank(this)" style="min-width:190px"></span>」能動的学習を重視し、<span class="blank" data-ans="問題解決学習" onclick="fillBlank(this)" ></span>を提唱しました。主著は『<span class="blank" data-ans="民主主義と教育" onclick="fillBlank(this)" style="min-width:150px"></span>』です。
+</div>
+<div class="note-box">【語群】プラグマティズム ・ フロンティア精神 ・ 検証 ・ 結果 ・ プラグマティズムの格率 ・ 有用性 ・ 有用 ・ 真理 ・ 為すことによって学ぶ ・ 問題解決学習 ・ 民主主義と教育</div>
+</div>
+</div>
+<div class="s-card">
+  <div class="s-head-q">
+    <div class="s-icon">3</div>
+    <div class="s-ht">人物 ↔ キーワード（左 → 右の順にタップ）</div>
+  </div>
+  <div class="s-body">
+<div class="match-wrap">
+  <div>
+    <div class="mcol-lbl">人物</div>
+    <div class="mitems">
+      <div class="mi lmi" data-id="pe" onclick="mL(this)">パース</div>
+      <div class="mi lmi" data-id="ja" onclick="mL(this)">ジェームズ</div>
+      <div class="mi lmi" data-id="de" onclick="mL(this)">デューイ</div>
+    </div>
+  </div>
+  <div>
+    <div class="mcol-lbl">関連キーワード</div>
+    <div class="mitems">
+      <div class="mi rmi" data-pair="ja" onclick="mR(this)">有用性 ／ 真理であるから有用</div>
+      <div class="mi rmi" data-pair="de" onclick="mR(this)">問題解決学習 ／ 為すことによって学ぶ ／ 民主主義と教育</div>
+      <div class="mi rmi" data-pair="pe" onclick="mR(this)">プラグマティズムの格率 ／ 概念は行動の結果で捉える</div>
+    </div>
+  </div>
+</div>
+<div class="mnote" id="mnote"></div>
+</div>
+</div></div>
+</div>
+<div class="jbanner" id="jbanner"></div>
+
+<div class="foot">
+  <!-- STEP① -->
+  <button class="fbtn f-challenge" id="bStart"  onclick="goChallE()">📝 説明で挑戦する！</button>
+  <button class="fbtn f-goq"       id="bGoQDirect" onclick="goQuizDirect()">▶ 練習問題へ進む</button>
+  <!-- STEP② -->
+  <button class="fbtn f-judge"  id="bCheckE" onclick="checkExplain()" style="display:none">✔ 確　認</button>
+  <button class="fbtn f-hint"   id="bHint"   onclick="showHint()"    style="display:none">📖 お手本を見る</button>
+  <button class="fbtn f-go"     id="bGoQ"    onclick="goQuiz()"      style="display:none">▶ 練習問題へ進む</button>
+  <!-- STEP③ -->
+  <button class="fbtn f-judge"  id="bJudge"  onclick="judgeAll()"    style="display:none">✔ 判　定</button>
+  <button class="fbtn f-retry"  id="bRetry"  onclick="retryQuiz()"   style="display:none">↺ やり直し</button>
+  <button class="fbtn f-hint"   id="bPause"  onclick="openPause()"   style="display:none">⏸ 中断</button>
+  <button class="fbtn f-back"   id="bBack"   onclick="backToRead()"  style="display:none">📖 説明に戻る</button>
+  <div class="score-pill" id="spill" style="display:none"></div>
+</div>
+
+<!-- 中断モーダル -->
+<div class="modal-overlay" id="pauseModal">
+  <div class="modal-box">
+    <div class="modal-title">⏸ 練習を中断しますか？</div>
+    <div class="modal-btns">
+      <button class="modal-btn mb-resume" onclick="resumeQuiz()">▶ 続きから再開する</button>
+      <button class="modal-btn mb-back"   onclick="backToRead()">📖 説明に戻る（記録なし）</button>
+      <button class="modal-btn mb-cancel" onclick="closePause()">キャンセル</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const AFILES = {pragma:'audio/pragma.wav',peirce:'audio/peirce.wav',james:'audio/james.wav',dewey:'audio/dewey.wav'};
+const EW = ["フロンティア精神","プラグマティズム","検証","結果","プラグマティズムの格率","有用性","有用","真理","為すことによって学ぶ","問題解決学習","民主主義と教育"];
+const QW = ["パース","ジェームズ","デューイ","プラグマティズム","フロンティア精神","検証","結果","プラグマティズムの格率","有用性","有用","真理","為すことによって学ぶ","問題解決学習","民主主義と教育"];
+
+let t0=0,tInt=null,selChip=null,mSel=null,curAud=null,curABtn=null;
+function tick(){
+  const total = pausedElapsed + (Date.now() - t0);
+  const m=String(Math.floor(total/60000)).padStart(2,'0');
+  const s=String(Math.floor((total%60000)/1000)).padStart(2,'0');
+  const ds=String(Math.floor((total%1000)/100));
+  document.getElementById('timerDisp').textContent=m+':'+s+'.'+ds;
+}
+function pad(n){return String(n).padStart(2,'0')}
+function setPhase(n){[0,1,2].forEach(i=>{document.getElementById('d'+i).classList.toggle('on',i===n);document.getElementById('t'+i).classList.toggle('on',i===n);});}
+function buildChips(words){const wb=document.getElementById('wbChips');wb.innerHTML='';selChip=null;[...words].sort(()=>Math.random()-.5).forEach(w=>{const c=document.createElement('button');c.className='chip';c.textContent=w;c.onclick=()=>{if(selChip)selChip.classList.remove('sel');if(selChip===c){selChip=null;return;}selChip=c;c.classList.add('sel');};wb.appendChild(c);});}
+function showWB(){document.getElementById('wbBar').classList.add('visible');}
+function hideWB(){document.getElementById('wbBar').classList.remove('visible');}
+function fillBlank(b){if(!selChip){b.textContent='';b.classList.remove('ok','ng','show');return;}b.textContent=selChip.textContent;b.classList.remove('ok','ng','show');selChip.classList.remove('sel');selChip=null;}
+function goChallE(){document.querySelectorAll('#vChallE .blank').forEach(b=>{b.textContent='';b.classList.remove('ok','ng','show');});sw('vRead',false);sw('vChallE',true);sw('vQ',false);buildChips(EW);showWB();setPhase(1);hide('bStart');hide('bGoQ');show('bCheckE');show('bHint');hide('bJudge');hide('bRetry');hide('bBack');hide('spill');hideBanner();stopConf();}
+function checkExplain(){const bl=[...document.querySelectorAll('#vChallE .blank')];let ok=0;bl.forEach(b=>{if(b.textContent.trim()===b.dataset.ans){b.classList.add('ok');b.classList.remove('ng');ok++;}else{b.classList.add('ng');b.classList.remove('ok');}});spill(ok,bl.length);if(ok===bl.length){banner(true,ok,bl.length);show('bGoQ');startConf();setTimeout(stopConf,5000);}else{banner(false,ok,bl.length);}}
+function showHint(){document.querySelectorAll('#vChallE .blank').forEach(b=>{if(!b.classList.contains('ok')){b.textContent=b.dataset.ans;b.classList.remove('ng');b.classList.add('show');}});hideBanner();hide('spill');document.getElementById('bCheckE').textContent='↺ もう一度挑戦';document.getElementById('bCheckE').onclick=reChallE;}
+function reChallE(){document.querySelectorAll('#vChallE .blank').forEach(b=>{b.textContent='';b.classList.remove('ok','ng','show');});buildChips(EW);hide('spill');hide('bGoQ');hideBanner();stopConf();document.getElementById('bCheckE').textContent='✔ 確　認';document.getElementById('bCheckE').onclick=checkExplain;}
+function goQuiz(){hideBanner();stopConf();pausedElapsed=0;paused=false;t0=Date.now();tInt=setInterval(tick,100);sw('vRead',false);sw('vChallE',false);sw('vQ',true);buildChips(QW);document.querySelectorAll('#vQ .blank').forEach(b=>{b.textContent='';b.classList.remove('ok','ng');});document.querySelectorAll('.mi').forEach(m=>m.classList.remove('sl','ok','ng'));document.getElementById('mnote').textContent='';mSel=null;setPhase(2);hide('bStart');hide('bCheckE');hide('bHint');hide('bGoQ');show('bJudge');show('bBack');hide('bRetry');hide('spill');}
+function backToRead(){clearInterval(tInt);tInt=null;pausedElapsed=0;paused=false;document.getElementById('pauseModal').classList.remove('open');document.getElementById('timerDisp').textContent='00:00';sw('vQ',false);sw('vChallE',false);sw('vRead',true);hideWB();hideBanner();stopConf();selChip=null;mSel=null;setPhase(0);show('bStart');show('bGoQDirect');hide('bCheckE');hide('bHint');hide('bGoQ');hide('bJudge');hide('bBack');hide('bRetry');hide('bPause');hide('spill');document.getElementById('bCheckE').textContent='✔ 確　認';document.getElementById('bCheckE').onclick=checkExplain;}
+function judgeAll(){const bl=[...document.querySelectorAll('#vQ .blank')];let ok=0;bl.forEach(b=>{if(b.textContent.trim()===b.dataset.ans){b.classList.add('ok');b.classList.remove('ng');ok++;}else{b.classList.add('ng');b.classList.remove('ok');}});spill(ok,bl.length);show('bRetry');if(ok===bl.length){clearInterval(tInt);tInt=null;const totalMs=pausedElapsed+(Date.now()-t0);saveRecord(totalMs);banner(true,ok,bl.length);startConf();}else{banner(false,ok,bl.length);}}
+function retryQuiz(){clearInterval(tInt);t0=Date.now();tInt=setInterval(tick,100);hideBanner();stopConf();buildChips(QW);document.querySelectorAll('#vQ .blank').forEach(b=>{b.textContent='';b.classList.remove('ok','ng');});document.querySelectorAll('.mi').forEach(m=>m.classList.remove('sl','ok','ng'));document.getElementById('mnote').textContent='';mSel=null;hide('spill');hide('bRetry');}
+function mL(item){if(item.classList.contains('ok'))return;document.querySelectorAll('.lmi').forEach(i=>i.classList.remove('sl'));if(mSel===item){mSel=null;return;}mSel=item;item.classList.add('sl');}
+function mR(item){if(!mSel)return;if(item.classList.contains('ok'))return;if(mSel.dataset.id===item.dataset.pair){mSel.classList.remove('sl');mSel.classList.add('ok');item.classList.add('ok');mSel=null;if([...document.querySelectorAll('.lmi')].every(i=>i.classList.contains('ok')))document.getElementById('mnote').innerHTML='<span style="color:#1e7a4a">✅ 全問正解！</span>';}else{const lr=mSel;lr.classList.remove('sl');lr.classList.add('ng');item.classList.add('ng');mSel=null;setTimeout(()=>{lr.classList.remove('ng');item.classList.remove('ng');},800);}}
+function banner(pass,ok,tot){const b=document.getElementById('jbanner');b.className='jbanner '+(pass?'ban-pass':'ban-ng');b.textContent=pass?`🎉 合格！　全${tot}問正解！`:`おしい！　${ok} / ${tot} 問 ── もう一息！`;b.style.display='block';if(!pass)setTimeout(hideBanner,2800);}
+function hideBanner(){document.getElementById('jbanner').style.display='none';}
+function sw(id,on){document.getElementById(id).classList.toggle('on',on);}
+function show(id){document.getElementById(id).style.display='inline-block';}
+function hide(id){document.getElementById(id).style.display='none';}
+function spill(ok,tot){const p=document.getElementById('spill');p.textContent=`${ok} / ${tot} 問正解`;p.style.display='inline-block';}
+function playAudio(key){const btns=document.querySelectorAll('[data-akey="'+key+'"]');if(curAud){curAud.pause();curAud.currentTime=0;document.querySelectorAll('.aud-btn').forEach(b=>b.classList.remove('playing'));const wasKey=curABtn?curABtn.dataset.akey:'';curAud=null;curABtn=null;if(wasKey===key)return;}if(!AFILES[key])return;const a=new Audio(AFILES[key]);a.onended=()=>{document.querySelectorAll('.aud-btn').forEach(b=>b.classList.remove('playing'));curAud=null;curABtn=null;};a.onerror=()=>{alert('音声ファイルが見つかりません。\nパス: '+AFILES[key]);document.querySelectorAll('.aud-btn').forEach(b=>b.classList.remove('playing'));curAud=null;curABtn=null;};a.play();btns.forEach(b=>b.classList.add('playing'));curAud=a;curABtn=btns[0];}
+
+/* ━━━ タイム記録・中断・再開 ━━━ */
+const REC_KEY = 'timer_seiyou6_' + new Date().toISOString().slice(0,10);
+let paused = false, pausedElapsed = 0;
+
+function saveRecord(ms){
+  let recs = JSON.parse(localStorage.getItem(REC_KEY)||'[]');
+  recs.push({ms, ts: new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})});
+  recs.sort((a,b)=>a.ms-b.ms);
+  if(recs.length>3) recs=recs.slice(0,3);
+  localStorage.setItem(REC_KEY, JSON.stringify(recs));
+  renderRecords();
+}
+function renderRecords(){
+  const recs = JSON.parse(localStorage.getItem(REC_KEY)||'[]');
+  const el = document.getElementById('recordList');
+  if(!el) return;
+  if(!recs.length){el.innerHTML='<div class="rp-empty">まだ記録がありません</div>';return;}
+  el.innerHTML = recs.map((r,i)=>{
+    const m=String(Math.floor(r.ms/60000)).padStart(2,'0');
+    const s=String(Math.floor((r.ms%60000)/1000)).padStart(2,'0');
+    const ds=String(Math.floor((r.ms%1000)/100));
+    return `<div class="rp-row"><div class="rp-rank r${i+1}">${i+1}</div><div class="rp-time">${m}:${s}.${ds}</div><div class="rp-date">${r.ts}</div></div>`;
+  }).join('');
+}
+function openPause(){
+  if(!tInt) return;
+  clearInterval(tInt); tInt=null;
+  pausedElapsed += Date.now() - t0;
+  document.getElementById('pauseModal').classList.add('open');
+}
+function closePause(){
+  document.getElementById('pauseModal').classList.remove('open');
+  t0=Date.now(); tInt=setInterval(tick,100);
+}
+function resumeQuiz(){
+  document.getElementById('pauseModal').classList.remove('open');
+  t0=Date.now(); tInt=setInterval(tick,100);
+}
+function goQuizDirect(){
+  hideBanner(); stopConf();
+  pausedElapsed=0; paused=false;
+  t0=Date.now(); tInt=setInterval(tick,100);
+  sw('vRead',false); sw('vChallE',false); sw('vQ',true);
+  buildChips(QW);
+  document.querySelectorAll('#vQ .blank').forEach(b=>{b.textContent='';b.classList.remove('ok','ng');});
+  document.querySelectorAll('.mi').forEach(m=>m.classList.remove('sl','ok','ng'));
+  document.getElementById('mnote').textContent='';
+  mSel=null; setPhase(2);
+  hide('bStart'); hide('bGoQDirect'); hide('bCheckE'); hide('bHint'); hide('bGoQ');
+  show('bJudge'); show('bBack'); show('bPause'); hide('bRetry'); hide('spill');
+  renderRecords();
+}
+
+const cv=document.getElementById('cnv'),cx=cv.getContext('2d');
+let pts=[],raf=null;
+function startConf(){cv.width=innerWidth;cv.height=innerHeight;pts=[];for(let i=0;i<200;i++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height-cv.height,s:Math.random()*9+4,c:`hsl(${Math.random()*360},70%,62%)`,sp:Math.random()*3+2,r:Math.random()*Math.PI*2,dr:.05});af();}
+function af(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{p.y+=p.sp;p.r+=p.dr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();if(p.y>cv.height)p.y=-20;});raf=requestAnimationFrame(af);}
+function stopConf(){if(raf){cancelAnimationFrame(raf);raf=null;}cx.clearRect(0,0,cv.width,cv.height);pts=[];}
+
+</script>
+
+<script>
+(function(){
+  // ページを開いたとき学習回数をカウント
+  var LS='koukyo_index_v1', CAL='koukyo_calendar_v1', ID='seiyou6';
+  try{
+    var d=JSON.parse(localStorage.getItem(LS)||'{}');
+    d[ID+'_count']=(d[ID+'_count']||0)+1;
+    d[ID+'_last']=new Date().toISOString().slice(0,10);
+    localStorage.setItem(LS,JSON.stringify(d));
+    // カレンダー
+    var cal=JSON.parse(localStorage.getItem(CAL)||'{}');
+    var today=new Date().toISOString().slice(0,10);
+    cal[today]=(cal[today]||0)+1;
+    localStorage.setItem(CAL,JSON.stringify(cal));
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

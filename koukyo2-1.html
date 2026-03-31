@@ -69,6 +69,27 @@
 </head>
 <body>
 
+<style>
+.home-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;pointer-events:none}
+.home-btn{
+  position:fixed;bottom:70px;right:16px;
+  font-family:'BIZ UDGothic','Meiryo',sans-serif;
+  font-size:.82em;font-weight:700;
+  background:#1a2236;color:#fff;
+  border:none;border-radius:24px;
+  padding:10px 18px 10px 14px;
+  cursor:pointer;pointer-events:all;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);
+  display:flex;align-items:center;gap:7px;
+  transition:.15s;z-index:500;
+  text-decoration:none;
+}
+.home-btn:hover{background:#253060;transform:translateY(-2px)}
+.home-btn .hb-icon{font-size:1.1em}
+</style>
+<a class="home-btn" href="index.html"><span class="hb-icon">🏠</span>単元表に戻る</a>
+
+
 <canvas id="confetti-canvas"></canvas>
 
 <nav class="page-nav">
@@ -147,6 +168,24 @@
     function startCnf() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; for (let i = 0; i < 150; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height-cvs.height, s: Math.random()*8+4, c: `hsl(${Math.random()*360},70%,70%)`, sp: Math.random()*3+2 }); updateCnf(); }
     function updateCnf() { if (pts.length === 0) return; ctx.clearRect(0, 0, cvs.width, cvs.height); pts.forEach(p => { p.y += p.sp; ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, p.s, p.s); if (p.y > cvs.height) p.y = -20; }); requestAnimationFrame(updateCnf); }
     shMo();
+</script>
+
+<script>
+(function(){
+  // ページを開いたとき学習回数をカウント
+  var LS='koukyo_index_v1', CAL='koukyo_calendar_v1', ID='koukyo2';
+  try{
+    var d=JSON.parse(localStorage.getItem(LS)||'{}');
+    d[ID+'_count']=(d[ID+'_count']||0)+1;
+    d[ID+'_last']=new Date().toISOString().slice(0,10);
+    localStorage.setItem(LS,JSON.stringify(d));
+    // カレンダー
+    var cal=JSON.parse(localStorage.getItem(CAL)||'{}');
+    var today=new Date().toISOString().slice(0,10);
+    cal[today]=(cal[today]||0)+1;
+    localStorage.setItem(CAL,JSON.stringify(cal));
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
