@@ -657,19 +657,30 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
 -->
 <div class="foot">
   <!-- STEP① ボタン -->
-  <button class="fbtn f-challenge" id="bStart" onclick="goChallE()">📝 説明で挑戦する！</button>
-
+  <button class="fbtn f-challenge" id="bStart"     onclick="goChallE()">📝 説明で挑戦する！</button>
+  <button class="fbtn f-goq"       id="bGoQDirect" onclick="goQuizDirect()">▶ 練習問題へ進む</button>
   <!-- STEP② ボタン -->
-  <button class="fbtn f-judge"     id="bCheckE"  onclick="checkExplain()" style="display:none">✔ 確　認</button>
-  <button class="fbtn f-hint"      id="bHint"    onclick="showHint()"    style="display:none">📖 お手本を見る</button>
-  <button class="fbtn f-go"        id="bGoQ"     onclick="goQuiz()"      style="display:none">▶ 練習問題へ進む</button>
-
+  <button class="fbtn f-judge" id="bCheckE" onclick="checkExplain()" style="display:none">✔ 確　認</button>
+  <button class="fbtn f-hint"  id="bHint"   onclick="showHint()"    style="display:none">📖 お手本を見る</button>
+  <button class="fbtn f-go"    id="bGoQ"    onclick="goQuiz()"      style="display:none">▶ 練習問題へ進む</button>
   <!-- STEP③ ボタン -->
-  <button class="fbtn f-judge"     id="bJudge"   onclick="judgeAll()"    style="display:none">✔ 判　定</button>
-  <button class="fbtn f-retry"     id="bRetry"   onclick="retryQuiz()"   style="display:none">↺ やり直し</button>
-  <button class="fbtn f-back"      id="bBack"    onclick="backToRead()"  style="display:none">📖 説明に戻る</button>
-
+  <button class="fbtn f-judge" id="bJudge"  onclick="judgeAll()"   style="display:none">✔ 判　定</button>
+  <button class="fbtn f-retry" id="bRetry"  onclick="retryQuiz()"  style="display:none">↺ やり直し</button>
+  <button class="fbtn f-hint"  id="bPause"  onclick="openPause()"  style="display:none">⏸ 中断</button>
+  <button class="fbtn f-back"  id="bBack"   onclick="backToRead()" style="display:none">📖 説明に戻る</button>
   <div class="score-pill" id="spill" style="display:none"></div>
+</div>
+
+<!-- 中断モーダル -->
+<div class="modal-overlay" id="pauseModal">
+  <div class="modal-box">
+    <div class="modal-title">⏸ 練習を中断しますか？</div>
+    <div class="modal-btns">
+      <button class="modal-btn mb-resume" onclick="resumeQuiz()">▶ 続きから再開する</button>
+      <button class="modal-btn mb-back"   onclick="backToRead()">📖 説明に戻る（記録なし）</button>
+      <button class="modal-btn mb-cancel" onclick="closePause()">キャンセル</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -904,9 +915,7 @@ function banner(pass, ok, tot){
 function hideBanner(){ document.getElementById('jbanner').style.display='none'; }
 
 /* ━━━ ユーティリティ ━━━ */
-function sw(id, on){ document.getElementById(id).classList.toggle('on', on); }
-function show(id){ document.getElementById(id).style.display='inline-block'; }
-function hide(id){ document.getElementById(id).style.display='none'; }
+function sw(id,on){var e=document.getElementById(id);if(e)e.classList.toggle('on',on);}function show(id){var e=document.getElementById(id);if(e)e.style.display='inline-block';}function hide(id){var e=document.getElementById(id);if(e)e.style.display='none';}
 function spill(ok, tot){
   const p=document.getElementById('spill');
   p.textContent=`${ok} / ${tot} 問正解`; p.style.display='inline-block';
