@@ -11,7 +11,7 @@
   --gold:#c8972a;--gold2:#f0c040;--red:#b83232;
   --blue:#1e4d8c;--green:#1e7a4a;--muted:#7a8299;
   --border:#ddd8cc;
-  --A:#27ae60;--B:#2980b9;--C:#e67e22;
+  --A:#27ae60;--B:#2980b9;--C:#e67e22;--toyo:#5d4037;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;min-height:100vh}
@@ -45,6 +45,7 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
 .cat-bar{width:5px;border-radius:3px;height:32px;flex-shrink:0}
 .cat-bar.seimei{background:var(--blue)}
 .cat-bar.seiyou{background:var(--red)}
+.cat-bar.toyo{background:var(--toyo,#5d4037)}
 .cat-title{font-size:1.1em;font-weight:700;letter-spacing:.04em}
 .cat-count{font-size:.78em;color:var(--muted);margin-left:auto;font-weight:700}
 
@@ -54,6 +55,7 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
 .unit-top{display:flex;align-items:center;gap:12px;padding:13px 16px}
 .unit-num{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82em;flex-shrink:0}
 .unit-num.red{background:var(--red)}
+.unit-num.toyo{background:#5d4037}
 .unit-title{flex:1;font-size:.95em;font-weight:700;line-height:1.35}
 .unit-type{font-size:.68em;padding:2px 8px;border-radius:10px;font-weight:700;flex-shrink:0;letter-spacing:.04em}
 .type-main{background:#e8f0ff;color:var(--blue)}
@@ -242,6 +244,19 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
   <div id="seiyou-cards"></div>
 </div>
 
+
+<!-- ━━━ 東洋哲学 ━━━ -->
+<div class="cat-section">
+  <div class="cat-header">
+    <div class="cat-bar toyo"></div>
+    <div class="cat-title">東洋哲学</div>
+    <div class="cat-count" id="cnt-toyo"></div>
+  </div>
+
+  <!-- toyo 1~3 -->
+  <div id="toyo-cards"></div>
+</div>
+
 </div><!-- /main -->
 
 <!-- 達成モーダル -->
@@ -273,7 +288,16 @@ const SEIYOU_UNITS = [
    links:[{label:'📖 本編を開く', url:'koukyo_seiyou6.html', main:true},{label:'✏️ 練習問題', url:'koukyo_seiyou6.html?mode=quiz', main:false}]},
 ];
 
-const ALL_UNIT_IDS = ['koukyo1','koukyo2','seiyou1','seiyou2','seiyou3','seiyou4','seiyou5','seiyou6'];
+const TOYO_UNITS = [
+  {id:'toyo1', num:'①', title:'中国の思想（諸子百家）― 孔子・孟子・荀子・墨子・老子・韓非子',
+   links:[{label:'📖 本編を開く', url:'toyo1.html', main:true},{label:'✏️ 練習問題', url:'toyo1.html?mode=quiz', main:false}]},
+  {id:'toyo2', num:'②', title:'中国の思想（朱子学・陽明学）― 朱熹・王陽明',
+   links:[{label:'📖 本編を開く', url:'toyo2.html', main:true},{label:'✏️ 練習問題', url:'toyo2.html?mode=quiz', main:false}]},
+  {id:'toyo3', num:'③', title:'日本の思想 ― 福沢諭吉・中江兆民・内村鑑三・吉野作造・和辻哲郎ほか',
+   links:[{label:'📖 本編を開く', url:'toyo3.html', main:true},{label:'✏️ 練習問題', url:'toyo3.html?mode=quiz', main:false}]},
+];
+
+const ALL_UNIT_IDS = ['koukyo1','koukyo2','seiyou1','seiyou2','seiyou3','seiyou4','seiyou5','seiyou6','toyo1','toyo2','toyo3'];
 
 /* ━━━ バッジ定義 ━━━ */
 const BADGES = [
@@ -368,6 +392,35 @@ function buildSeiyouCards(){
   });
 }
 
+function buildToyoCards(){
+  const wrap = document.getElementById('toyo-cards');
+  wrap.innerHTML='';
+  TOYO_UNITS.forEach(u=>{
+    wrap.innerHTML += `
+    <div class="unit-card" id="uc-${u.id}">
+      <div class="unit-top">
+        <div class="unit-num toyo">${u.num}</div>
+        <div class="unit-title">${u.title}</div>
+        <span class="unit-type type-quiz">説明＋練習</span>
+      </div>
+      <div class="abc-row">
+        <span class="abc-lbl">理解度</span>
+        <button class="abc-btn" data-id="${u.id}" data-grade="A" onclick="setGrade(this)">A</button>
+        <button class="abc-btn" data-id="${u.id}" data-grade="B" onclick="setGrade(this)">B</button>
+        <button class="abc-btn" data-id="${u.id}" data-grade="C" onclick="setGrade(this)">C</button>
+      </div>
+      <div class="stat-row">
+        <div class="stat-item">学習回数：<span class="val" id="cnt-${u.id}">0</span>回</div>
+        <div class="repeat-dots" id="dots-${u.id}"></div>
+        <div class="stat-item">最終：<span class="val" id="last-${u.id}">—</span></div>
+      </div>
+      <div class="link-row">
+        ${u.links.map(l=>`<a class="page-link${l.main?' main-link':''}" href="${l.url}">${l.label}</a>`).join('')}
+      </div>
+    </div>`;
+  });
+}
+
 /* ━━━ 繰り返しドット（最大5個） ━━━ */
 function renderDots(id, cnt, grade){
   const el=document.getElementById('dots-'+id);
@@ -434,9 +487,12 @@ function render(){
 
   // カテゴリ内カウント
   const seiCount=ALL_UNIT_IDS.filter(id=>id.startsWith('seiyou')&&getGrade(d,id)).length;
+  const toyoCount=ALL_UNIT_IDS.filter(id=>id.startsWith('toyo')&&getGrade(d,id)).length;
   const kouCount=ALL_UNIT_IDS.filter(id=>id.startsWith('koukyo')&&getGrade(d,id)).length;
   document.getElementById('cnt-seimei').textContent=`${kouCount}/2単元チェック済`;
   document.getElementById('cnt-seiyou').textContent=`${seiCount}/6単元チェック済`;
+  const toyoEl=document.getElementById('cnt-toyo');
+  if(toyoEl) toyoEl.textContent=`${toyoCount}/3単元チェック済`;
 
   // 連続日数
   document.getElementById('streakDisp').textContent=getStreak()+'日連続';
@@ -518,6 +574,7 @@ function stopConf(){if(raf){cancelAnimationFrame(raf);raf=null;}cx.clearRect(0,0
 
 /* ━━━ 初期化 ━━━ */
 buildSeiyouCards();
+buildToyoCards();
 render();
 </script>
 </body>
