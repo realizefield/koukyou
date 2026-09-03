@@ -120,6 +120,17 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
 
 #cnv{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
 </style>
+<script>
+/* 未作成ページは「準備中」として押せないようにする（2026-09-03） */
+var GAMBA_SOON = ['toyo1.html','toyo2.html','toyo3.html'];
+function gambaLink(l){
+  var base = String(l.url).split('?')[0];
+  if (GAMBA_SOON.indexOf(base) !== -1) {
+    return '<span class="page-link' + (l.main ? ' main-link' : '') + '" style="opacity:.45;cursor:default;">' + l.label + '（準備中）</span>';
+  }
+  return '<a class="page-link' + (l.main ? ' main-link' : '') + '" href="' + l.url + '">' + l.label + '</a>';
+}
+</script>
 </head>
 <body>
 <canvas id="cnv"></canvas>
@@ -386,7 +397,7 @@ function buildSeiyouCards(){
         <div class="stat-item">最終：<span class="val" id="last-${u.id}">—</span></div>
       </div>
       <div class="link-row">
-        ${u.links.map(l=>`<a class="page-link${l.main?' main-link':''}" href="${l.url}">${l.label}</a>`).join('')}
+        ${u.links.map(l=>gambaLink(l)).join('')}
       </div>
     </div>`;
   });
@@ -415,7 +426,7 @@ function buildToyoCards(){
         <div class="stat-item">最終：<span class="val" id="last-${u.id}">—</span></div>
       </div>
       <div class="link-row">
-        ${u.links.map(l=>`<a class="page-link${l.main?' main-link':''}" href="${l.url}">${l.label}</a>`).join('')}
+        ${u.links.map(l=>gambaLink(l)).join('')}
       </div>
     </div>`;
   });
@@ -577,5 +588,6 @@ buildSeiyouCards();
 buildToyoCards();
 render();
 </script>
+<script src="https://realizefield.github.io/gamba-kounin-seito/gamba-ai.js" defer></script>
 </body>
 </html>

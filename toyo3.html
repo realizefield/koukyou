@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公共：東洋哲学③ 日本の思想</title>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a2236;--paper:#f5f3ee;--card:#fffefb;
+  --gold:#c8972a;--gold2:#f0c040;--red:#b83232;
+  --blue:#1e4d8c;--green:#1e7a4a;--muted:#7a8299;
+  --border:#ddd8cc;--drop:#fff8dc;
+  --toyo:#5d4037;--toyo2:#8d6e63;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.95}
+.hdr{background:var(--toyo);color:#fff;padding:0 18px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 3px 14px rgba(0,0,0,.42)}
+.hdr-sub{font-size:.7em;opacity:.5;letter-spacing:.1em}
+.hdr-title{font-size:1em;font-weight:700;letter-spacing:.04em}
+.hdr-timer{font-size:1.2em;font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums;letter-spacing:.06em;min-width:68px;text-align:right}
+.tab-bar{background:#3e2723;border-bottom:2px solid var(--gold);display:flex;gap:4px;padding:6px 12px;flex-wrap:wrap;position:sticky;top:52px;z-index:290}
+.tab-btn{font-family:'BIZ UDGothic',sans-serif;font-size:.76em;font-weight:700;padding:5px 12px;border:none;border-radius:4px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;transition:.15s;text-decoration:none;display:inline-block}
+.tab-btn:hover{background:rgba(255,255,255,.22);color:#fff}
+.tab-btn.active{background:var(--gold);color:var(--ink)}
+.phase-bar{background:#fff;border-bottom:2px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:94px;z-index:280}
+.pdot{width:11px;height:11px;border-radius:50%;background:var(--border);transition:.3s;flex-shrink:0}
+.pdot.on{background:var(--gold)}
+.ptxt{font-size:.78em;color:var(--muted);font-weight:700}
+.ptxt.on{color:var(--ink)}
+.parr{font-size:.85em;color:var(--border);margin:0 4px}
+.plbl{font-size:.75em;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.wb-bar{background:#fff;border-bottom:2px solid var(--border);padding:10px 16px;display:none;position:sticky;top:132px;z-index:270;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.wb-lbl{font-size:.7em;color:var(--muted);font-weight:700;letter-spacing:.1em;margin-bottom:7px}
+.wb-chips{display:flex;flex-wrap:wrap;gap:7px;min-height:34px;align-items:center}
+.chip{font-family:'BIZ UDGothic',sans-serif;font-size:.87em;font-weight:700;background:var(--toyo);color:#fff;border:none;padding:5px 13px;border-radius:4px;cursor:pointer;transition:.13s}
+.chip:hover{background:var(--toyo2);transform:translateY(-1px)}
+.chip.sel{background:var(--gold);color:var(--ink);box-shadow:0 0 0 2px var(--toyo);transform:scale(1.05)}
+.main{max-width:860px;margin:0 auto;padding:22px 14px 160px}
+.view{display:none}.view.on{display:block}
+.s-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:22px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.s-head-e{background:var(--toyo);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.s-head-q{background:var(--red);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.s-icon{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.86em;flex-shrink:0}
+.s-ht{font-size:.94em;font-weight:700;letter-spacing:.04em;flex:1}
+.aud-btn{background:rgba(255,255,255,.18);color:#fff;border:1.5px solid rgba(255,255,255,.45);border-radius:6px;padding:5px 11px;font-size:.78em;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;font-family:'BIZ UDGothic',sans-serif}
+.aud-btn svg{width:14px;height:14px;fill:currentColor}
+.s-body{padding:18px 20px}
+.person-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.person-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.pbadge{background:var(--toyo);color:#fff;font-size:.73em;font-weight:700;padding:4px 10px;border-radius:4px;white-space:nowrap;align-self:flex-start;margin-top:3px;flex-shrink:0}
+.pbadge.sub{background:var(--toyo2)}
+.pcont{flex:1;font-size:.94em}
+.pcont p{margin-bottom:9px}
+.pcont strong{color:var(--toyo)}
+.pt{display:inline-block;background:var(--toyo);color:#fff;font-size:.72em;font-weight:700;padding:2px 9px;border-radius:3px;margin-bottom:5px;letter-spacing:.05em}
+.qt{display:inline-block;background:var(--red);color:#fff;font-size:.72em;font-weight:700;padding:2px 9px;border-radius:3px;margin-bottom:6px;letter-spacing:.05em}
+#vChallE .pt{display:none}
+.q-item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px dashed var(--border);font-size:.95em}
+.q-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.blank{display:inline-flex;align-items:center;justify-content:center;min-width:108px;height:28px;background:var(--drop);border:none;border-bottom:2.5px solid var(--toyo);margin:0 3px;padding:0 8px;cursor:pointer;font-family:'BIZ UDGothic',sans-serif;font-size:.92em;font-weight:700;color:var(--red);border-radius:3px 3px 0 0;transition:.13s;vertical-align:middle;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.blank:hover{background:#fff3b0}
+.blank.show{background:#eef3ff;border-color:var(--blue);color:var(--blue);cursor:default;pointer-events:none}
+.blank.ok{background:#d4f5e2;border-color:var(--green);color:var(--green)}
+.blank.ng{background:#ffe0e0;border-color:var(--red);color:var(--red)}
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mcol-lbl{font-size:.7em;color:var(--muted);font-weight:700;letter-spacing:.1em;margin-bottom:5px}
+.mitems{display:flex;flex-direction:column;gap:7px}
+.mi{font-family:'BIZ UDGothic',sans-serif;font-size:.86em;font-weight:700;background:#f5f0eb;border:1.5px solid var(--border);border-radius:6px;padding:8px 12px;cursor:pointer;transition:.13s;text-align:center;user-select:none}
+.mi:hover{border-color:var(--toyo);background:#efe8e0}
+.mi.sl{background:var(--gold);border-color:var(--toyo);color:var(--ink)}
+.mi.ok{background:#d4f5e2;border-color:var(--green);color:var(--green);cursor:default}
+.mi.ng{background:#ffe0e0;border-color:var(--red);color:var(--red)}
+.mnote{margin-top:10px;font-size:.87em;font-weight:700}
+.note-box{font-size:.8em;color:var(--muted);margin-top:10px;padding:8px 12px;background:#f5f0eb;border-radius:4px;border-left:3px solid var(--toyo);line-height:1.6}
+.record-panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:22px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.rp-title{font-size:.8em;font-weight:700;color:var(--muted);letter-spacing:.1em;margin-bottom:10px}
+.rp-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dashed var(--border);font-size:.92em}
+.rp-row:last-child{border-bottom:none}
+.rp-rank{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78em;flex-shrink:0}
+.rp-rank.r1{background:#f0c040;color:var(--ink)}.rp-rank.r2{background:#b0bec5;color:#fff}.rp-rank.r3{background:#cd7f32;color:#fff}
+.rp-time{font-weight:700;font-variant-numeric:tabular-nums;color:var(--toyo);flex:1}
+.rp-date{font-size:.78em;color:var(--muted)}
+.rp-empty{font-size:.85em;color:var(--muted);text-align:center;padding:6px 0}
+.foot{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);padding:10px 14px;display:flex;gap:8px;justify-content:center;align-items:center;z-index:200;box-shadow:0 -4px 18px rgba(0,0,0,.09);flex-wrap:wrap}
+.fbtn{font-family:'BIZ UDGothic',sans-serif;font-size:.88em;font-weight:700;border:none;border-radius:6px;padding:10px 20px;cursor:pointer;transition:.13s;letter-spacing:.04em}
+.fbtn:hover{transform:translateY(-1px);opacity:.88}
+.f-challenge{background:var(--toyo);color:#fff}.f-goq{background:var(--toyo);color:#fff}
+.f-judge{background:var(--green);color:#fff}.f-retry{background:var(--blue);color:#fff}
+.f-hint{background:#8e44ad;color:#fff}.f-back{background:var(--muted);color:#fff}
+.f-go{background:var(--green);color:#fff}
+.score-pill{background:var(--toyo);color:#fff;padding:6px 14px;border-radius:20px;font-size:.84em;font-weight:700}
+.jbanner{display:none;position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:600;padding:16px 36px;border-radius:12px;font-size:1.22em;font-weight:700;letter-spacing:.06em;text-align:center;white-space:nowrap;box-shadow:0 6px 28px rgba(0,0,0,.28);animation:pop .35s cubic-bezier(.17,.67,.37,1.4)}
+@keyframes pop{from{transform:translateX(-50%) scale(.5);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+.ban-pass{background:#1e7a4a;color:#fff}.ban-ng{background:#b83232;color:#fff}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:14px;padding:28px 32px;max-width:340px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.3);text-align:center}
+.modal-title{font-size:1.1em;font-weight:700;color:var(--ink);margin-bottom:18px}
+.modal-btns{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.modal-btn{font-family:'BIZ UDGothic',sans-serif;font-size:.92em;font-weight:700;border:none;border-radius:8px;padding:12px 0;cursor:pointer}
+.mb-resume{background:var(--green);color:#fff}.mb-back{background:var(--muted);color:#fff}.mb-cancel{background:#eee;color:var(--ink)}
+.home-btn{position:fixed;bottom:130px;right:16px;font-family:'BIZ UDGothic','Meiryo',sans-serif;font-size:.82em;font-weight:700;background:var(--toyo);color:#fff;border:none;border-radius:24px;padding:10px 18px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35);display:flex;align-items:center;gap:7px;transition:.15s;z-index:500;text-decoration:none}
+.home-btn:hover{background:var(--toyo2);transform:translateY(-2px)}
+#cnv{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<canvas id="cnv"></canvas>
+<header class="hdr">
+  <div><div class="hdr-sub">江原予備校　公共</div><div class="hdr-title">東洋哲学③　日本の思想</div></div>
+  <div class="hdr-timer" id="timerDisp">00:00</div>
+</header>
+<nav class="tab-bar">
+  <a class="tab-btn" href="toyo1.html">① 諸子百家</a>
+  <a class="tab-btn" href="toyo2.html">② 朱子学・陽明学</a>
+  <a class="tab-btn active" href="toyo3.html">③ 日本の思想</a>
+</nav>
+
+<div class="phase-bar">
+  <span class="plbl">STEP</span>
+  <div class="pdot on" id="d0"></div><span class="ptxt on" id="t0">① 説明を読む</span>
+  <span class="parr">▶</span>
+  <div class="pdot" id="d1"></div><span class="ptxt" id="t1">② 説明で挑戦</span>
+  <span class="parr">▶</span>
+  <div class="pdot" id="d2"></div><span class="ptxt" id="t2">③ 練習問題</span>
+</div>
+<div class="wb-bar" id="wbBar">
+  <div class="wb-lbl">▶ 語句をタップして選択 → 空欄をタップで入力　／　入力済みの空欄をタップするとクリア</div>
+  <div class="wb-chips" id="wbChips"></div>
+</div>
+<div class="main">
+<div class="view on" id="vRead">
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">明</div>
+    <div class="s-ht">明治の啓蒙思想</div>
+    <button class="aud-btn" onclick="playAudio('jp1')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">福沢諭吉</div>
+      <div class="pcont">
+        <div class="pt">ポイント①　天賦人権論・脱亜論</div>
+        <p>主著『学問のすゝめ』で「天は人の上に人を造らず、人の下に人を造らず」と述べ、自由や平等などの権利は誰もが生まれながらに持っていると主張しました。</p>
+        <p>人権は天から与えられたものだとする<span class="blank show" data-ans="天賦人権論">天賦人権論</span>を唱えました。</p>
+        <p>また、近代化の進まないアジア諸国との連帯を断念して西洋列強への仲間入りをめざす<span class="blank show" data-ans="脱亜論">脱亜論</span>（脱亜入欧）を唱えました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">中江兆民</div>
+      <div class="pcont">
+        <div class="pt">ポイント②　東洋のルソー</div>
+        <p>ルソーの『社会契約論』の漢文訳・注解書「<span class="blank show" data-ans="民約論">民約論</span>」を書き、「<span class="blank show" data-ans="東洋のルソー">東洋のルソー</span>」と呼ばれました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">内村鑑三</div>
+      <div class="pcont">
+        <div class="pt">ポイント③　二つのJ・不敬事件</div>
+        <p>札幌農学校でクラーク博士に影響を受けキリスト教に入信。イエス（Jesus）と日本（Japan）の<span class="blank show" data-ans="二つのJ">二つのJ</span>に生涯をささげることを誓いました。</p>
+        <p>第一高等中学校の講師であったとき、教育勅語への礼拝を拒否し世の非難を浴びた<span class="blank show" data-ans="不敬事件">不敬事件</span>が起きました。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">大</div>
+    <div class="s-ht">大正デモクラシーと日本思想</div>
+    <button class="aud-btn" onclick="playAudio('jp2')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">吉野作造</div>
+      <div class="pcont">
+        <div class="pt">ポイント④　民本主義</div>
+        <p>「民主主義」とは異なり、主権がどこにあるかを問わず、政治の目的を民衆の福利に置き、政策決定は民衆の意向に基づくべきだとする<span class="blank show" data-ans="民本主義">民本主義</span>を唱えました。大正デモクラシーの理論的指導者となりました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">和辻哲郎</div>
+      <div class="pcont">
+        <div class="pt">ポイント⑤　風土論</div>
+        <p>著書『風土』で風土と人間のあり方を分類しました。</p>
+        <p>東アジア（日本含む）＝<span class="blank show" data-ans="モンスーン型">モンスーン型</span>（受容的・忍従的）、アラビア半島＝砂漠型（戦闘的）、ヨーロッパ＝牧場型（合理的・規則的）に分類しました。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="s-card">
+  <div class="s-head-e">
+    <div class="s-icon">近</div>
+    <div class="s-ht">近代日本の独自思想</div>
+    <button class="aud-btn" onclick="playAudio('jp3')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
+  </div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">西田幾多郎</div>
+      <div class="pcont">
+        <div class="pt">ポイント⑥　純粋経験・絶対無</div>
+        <p>著書『善の研究』。美しい音楽に心を奪われて自分も対象も忘れる「主客未分」の世界のように、思考を一切挟まない経験を<span class="blank show" data-ans="純粋経験">純粋経験</span>といいます。</p>
+        <p>相対的な有無を超えた、無と有が表裏一体の「ひとつの世界」である無を<span class="blank show" data-ans="絶対無">絶対無</span>としました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">柳田国男</div>
+      <div class="pcont">
+        <div class="pt">ポイント⑦　民俗学・常民</div>
+        <p>伝承を保持し祖先信仰などを共有して生きる無名の人々を<span class="blank show" data-ans="常民">常民</span>（じょうみん）といいました。</p>
+        <p>常民の間に受け継がれてきた生活の知恵や民間伝承を収集して<span class="blank show" data-ans="民俗学">民俗学</span>を確立しました。代表作『遠野物語』。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">土居健郎</div>
+      <div class="pcont">
+        <div class="pt">ポイント⑧　甘えの構造</div>
+        <p>精神科医であった土居健郎は、著書『<span class="blank show" data-ans="甘えの構造">甘えの構造</span>』で、日本人の根底に「甘え」という構造があることを説きました。「甘え」は日本人の精神構造と社会構造を理解するための鍵だと考えました。</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="view" id="vChallE">
+<div class="s-card">
+  <div class="s-head-e"><div class="s-icon">明</div><div class="s-ht">明治の啓蒙思想</div></div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">福沢諭吉</div>
+      <div class="pcont">
+        <p>人権は天から与えられたものだとする<span class="blank" data-ans="天賦人権論" onclick="fillBlank(this)"></span>を唱えました。アジア諸国との連帯を断念し西洋列強を目指す<span class="blank" data-ans="脱亜論" onclick="fillBlank(this)"></span>も唱えました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">中江兆民</div>
+      <div class="pcont">
+        <p>ルソーの社会契約論の漢文訳「<span class="blank" data-ans="民約論" onclick="fillBlank(this)"></span>」を書き「<span class="blank" data-ans="東洋のルソー" onclick="fillBlank(this)"></span>」と呼ばれました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">内村鑑三</div>
+      <div class="pcont">
+        <p>イエスと日本の<span class="blank" data-ans="二つのJ" onclick="fillBlank(this)"></span>に生涯をささげることを誓いました。教育勅語への礼拝を拒否した<span class="blank" data-ans="不敬事件" onclick="fillBlank(this)"></span>で非難を浴びました。</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e"><div class="s-icon">大</div><div class="s-ht">大正デモクラシーと日本思想</div></div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">吉野作造</div>
+      <div class="pcont">
+        <p>政治の目的を民衆の福利に置く<span class="blank" data-ans="民本主義" onclick="fillBlank(this)"></span>を唱え、大正デモクラシーの理論的指導者となりました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">和辻哲郎</div>
+      <div class="pcont">
+        <p>著書『風土』で日本（東アジア）を<span class="blank" data-ans="モンスーン型" onclick="fillBlank(this)"></span>（受容的・忍従的）に分類しました。</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-e"><div class="s-icon">近</div><div class="s-ht">近代日本の独自思想</div></div>
+  <div class="s-body">
+    <div class="person-row">
+      <div class="pbadge">西田幾多郎</div>
+      <div class="pcont">
+        <p>思考を一切挟まない「主客未分」の経験を<span class="blank" data-ans="純粋経験" onclick="fillBlank(this)"></span>といいます。無と有が表裏一体の「ひとつの世界」である無を<span class="blank" data-ans="絶対無" onclick="fillBlank(this)"></span>としました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">柳田国男</div>
+      <div class="pcont">
+        <p>無名の庶民を<span class="blank" data-ans="常民" onclick="fillBlank(this)"></span>と呼び、民間伝承を収集して<span class="blank" data-ans="民俗学" onclick="fillBlank(this)"></span>を確立しました。</p>
+      </div>
+    </div>
+    <div class="person-row">
+      <div class="pbadge">土居健郎</div>
+      <div class="pcont">
+        <p>著書『<span class="blank" data-ans="甘えの構造" onclick="fillBlank(this)"></span>』で、日本人の根底に「甘え」という構造があることを説きました。</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="view" id="vQ">
+  <div class="record-panel" id="recordPanel">
+    <div class="rp-title">🏅 本日のタイム記録（最大3回・速い順）</div>
+    <div id="recordList"><div class="rp-empty">まだ記録がありません</div></div>
+  </div>
+  
+<div class="s-card">
+  <div class="s-head-q"><div class="s-icon">1</div><div class="s-ht">人物選択 ── 説明に当てはまる人物を語群から選びなさい。</div></div>
+  <div class="s-body">
+    <div class="q-item"><div class="qt">問 1</div>『学問のすゝめ』を著し、<strong>天賦人権論</strong>・<strong>脱亜論</strong>を唱えたのは誰ですか。→ <span class="blank" data-ans="福沢諭吉" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 2</div>「<strong>東洋のルソー</strong>」と呼ばれ、<strong>民約論</strong>を著したのは誰ですか。→ <span class="blank" data-ans="中江兆民" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 3</div><strong>二つのJ</strong>に生涯をささげることを誓い、<strong>不敬事件</strong>で非難を浴びたのは誰ですか。→ <span class="blank" data-ans="内村鑑三" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 4</div><strong>民本主義</strong>を唱えて大正デモクラシーの理論的指導者となったのは誰ですか。→ <span class="blank" data-ans="吉野作造" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 5</div>著書『風土』で日本をモンスーン型に分類したのは誰ですか。→ <span class="blank" data-ans="和辻哲郎" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 6</div><strong>純粋経験</strong>・<strong>絶対無</strong>を説き、著書『善の研究』を著したのは誰ですか。→ <span class="blank" data-ans="西田幾多郎" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 7</div><strong>民俗学</strong>を確立し、無名の庶民を<strong>常民</strong>と呼んだのは誰ですか。→ <span class="blank" data-ans="柳田国男" onclick="fillBlank(this)"></span></div>
+    <div class="q-item"><div class="qt">問 8</div>著書『甘えの構造』で日本人の「甘え」の心理を解明したのは誰ですか。→ <span class="blank" data-ans="土居健郎" onclick="fillBlank(this)"></span></div>
+    <div class="note-box">【語群】福沢諭吉 ・ 中江兆民 ・ 内村鑑三 ・ 吉野作造 ・ 和辻哲郎 ・ 西田幾多郎 ・ 柳田国男 ・ 土居健郎</div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-q"><div class="s-icon">2</div><div class="s-ht">キーワード穴埋め ── 当てはまる語句を語群から選びなさい。</div></div>
+  <div class="s-body">
+    <div class="q-item">
+      <div class="qt">福沢諭吉・中江兆民・内村鑑三</div>
+      福沢諭吉は<span class="blank" data-ans="天賦人権論" onclick="fillBlank(this)"></span>を唱え、<span class="blank" data-ans="脱亜論" onclick="fillBlank(this)"></span>も唱えました。中江兆民は「<span class="blank" data-ans="民約論" onclick="fillBlank(this)"></span>」を書き「<span class="blank" data-ans="東洋のルソー" onclick="fillBlank(this)"></span>」と呼ばれました。内村鑑三は<span class="blank" data-ans="二つのJ" onclick="fillBlank(this)"></span>に生涯をささげ、<span class="blank" data-ans="不敬事件" onclick="fillBlank(this)"></span>で非難を浴びました。
+    </div>
+    <div class="q-item">
+      <div class="qt">吉野作造・和辻哲郎・西田幾多郎・柳田国男・土居健郎</div>
+      吉野作造は<span class="blank" data-ans="民本主義" onclick="fillBlank(this)"></span>を唱えました。和辻哲郎は日本を<span class="blank" data-ans="モンスーン型" onclick="fillBlank(this)"></span>に分類しました。西田幾多郎は「主客未分」の<span class="blank" data-ans="純粋経験" onclick="fillBlank(this)"></span>と<span class="blank" data-ans="絶対無" onclick="fillBlank(this)"></span>を説きました。柳田国男は無名の庶民を<span class="blank" data-ans="常民" onclick="fillBlank(this)"></span>と呼び<span class="blank" data-ans="民俗学" onclick="fillBlank(this)"></span>を確立しました。土居健郎は著書『<span class="blank" data-ans="甘えの構造" onclick="fillBlank(this)"></span>』を著しました。
+    </div>
+    <div class="note-box">【語群】天賦人権論 ・ 脱亜論 ・ 民約論 ・ 東洋のルソー ・ 二つのJ ・ 不敬事件 ・ 民本主義 ・ モンスーン型 ・ 純粋経験 ・ 絶対無 ・ 常民 ・ 民俗学 ・ 甘えの構造</div>
+  </div>
+</div>
+<div class="s-card">
+  <div class="s-head-q"><div class="s-icon">3</div><div class="s-ht">人物 ↔ キーワード（左 → 右の順にタップ）</div></div>
+  <div class="s-body">
+    <div class="match-wrap">
+      <div>
+        <div class="mcol-lbl">人物</div>
+        <div class="mitems">
+          <div class="mi lmi" data-id="fu" onclick="mL(this)">福沢諭吉</div>
+          <div class="mi lmi" data-id="na" onclick="mL(this)">中江兆民</div>
+          <div class="mi lmi" data-id="uc" onclick="mL(this)">内村鑑三</div>
+          <div class="mi lmi" data-id="yo" onclick="mL(this)">吉野作造</div>
+          <div class="mi lmi" data-id="wa" onclick="mL(this)">和辻哲郎</div>
+          <div class="mi lmi" data-id="ni" onclick="mL(this)">西田幾多郎</div>
+          <div class="mi lmi" data-id="ya" onclick="mL(this)">柳田国男</div>
+          <div class="mi lmi" data-id="do" onclick="mL(this)">土居健郎</div>
+        </div>
+      </div>
+      <div>
+        <div class="mcol-lbl">関連キーワード</div>
+        <div class="mitems">
+          <div class="mi rmi" data-pair="ni" onclick="mR(this)">純粋経験 ／ 絶対無 ／ 善の研究</div>
+          <div class="mi rmi" data-pair="fu" onclick="mR(this)">天賦人権論 ／ 脱亜論 ／ 学問のすゝめ</div>
+          <div class="mi rmi" data-pair="yo" onclick="mR(this)">民本主義 ／ 大正デモクラシー</div>
+          <div class="mi rmi" data-pair="na" onclick="mR(this)">東洋のルソー ／ 民約論</div>
+          <div class="mi rmi" data-pair="ya" onclick="mR(this)">常民 ／ 民俗学 ／ 遠野物語</div>
+          <div class="mi rmi" data-pair="uc" onclick="mR(this)">二つのJ ／ 不敬事件 ／ キリスト教</div>
+          <div class="mi rmi" data-pair="do" onclick="mR(this)">甘えの構造 ／ 甘えの心理</div>
+          <div class="mi rmi" data-pair="wa" onclick="mR(this)">風土 ／ モンスーン型 ／ 倫理学</div>
+        </div>
+      </div>
+    </div>
+    <div class="mnote" id="mnote"></div>
+  </div>
+</div>
+
+</div>
+</div>
+<div class="jbanner" id="jbanner"></div>
+<div class="foot">
+  <button class="fbtn f-challenge" id="bStart"     onclick="goChallE()">📝 説明で挑戦する！</button>
+  <button class="fbtn f-goq"       id="bGoQDirect" onclick="goQuizDirect()">▶ 練習問題へ進む</button>
+  <button class="fbtn f-judge"     id="bCheckE"    onclick="checkExplain()" style="display:none">✔ 確　認</button>
+  <button class="fbtn f-hint"      id="bHint"      onclick="showHint()"     style="display:none">📖 お手本を見る</button>
+  <button class="fbtn f-go"        id="bGoQ"       onclick="goQuiz()"       style="display:none">▶ 練習問題へ進む</button>
+  <button class="fbtn f-judge"     id="bJudge"     onclick="judgeAll()"     style="display:none">✔ 判　定</button>
+  <button class="fbtn f-retry"     id="bRetry"     onclick="retryQuiz()"    style="display:none">↺ やり直し</button>
+  <button class="fbtn f-hint"      id="bPause"     onclick="openPause()"    style="display:none">⏸ 中断</button>
+  <button class="fbtn f-back"      id="bBack"      onclick="backToRead()"   style="display:none">📖 説明に戻る</button>
+  <div class="score-pill" id="spill" style="display:none"></div>
+</div>
+<div class="modal-overlay" id="pauseModal">
+  <div class="modal-box">
+    <div class="modal-title">⏸ 練習を中断しますか？</div>
+    <div class="modal-btns">
+      <button class="modal-btn mb-resume" onclick="resumeQuiz()">▶ 続きから再開する</button>
+      <button class="modal-btn mb-back"   onclick="backToRead()">📖 説明に戻る（記録なし）</button>
+      <button class="modal-btn mb-cancel" onclick="closePause()">キャンセル</button>
+    </div>
+  </div>
+</div>
+<a class="home-btn" href="index.html">🏠 単元表に戻る</a>
+<script>
+const EW=["天賦人権論", "脱亜論", "東洋のルソー", "民約論", "二つのJ", "不敬事件", "民本主義", "モンスーン型", "純粋経験", "絶対無", "常民", "民俗学", "甘えの構造"];
+const QW=["福沢諭吉", "中江兆民", "内村鑑三", "吉野作造", "和辻哲郎", "西田幾多郎", "柳田国男", "土居健郎", "天賦人権論", "脱亜論", "東洋のルソー", "民約論", "二つのJ", "不敬事件", "民本主義", "モンスーン型", "純粋経験", "絶対無", "常民", "民俗学", "甘えの構造"];
+const AFILES={'jp1':'audio/toyo3_jp1.wav','jp2':'audio/toyo3_jp2.wav','jp3':'audio/toyo3_jp3.wav'};
+const REC_KEY='timer_toyo3_'+new Date().toISOString().slice(0,10);
+var _selChip=null,_mSel=null,_tInt=null,_t0=0,_pausedMs=0,_curAud=null,_currentWords=[];
+function _el(id){return document.getElementById(id);}
+function _show(id){var e=_el(id);if(e)e.style.display='inline-block';}
+function _hide(id){var e=_el(id);if(e)e.style.display='none';}
+function _sw(id,on){var e=_el(id);if(e)e.classList.toggle('on',on);}
+function setPhase(n){[0,1,2].forEach(function(i){_sw('d'+i,i===n);var t=_el('t'+i);if(t)t.classList.toggle('on',i===n);});}
+function _tick(){var ms=_pausedMs+(Date.now()-_t0);var m=String(Math.floor(ms/60000)).padStart(2,'0');var s=String(Math.floor((ms%60000)/1000)).padStart(2,'0');var ds=String(Math.floor((ms%1000)/100));_el('timerDisp').textContent=m+':'+s+'.'+ds;}
+function _startTimer(){_t0=Date.now();_tInt=setInterval(_tick,100);}
+function _stopTimer(){clearInterval(_tInt);_tInt=null;}
+function _resetTimer(){_stopTimer();_pausedMs=0;_el('timerDisp').textContent='00:00';}
+function _showWB(){_el('wbBar').style.display='block';}
+function _hideWB(){_el('wbBar').style.display='none';}
+function buildChips(words){var wb=_el('wbChips');wb.innerHTML='';_selChip=null;_currentWords=words.slice();var arr=words.slice().sort(function(){return Math.random()-.5;});arr.forEach(function(w){var btn=document.createElement('button');btn.className='chip';btn.textContent=w;btn.addEventListener('click',function(e){e.stopPropagation();if(_selChip&&_selChip!==btn)_selChip.classList.remove('sel');if(_selChip===btn){_selChip=null;btn.classList.remove('sel');return;}_selChip=btn;btn.classList.add('sel');});wb.appendChild(btn);});}
+function fillBlank(b){if(_selChip){b.textContent=_selChip.textContent;b.classList.remove('ok','ng','show');_selChip.classList.remove('sel');_selChip=null;_closePopup();return;}if(b===_popupTarget&&_popup&&_popup.classList.contains('open')){_closePopup();return;}if(b.textContent.trim()!=''){b.textContent='';b.classList.remove('ok','ng','show');_closePopup();return;}_openPopup(b);}
+function _showView(id){['vRead','vChallE','vQ'].forEach(function(v){_sw(v,v===id);});}
+function goChallE(){_showView('vChallE');document.querySelectorAll('#vChallE .blank').forEach(function(b){b.textContent='';b.classList.remove('ok','ng','show');});buildChips(EW);_showWB();setPhase(1);_show('bCheckE');_show('bHint');_hide('bStart');_hide('bGoQDirect');_hide('bGoQ');_hide('bJudge');_hide('bRetry');_hide('bPause');_hide('bBack');_hide('spill');_hideBanner();_stopConf();_el('bCheckE').textContent='✔ 確　認';_el('bCheckE').onclick=checkExplain;}
+function checkExplain(){var bls=[].slice.call(document.querySelectorAll('#vChallE .blank')),ok=0;bls.forEach(function(b){if(b.textContent.trim()===b.dataset.ans){b.classList.add('ok');b.classList.remove('ng');ok++;}else{b.classList.add('ng');b.classList.remove('ok');}});_showScore(ok,bls.length);if(ok===bls.length){_showBanner(true,ok,bls.length);_show('bGoQ');_startConf();setTimeout(_stopConf,5000);}else _showBanner(false,ok,bls.length);}
+function showHint(){document.querySelectorAll('#vChallE .blank').forEach(function(b){if(!b.classList.contains('ok')){b.textContent=b.dataset.ans;b.classList.remove('ng');b.classList.add('show');}});_hideBanner();_hide('spill');_el('bCheckE').textContent='↺ もう一度挑戦';_el('bCheckE').onclick=reChallE;}
+function reChallE(){document.querySelectorAll('#vChallE .blank').forEach(function(b){b.textContent='';b.classList.remove('ok','ng','show');});buildChips(EW);_hide('spill');_hide('bGoQ');_hideBanner();_stopConf();_el('bCheckE').textContent='✔ 確　認';_el('bCheckE').onclick=checkExplain;}
+function _startQuiz(){_showView('vQ');document.querySelectorAll('#vQ .blank').forEach(function(b){b.textContent='';b.classList.remove('ok','ng');});document.querySelectorAll('.mi').forEach(function(m){m.classList.remove('sl','ok','ng');});var mn=_el('mnote');if(mn)mn.textContent='';_mSel=null;buildChips(QW);_showWB();setPhase(2);_hide('bStart');_hide('bGoQDirect');_hide('bCheckE');_hide('bHint');_hide('bGoQ');_show('bJudge');_show('bBack');_show('bPause');_hide('bRetry');_hide('spill');_renderRecords();}
+function goQuiz(){_hideBanner();_stopConf();_pausedMs=0;_startTimer();_startQuiz();}
+function goQuizDirect(){_pausedMs=0;_startTimer();_startQuiz();}
+function backToRead(){_resetTimer();_el('pauseModal').classList.remove('open');_showView('vRead');_hideWB();_hideBanner();_stopConf();_selChip=null;_mSel=null;setPhase(0);_show('bStart');_show('bGoQDirect');_hide('bCheckE');_hide('bHint');_hide('bGoQ');_hide('bJudge');_hide('bBack');_hide('bRetry');_hide('bPause');_hide('spill');_el('bCheckE').textContent='✔ 確　認';_el('bCheckE').onclick=checkExplain;}
+function judgeAll(){var bls=[].slice.call(document.querySelectorAll('#vQ .blank')),ok=0;bls.forEach(function(b){if(b.textContent.trim()===b.dataset.ans){b.classList.add('ok');b.classList.remove('ng');ok++;}else{b.classList.add('ng');b.classList.remove('ok');}});_showScore(ok,bls.length);_show('bRetry');if(ok===bls.length){var ms=_pausedMs+(Date.now()-_t0);_stopTimer();_saveRecord(ms);_showBanner(true,ok,bls.length);_startConf();}else _showBanner(false,ok,bls.length);}
+function retryQuiz(){_hideBanner();_stopConf();document.querySelectorAll('#vQ .blank').forEach(function(b){b.textContent='';b.classList.remove('ok','ng');});document.querySelectorAll('.mi').forEach(function(m){m.classList.remove('sl','ok','ng');});var mn=_el('mnote');if(mn)mn.textContent='';_mSel=null;buildChips(QW);_pausedMs=0;_startTimer();_hide('spill');_hide('bRetry');}
+function openPause(){_stopTimer();_pausedMs+=Date.now()-_t0;_el('pauseModal').classList.add('open');}
+function closePause(){_el('pauseModal').classList.remove('open');_t0=Date.now();_tInt=setInterval(_tick,100);}
+function resumeQuiz(){_el('pauseModal').classList.remove('open');_t0=Date.now();_tInt=setInterval(_tick,100);}
+function mL(item){if(item.classList.contains('ok'))return;document.querySelectorAll('.lmi').forEach(function(i){i.classList.remove('sl');});if(_mSel===item){_mSel=null;return;}_mSel=item;item.classList.add('sl');}
+function mR(item){if(!_mSel||item.classList.contains('ok'))return;if(_mSel.dataset.id===item.dataset.pair){_mSel.classList.remove('sl');_mSel.classList.add('ok');item.classList.add('ok');_mSel=null;if([].every.call(document.querySelectorAll('.lmi'),function(i){return i.classList.contains('ok');})){var mn=_el('mnote');if(mn)mn.innerHTML='<span style="color:#1e7a4a">✅ 全問正解！</span>';}}else{var lr=_mSel;lr.classList.remove('sl');lr.classList.add('ng');item.classList.add('ng');_mSel=null;setTimeout(function(){lr.classList.remove('ng');item.classList.remove('ng');},800);}}
+function _showBanner(pass,ok,tot){var b=_el('jbanner');b.className='jbanner '+(pass?'ban-pass':'ban-ng');b.textContent=pass?('🎉 合格！　全'+tot+'問正解！'):('おしい！　'+ok+' / '+tot+' 問 ── もう一息！');b.style.display='block';if(!pass)setTimeout(_hideBanner,2800);}
+function _hideBanner(){var b=_el('jbanner');if(b)b.style.display='none';}
+function _showScore(ok,tot){var p=_el('spill');p.textContent=ok+' / '+tot+' 問正解';p.style.display='inline-block';}
+function _saveRecord(ms){try{var recs=JSON.parse(localStorage.getItem(REC_KEY)||'[]');var ts=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});recs.push({ms:ms,ts:ts});recs.sort(function(a,b){return a.ms-b.ms;});if(recs.length>3)recs=recs.slice(0,3);localStorage.setItem(REC_KEY,JSON.stringify(recs));_renderRecords();}catch(e){}}
+function _renderRecords(){try{var recs=JSON.parse(localStorage.getItem(REC_KEY)||'[]');var el2=_el('recordList');if(!el2)return;if(!recs.length){el2.innerHTML='<div class="rp-empty">まだ記録がありません</div>';return;}el2.innerHTML=recs.map(function(r,i){var m=String(Math.floor(r.ms/60000)).padStart(2,'0');var s=String(Math.floor((r.ms%60000)/1000)).padStart(2,'0');var ds=String(Math.floor((r.ms%1000)/100));return '<div class="rp-row"><div class="rp-rank r'+(i+1)+'">'+(i+1)+'</div><div class="rp-time">'+m+':'+s+'.'+ds+'</div><div class="rp-date">'+r.ts+'</div></div>';}).join('');}catch(e){}}
+function playAudio(key){if(_curAud){_curAud.pause();_curAud.currentTime=0;}if(!AFILES[key])return;_curAud=new Audio(AFILES[key]);_curAud.onerror=function(){alert('音声ファイルが見つかりません:\n'+AFILES[key]);_curAud=null;};_curAud.play();}
+var _popup=null,_popupTarget=null;
+function _makePopup(){var p=document.getElementById('_blankPopup');if(!p){p=document.createElement('div');p.id='_blankPopup';document.body.appendChild(p);document.addEventListener('click',function(e){if(_popup&&_popup.style.display==='flex'&&!_popup.contains(e.target)&&e.target!==_popupTarget){_closePopup();}});}return p;}
+function _openPopup(blank){var p=_makePopup();_popup=p;_popupTarget=blank;p.innerHTML='';var words=_currentWords.length?_currentWords:QW;words.forEach(function(w){var btn=document.createElement('button');btn.style.cssText='font-family:\'BIZ UDGothic\',sans-serif;font-size:.85em;font-weight:700;background:#5d4037;color:#fff;border:none;padding:5px 12px;border-radius:4px;cursor:pointer;white-space:nowrap;margin:2px;';btn.textContent=w;btn.addEventListener('click',function(e){e.stopPropagation();blank.textContent=w;blank.classList.remove('ok','ng','show');_closePopup();});p.appendChild(btn);});var rect=blank.getBoundingClientRect();var pw=Math.min(340,window.innerWidth-24);var left=Math.max(12,Math.min(rect.left,window.innerWidth-pw-12));var top=rect.bottom+6;if(top+180>window.innerHeight)top=rect.top-190;p.style.cssText='display:flex;flex-wrap:wrap;gap:5px;padding:10px 12px;position:fixed;z-index:1000;background:#fff;border:2px solid #5d4037;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.22);max-width:'+pw+'px;left:'+left+'px;top:'+top+'px;';}
+function _closePopup(){if(_popup){_popup.style.display='none';_popup=null;_popupTarget=null;}}
+var _cnv=_el('cnv'),_ctx=_cnv.getContext('2d'),_pts=[],_raf=null;
+function _startConf(){_cnv.width=innerWidth;_cnv.height=innerHeight;_pts=[];for(var i=0;i<200;i++)_pts.push({x:Math.random()*_cnv.width,y:Math.random()*_cnv.height-_cnv.height,s:Math.random()*9+4,c:'hsl('+Math.floor(Math.random()*360)+',70%,62%)',sp:Math.random()*3+2,r:Math.random()*Math.PI*2,dr:.05});_animConf();}
+function _animConf(){_ctx.clearRect(0,0,_cnv.width,_cnv.height);_pts.forEach(function(p){p.y+=p.sp;p.r+=p.dr;_ctx.save();_ctx.translate(p.x,p.y);_ctx.rotate(p.r);_ctx.fillStyle=p.c;_ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s);_ctx.restore();if(p.y>_cnv.height)p.y=-20;});_raf=requestAnimationFrame(_animConf);}
+function _stopConf(){if(_raf){cancelAnimationFrame(_raf);_raf=null;}_ctx.clearRect(0,0,_cnv.width,_cnv.height);_pts=[];}
+(function(){try{var d=JSON.parse(localStorage.getItem('koukyo_index_v1')||'{}');var ID='toyo1';d[ID+'_count']=(d[ID+'_count']||0)+1;d[ID+'_last']=new Date().toISOString().slice(0,10);localStorage.setItem('koukyo_index_v1',JSON.stringify(d));var cal=JSON.parse(localStorage.getItem('koukyo_calendar_v1')||'{}');var today=new Date().toISOString().slice(0,10);cal[today]=(cal[today]||0)+1;localStorage.setItem('koukyo_calendar_v1',JSON.stringify(cal));}catch(e){}})();
+
+(function(){try{var d=JSON.parse(localStorage.getItem('koukyo_index_v1')||'{}');var ID='toyo3';d[ID+'_count']=(d[ID+'_count']||0)+1;d[ID+'_last']=new Date().toISOString().slice(0,10);localStorage.setItem('koukyo_index_v1',JSON.stringify(d));var cal=JSON.parse(localStorage.getItem('koukyo_calendar_v1')||'{}');var today=new Date().toISOString().slice(0,10);cal[today]=(cal[today]||0)+1;localStorage.setItem('koukyo_calendar_v1',JSON.stringify(cal));}catch(e){}}());
+if(new URLSearchParams(location.search).get('mode')==='quiz'){goQuizDirect();}
+</script>
+</body>
+</html>

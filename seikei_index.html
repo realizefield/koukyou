@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>政治経済 GAMBA システム</title>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f1923;--paper:#f2f0eb;--card:#fffefb;
+  --gold:#c8972a;--gold2:#f0c040;--accent:#1a3a6b;
+  --red:#c0392b;--green:#1a6b3a;--orange:#e67e22;
+  --muted:#6b7a99;--border:#d8d3c8;
+  --A:#27ae60;--B:#2980b9;--C:#e67e22;
+  --fc-blue:#1a3a6b;--fc-card:#fffefb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'BIZ UDPGothic','Meiryo',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;min-height:100vh}
+
+/* ヘッダー */
+.hdr{background:var(--ink);color:#fff;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 16px rgba(0,0,0,.5);position:sticky;top:0;z-index:400}
+.hdr-brand{display:flex;align-items:center;gap:12px}
+.hdr-logo{font-family:'Noto Serif JP',serif;font-size:1.2em;font-weight:700;letter-spacing:.06em}
+.hdr-logo span{color:var(--gold2)}
+.hdr-sub{font-size:.65em;opacity:.5;letter-spacing:.15em;margin-top:1px}
+.streak-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:5px 12px;cursor:pointer}
+.streak-badge .flame{font-size:1.2em}
+.streak-badge .days{font-size:.76em;font-weight:700;color:var(--gold2)}
+
+/* サマリーバー */
+.sbar{background:#1d2f5a;padding:10px 20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;border-bottom:2px solid var(--gold)}
+.sbi{display:flex;flex-direction:column;align-items:center;gap:1px}
+.sbi-n{font-size:1.3em;font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums}
+.sbi-l{font-size:.64em;color:rgba(255,255,255,.6);letter-spacing:.05em}
+.sbd{width:1px;background:rgba(255,255,255,.18);height:34px}
+.pw{flex:1;min-width:180px}
+.pl{font-size:.68em;color:rgba(255,255,255,.6);margin-bottom:3px}
+.pb{background:rgba(255,255,255,.14);border-radius:20px;height:9px;overflow:hidden}
+.pf{background:linear-gradient(90deg,var(--gold),var(--gold2));height:100%;border-radius:20px;transition:.6s}
+.pp{font-size:.7em;color:var(--gold2);margin-top:2px;font-weight:700}
+
+/* タブナビ */
+.tab-nav{background:#253060;border-bottom:2px solid var(--gold);padding:6px 16px;display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:60px;z-index:300}
+.tnav-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.76em;font-weight:700;padding:5px 14px;border:none;border-radius:5px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);cursor:pointer;transition:.15s;letter-spacing:.03em}
+.tnav-btn:hover{background:rgba(255,255,255,.22);color:#fff}
+.tnav-btn.active{background:var(--gold);color:var(--ink)}
+
+/* メイン */
+.main{max-width:920px;margin:0 auto;padding:22px 14px 80px}
+.tab-section{display:none}.tab-section.on{display:block}
+
+/* セクションヘッダー */
+.sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:8px}
+.sec-bar{width:5px;height:34px;border-radius:3px;flex-shrink:0}
+.bar-seikei{background:var(--red)}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:1.05em;font-weight:700;letter-spacing:.04em}
+.sec-cnt{font-size:.75em;color:var(--muted);margin-left:auto;font-weight:700}
+
+/* 単元カード */
+.unit-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.15s}
+.unit-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.1);transform:translateY(-1px)}
+.unit-top{display:flex;align-items:center;gap:12px;padding:13px 16px}
+.unit-num{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82em;flex-shrink:0}
+.unit-title{flex:1;font-size:.95em;font-weight:700;line-height:1.35}
+.unit-badges{display:flex;gap:5px;flex-wrap:wrap}
+.unit-type{font-size:.66em;padding:2px 7px;border-radius:10px;font-weight:700;letter-spacing:.03em;white-space:nowrap}
+.type-gamba{background:#fde8e8;color:var(--red)}
+.type-fc{background:#e8f3ff;color:var(--accent)}
+.type-kakomon{background:#e8f5ee;color:var(--green)}
+
+/* ABCボタン */
+.abc-row{display:flex;gap:6px;padding:0 16px 10px;align-items:center}
+.abc-lbl{font-size:.7em;color:var(--muted);font-weight:700;margin-right:4px;letter-spacing:.06em}
+.abc-btn{width:34px;height:28px;border:2px solid var(--border);border-radius:6px;font-family:'BIZ UDPGothic',sans-serif;font-weight:700;font-size:.82em;background:#f5f5f5;color:var(--muted);cursor:pointer;transition:.15s}
+.abc-btn:hover{border-color:var(--muted)}
+.abc-btn.A{background:var(--A);color:#fff;border-color:var(--A)}
+.abc-btn.B{background:var(--B);color:#fff;border-color:var(--B)}
+.abc-btn.C{background:var(--C);color:#fff;border-color:var(--C)}
+
+/* 統計行 */
+.stat-row{display:flex;gap:12px;padding:0 16px 10px;align-items:center;flex-wrap:wrap}
+.stat-item{display:flex;align-items:center;gap:3px;font-size:.74em;color:var(--muted)}
+.stat-item .val{font-weight:700;color:var(--ink)}
+.rdots{display:flex;gap:3px}
+.rdot{width:9px;height:9px;border-radius:50%;background:var(--border)}
+.rdot.done{background:var(--gold)}
+.rdot.done.perfect{background:var(--green)}
+
+/* リンク行 */
+.link-row{display:flex;gap:8px;padding:0 16px 14px;flex-wrap:wrap}
+.plink{text-decoration:none;font-family:'BIZ UDPGothic',sans-serif;font-size:.8em;font-weight:700;padding:7px 15px;border-radius:6px;border:1.5px solid var(--border);color:var(--ink);background:#f8f8f5;transition:.13s;display:flex;align-items:center;gap:5px}
+.plink:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.plink.main-link{background:var(--accent);color:#fff;border-color:var(--accent)}
+.plink.main-link:hover{background:#122d56}
+.plink.fc-link{background:#1a3a6b;color:#fff;border-color:#1a3a6b}
+.plink.fc-link:hover{background:#0f2548}
+.plink.ka-link{background:var(--green);color:#fff;border-color:var(--green)}
+.plink.ka-link:hover{background:#125a2e}
+
+/* バッジ */
+.badge-sec{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.badge-ttl{font-size:.78em;font-weight:700;color:var(--muted);letter-spacing:.1em;margin-bottom:10px}
+.badges{display:flex;flex-wrap:wrap;gap:9px}
+.badge{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 12px;border-radius:8px;border:2px solid var(--border);background:#f8f8f5;min-width:76px;transition:.2s}
+.badge.earned{border-color:var(--gold);background:linear-gradient(135deg,#fffbea,#fff8d0);box-shadow:0 2px 8px rgba(200,151,42,.2)}
+.badge.locked{opacity:.32;filter:grayscale(1)}
+.badge-icon{font-size:1.55em}
+.badge-name{font-size:.65em;font-weight:700;color:var(--ink);text-align:center;line-height:1.3}
+
+/* カレンダー */
+.cal-sec{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.cal-ttl{font-size:.78em;font-weight:700;color:var(--muted);letter-spacing:.1em;margin-bottom:10px}
+.cal-grid{display:flex;flex-wrap:wrap;gap:4px}
+.cal-day{width:15px;height:15px;border-radius:3px;background:var(--border)}
+.cal-day.s1{background:#c6e48b}.cal-day.s2{background:#7bc96f}.cal-day.s3{background:#239a3b}.cal-day.s4{background:#196127}
+.cal-lbl{display:flex;gap:5px;align-items:center;margin-top:7px;font-size:.68em;color:var(--muted)}
+.cld{width:11px;height:11px;border-radius:2px}
+
+/* フラッシュカードタブ */
+.fc-top{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.fc-top-title{font-family:'Noto Serif JP',serif;font-size:1em;font-weight:700;margin-bottom:14px;color:var(--accent)}
+.unit-sel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.usel-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.82em;font-weight:700;padding:8px 10px;border:2px solid var(--border);border-radius:7px;background:#f5f5f2;color:var(--ink);cursor:pointer;transition:.13s;text-align:left;line-height:1.4}
+.usel-btn:hover{border-color:var(--accent);background:#eef3ff}
+.usel-btn.active{border-color:var(--accent);background:var(--accent);color:#fff}
+
+.fc-settings{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px}
+.fc-set-lbl{font-size:.78em;font-weight:700;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+.speed-btns{display:flex;gap:6px}
+.spd-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.82em;font-weight:700;padding:7px 16px;border:2px solid var(--border);border-radius:6px;background:#f5f5f2;color:var(--ink);cursor:pointer;transition:.13s}
+.spd-btn:hover{border-color:var(--accent)}
+.spd-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.mode-btns{display:flex;gap:6px}
+.mode-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.82em;font-weight:700;padding:7px 16px;border:2px solid var(--border);border-radius:6px;background:#f5f5f2;color:var(--ink);cursor:pointer;transition:.13s}
+.mode-btn:hover{border-color:var(--red)}
+.mode-btn.active{background:var(--red);color:#fff;border-color:var(--red)}
+
+.fc-arena{display:none;flex-direction:column;align-items:center;gap:16px}
+.fc-arena.on{display:flex}
+.fc-progress-wrap{width:100%;max-width:500px}
+.fc-prog-bar{background:var(--border);border-radius:20px;height:8px;overflow:hidden;margin-bottom:4px}
+.fc-prog-fill{background:linear-gradient(90deg,var(--accent),var(--gold));height:100%;border-radius:20px;transition:.4s}
+.fc-prog-txt{font-size:.74em;color:var(--muted);text-align:center;font-weight:700}
+
+/* フラッシュカード本体 */
+.flash-card{width:100%;max-width:500px;min-height:260px;background:var(--fc-card);border:2px solid var(--border);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.1);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;text-align:center;position:relative;transition:transform .15s,box-shadow .15s;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.flash-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.14);transform:translateY(-2px)}
+.flash-card.flip-anim{animation:flipCard .3s ease forwards}
+@keyframes flipCard{0%{transform:rotateY(0);opacity:1}50%{transform:rotateY(90deg);opacity:0}100%{transform:rotateY(0);opacity:1}}
+.fc-unit-tag{position:absolute;top:12px;left:14px;font-size:.66em;font-weight:700;background:var(--accent);color:#fff;padding:2px 8px;border-radius:4px;letter-spacing:.04em}
+.fc-side-tag{position:absolute;top:12px;right:14px;font-size:.66em;font-weight:700;padding:2px 8px;border-radius:4px}
+.fc-side-tag.q{background:#fde8e8;color:var(--red)}
+.fc-side-tag.a{background:#e8f5ee;color:var(--green)}
+.fc-counter{position:absolute;bottom:12px;right:14px;font-size:.7em;color:var(--muted);font-weight:700}
+.fc-auto-bar{position:absolute;bottom:0;left:0;height:4px;background:var(--gold);border-radius:0 0 14px 14px;transition:none}
+.fc-main-text{font-family:'Noto Serif JP',serif;font-size:1.18em;font-weight:700;line-height:1.7;color:var(--ink)}
+.fc-hint{font-size:.8em;color:var(--muted);margin-top:10px;line-height:1.6}
+.fc-tap-hint{font-size:.72em;color:var(--muted);opacity:.7;margin-top:12px}
+.fc-answer-area{display:none;width:100%;background:#f0f8ff;border-top:1px dashed var(--border);margin-top:14px;padding-top:14px;text-align:left}
+.fc-answer-area.on{display:block}
+.fc-ans-lbl{font-size:.68em;font-weight:700;color:var(--green);letter-spacing:.08em;margin-bottom:5px}
+.fc-ans-txt{font-size:1em;font-weight:700;color:var(--ink);line-height:1.65}
+
+.fc-controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.fc-ctrl-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.86em;font-weight:700;padding:10px 22px;border:none;border-radius:8px;cursor:pointer;transition:.13s;letter-spacing:.04em}
+.fc-ctrl-btn:hover{transform:translateY(-1px);opacity:.88}
+.btn-prev{background:#d0d5e0;color:var(--ink)}
+.btn-flip{background:var(--accent);color:#fff}
+.btn-next{background:var(--green);color:#fff}
+.btn-start-fc{background:var(--red);color:#fff;padding:12px 32px;font-size:.95em}
+.btn-stop-fc{background:var(--muted);color:#fff}
+.btn-shuffle{background:var(--orange);color:#fff}
+.fc-stat-row{display:flex;gap:16px;font-size:.78em;color:var(--muted);font-weight:700;flex-wrap:wrap;justify-content:center}
+.fc-stat-row span{display:flex;align-items:center;gap:4px}
+
+/* 速度タイマー表示 */
+.fc-timer-ring{font-size:1.3em;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+
+/* 過去問タブ */
+.kakomon-intro{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:18px}
+.kakomon-intro p{font-size:.88em;line-height:1.8;color:var(--muted)}
+.kakomon-intro strong{color:var(--ink)}
+
+.qunit-sel{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.qunit-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.78em;font-weight:700;padding:6px 14px;border:2px solid var(--border);border-radius:6px;background:#f5f5f2;cursor:pointer;transition:.13s}
+.qunit-btn:hover{border-color:var(--green)}
+.qunit-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+.kakomon-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.kk-head{background:var(--accent);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.kk-year{font-size:.76em;font-weight:700;background:var(--gold);color:var(--ink);padding:2px 9px;border-radius:4px;white-space:nowrap}
+.kk-q{font-size:.92em;font-weight:700;flex:1;line-height:1.45}
+.kk-body{padding:16px 18px}
+.kk-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.kk-choice{font-family:'BIZ UDPGothic',sans-serif;font-size:.88em;padding:9px 14px;border:2px solid var(--border);border-radius:7px;background:#f8f8f5;cursor:pointer;transition:.13s;text-align:left;line-height:1.5}
+.kk-choice:hover{border-color:var(--accent);background:#eef3ff}
+.kk-choice.correct{background:#d4f5e2;border-color:var(--green);color:var(--green);font-weight:700}
+.kk-choice.wrong{background:#ffe0e0;border-color:var(--red);color:var(--red)}
+.kk-choice.show-ans{background:#d4f5e2;border-color:var(--green)}
+.kk-explain{display:none;font-size:.85em;color:var(--muted);background:#f0f8ff;border-radius:6px;padding:10px 14px;border-left:3px solid var(--accent);line-height:1.7;margin-top:8px}
+.kk-explain.on{display:block}
+.kk-ans-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.78em;font-weight:700;padding:6px 14px;border:none;border-radius:5px;background:var(--accent);color:#fff;cursor:pointer;transition:.13s;margin-top:8px}
+.kk-ans-btn:hover{background:#122d56}
+
+/* モーダル */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:900;align-items:center;justify-content:center}
+.modal-ov.open{display:flex}
+.modal-box{background:#fff;border-radius:18px;padding:32px 36px;text-align:center;max-width:340px;width:90%;box-shadow:0 12px 48px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold))}
+.modal-emoji{font-size:2.8em;margin-bottom:8px}
+.modal-title{font-size:1.25em;font-weight:700;margin-bottom:7px;color:var(--ink)}
+.modal-sub{font-size:.85em;color:var(--muted);margin-bottom:18px;line-height:1.6}
+.modal-close-btn{font-family:'BIZ UDPGothic',sans-serif;font-size:.9em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 28px;cursor:pointer}
+
+#cnv{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<canvas id="cnv"></canvas>
+
+<header class="hdr">
+  <div class="hdr-brand">
+    <div>
+      <div class="hdr-logo">政治経済 <span>GAMBA</span></div>
+      <div class="hdr-sub">頑張れ！完全習得システム</div>
+    </div>
+  </div>
+  <div class="streak-badge">
+    <span class="flame">🔥</span>
+    <span class="days" id="streakDisp">0日連続</span>
+  </div>
+</header>
+
+<div class="sbar">
+  <div class="sbi"><div class="sbi-n" id="sumTotal">0</div><div class="sbi-l">総学習回数</div></div>
+  <div class="sbd"></div>
+  <div class="sbi"><div class="sbi-n" id="sumA">0</div><div class="sbi-l">理解A</div></div>
+  <div class="sbi"><div class="sbi-n" id="sumB">0</div><div class="sbi-l">理解B</div></div>
+  <div class="sbi"><div class="sbi-n" id="sumC">0</div><div class="sbi-l">理解C</div></div>
+  <div class="sbd"></div>
+  <div class="pw">
+    <div class="pl">全単元習熟度</div>
+    <div class="pb"><div class="pf" id="progFill" style="width:0%"></div></div>
+    <div class="pp" id="progPct">0%</div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <button class="tnav-btn active" onclick="showTab('tab-units',this)">📋 単元表</button>
+  <button class="tnav-btn" onclick="showTab('tab-flash',this)">⚡ フラッシュカード</button>
+  <button class="tnav-btn" onclick="showTab('tab-kakomon',this)">📝 共通テスト過去問</button>
+  <button class="tnav-btn" onclick="showTab('tab-calendar',this)">📅 学習記録</button>
+</nav>
+
+<div class="main">
+
+<!-- ========== 単元表タブ ========== -->
+<div class="tab-section on" id="tab-units">
+
+  <div class="badge-sec">
+    <div class="badge-ttl">🏅 達成バッジ</div>
+    <div class="badges" id="badgeArea"></div>
+  </div>
+
+  <div class="sec-hdr">
+    <div class="sec-bar bar-seikei"></div>
+    <div class="sec-title">政治経済　全10単元</div>
+    <div class="sec-cnt" id="cnt-seikei"></div>
+  </div>
+  <div id="unit-cards-wrap"></div>
+</div>
+
+<!-- ========== フラッシュカードタブ ========== -->
+<div class="tab-section" id="tab-flash">
+
+  <div class="fc-top">
+    <div class="fc-top-title">⚡ 学習する単元を選ぶ（複数選択可）</div>
+    <div class="unit-sel-grid" id="unitSelGrid"></div>
+  </div>
+
+  <div class="fc-settings">
+    <div class="fc-set-lbl">⏱ 自動めくり速度：</div>
+    <div class="speed-btns">
+      <button class="spd-btn active" data-sec="0" onclick="setSpeed(this)">手動</button>
+      <button class="spd-btn" data-sec="2" onclick="setSpeed(this)">2秒</button>
+      <button class="spd-btn" data-sec="3" onclick="setSpeed(this)">3秒</button>
+      <button class="spd-btn" data-sec="4" onclick="setSpeed(this)">4秒</button>
+    </div>
+    <div class="fc-set-lbl" style="margin-left:10px">📌 表示モード：</div>
+    <div class="mode-btns">
+      <button class="mode-btn active" data-mode="term" onclick="setMode(this)">用語→意味</button>
+      <button class="mode-btn" data-mode="def" onclick="setMode(this)">意味→用語</button>
+    </div>
+    <button class="fc-ctrl-btn btn-shuffle" onclick="shuffleCards()" style="margin-left:auto">🔀 シャッフル</button>
+    <button class="fc-ctrl-btn btn-start-fc" onclick="startFlash()">▶ スタート</button>
+  </div>
+
+  <div class="fc-arena" id="fcArena">
+    <div class="fc-progress-wrap">
+      <div class="fc-prog-bar"><div class="fc-prog-fill" id="fcProgFill" style="width:0%"></div></div>
+      <div class="fc-prog-txt" id="fcProgTxt">0 / 0</div>
+    </div>
+    <div class="fc-stat-row" id="fcStatRow">
+      <span>⏱ <span id="fcTimer" class="fc-timer-ring">0.0</span>秒</span>
+      <span>✅ <span id="fcOk">0</span> 正解</span>
+      <span>❌ <span id="fcNg">0</span> 再確認</span>
+    </div>
+    <div class="flash-card" id="flashCard" onclick="flipOrNext()">
+      <div class="fc-unit-tag" id="fcUnitTag">単元①</div>
+      <div class="fc-side-tag q" id="fcSideTag">問題</div>
+      <div class="fc-main-text" id="fcMainText">カードを選んでスタート</div>
+      <div class="fc-hint" id="fcHint"></div>
+      <div class="fc-answer-area" id="fcAnswerArea">
+        <div class="fc-ans-lbl">▶ 答え</div>
+        <div class="fc-ans-txt" id="fcAnsTxt"></div>
+      </div>
+      <div class="fc-tap-hint" id="fcTapHint">タップで答えを見る</div>
+      <div class="fc-counter" id="fcCounter">1 / 1</div>
+      <div class="fc-auto-bar" id="fcAutoBar" style="width:0%"></div>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-ctrl-btn btn-prev" onclick="fcPrev()">◀ 前へ</button>
+      <button class="fc-ctrl-btn btn-flip" onclick="flipCard()">🔄 裏返す</button>
+      <button class="fc-ctrl-btn btn-next" onclick="fcNext()">次へ ▶</button>
+      <button class="fc-ctrl-btn btn-stop-fc" onclick="stopFlash()">■ 終了</button>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="fc-ctrl-btn" style="background:var(--green);color:#fff" onclick="markOk()">✅ 覚えた</button>
+      <button class="fc-ctrl-btn" style="background:var(--red);color:#fff" onclick="markNg()">❌ もう一度</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 共通テスト過去問タブ ========== -->
+<div class="tab-section" id="tab-kakomon">
+  <div class="kakomon-intro">
+    <p><strong>共通テスト・センター試験　政治経済　過去問抜粋</strong><br>
+    単元ごとに実際の入試問題を解いて、理解を深めましょう。<br>
+    選択肢をクリックすると正誤が分かります。「解説を見る」で詳しい解説も確認できます。</p>
+  </div>
+  <div class="qunit-sel" id="kakomonUnitSel"></div>
+  <div id="kakomonArea"></div>
+</div>
+
+<!-- ========== 学習記録タブ ========== -->
+<div class="tab-section" id="tab-calendar">
+  <div class="cal-sec">
+    <div class="cal-ttl">📅 学習カレンダー（過去84日）</div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-lbl">
+      <span>少</span>
+      <div class="cld" style="background:var(--border)"></div>
+      <div class="cld cal-day s1"></div>
+      <div class="cld cal-day s2"></div>
+      <div class="cld cal-day s3"></div>
+      <div class="cld cal-day s4"></div>
+      <span>多</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- 達成モーダル -->
+<div class="modal-ov" id="achieveModal">
+  <div class="modal-box">
+    <div class="modal-emoji" id="achieveEmoji">🎉</div>
+    <div class="modal-title" id="achieveTitle">達成！</div>
+    <div class="modal-sub" id="achieveSub"></div>
+    <button class="modal-close-btn" onclick="closeAchieve()">とじる</button>
+  </div>
+</div>
+
+<script>
+/* ========================================================
+   DATA：全10単元の定義
+   ======================================================== */
+const UNITS = [
+  {id:'sk01', num:'①', title:'国家と法(1)　―法の分類・国家の領域―'},
+  {id:'sk02', num:'②', title:'国家と法(2)　―国家の在り方・支配の類型―'},
+  {id:'sk03', num:'③', title:'国家と法(3)　―法の支配・社会契約説―'},
+  {id:'sk04', num:'④', title:'人権獲得の歴史　―市民革命・国際人権―'},
+  {id:'sk05', num:'⑤', title:'各国の政治制度　―議院内閣制・大統領制―'},
+  {id:'sk06', num:'⑥', title:'大日本帝国憲法と日本国憲法'},
+  {id:'sk07', num:'⑦', title:'基本的人権　―平等権―'},
+  {id:'sk08', num:'⑧', title:'自由権　―精神・身体の自由―'},
+  {id:'sk09', num:'⑨', title:'自由権・参政権・請求権　―社会権・労働―'},
+  {id:'sk10', num:'⑩', title:'平和主義　―自衛隊・安全保障―'},
+];
+
+/* ========================================================
+   フラッシュカードデータ（全10単元）
+   ======================================================== */
+const FLASH_DATA = {
+sk01:[
+  {q:'アリストテレスが人間を表した言葉は？',a:'「人間はポリス的動物である」　（著書：政治学）'},
+  {q:'法・道徳・宗教・慣習など社会生活の基準をまとめて何という？',a:'社会規範'},
+  {q:'時代を超えて常に成り立つ理性に基づく法を何という？',a:'自然法'},
+  {q:'人間が時代に応じて作った法を何という？',a:'実定法'},
+  {q:'文章の形で制定された法を何という？',a:'成文法'},
+  {q:'社会生活で繰り返し行われることをもとにした不文法を何という？',a:'慣例法（慣習法）'},
+  {q:'同じ内容の判決が繰り返されることで成立する不文法は？',a:'判例法'},
+  {q:'憲法・刑法などが属する法の分類は？',a:'公法'},
+  {q:'民法・会社法などが属する法の分類は？',a:'私法'},
+  {q:'労働基準法などが属する法の分類は？',a:'社会法'},
+  {q:'国家の三要素を答えよ。',a:'領域・人民・主権'},
+  {q:'「国家の三要素」を著書『一般国家学』で述べたドイツの学者は？',a:'イェリネック'},
+  {q:'領海は沿岸から何海里か？',a:'12海里'},
+  {q:'沿岸から200海里の範囲で漁業・鉱物資源の権利を持つ水域は？',a:'排他的経済水域（EEZ）'},
+  {q:'「主権論の祖」と呼ばれるフランスの思想家は？',a:'ジャン＝ボーダン'},
+  {q:'「国際法の父」と呼ばれるオランダの法学者は？著書も答えよ。',a:'グロチウス（著書：海洋自由論）'},
+  {q:'主権の3つの意味は？',a:'①国内統治権　②国家意思最終決定権　③対外独立権'},
+],
+sk02:[
+  {q:'会社法人と同様、国家も法人で君主は機関とする説は？提唱者は？',a:'国家法人説（イェリネック）　※天皇機関説→美濃部達吉'},
+  {q:'国家主権の絶対性を否定し、国家は社会集団の一つとする説は？',a:'多元国家論（ラスキ・マッキーバー）'},
+  {q:'国家は生物で国民は細胞とする説は？提唱者は？',a:'国家有機体説（スペンサー）'},
+  {q:'国家は一つの階級が他の階級を抑圧する道具とする説は？',a:'階級国家論（マルクス・エンゲルス）'},
+  {q:'国家は強者の征服によって成立するとする説は？',a:'国家征服説（オッペンハイマー）'},
+  {q:'王権は神から授かったもので、これへの反逆は神への反逆とする説は？',a:'王権神授説（フィルマー・ボシュエ）'},
+  {q:'国家は人間が契約によって作ったとする説は？',a:'社会契約説（ロック・ルソー・ホッブズ）'},
+  {q:'マックス・ウェーバーの支配の三類型を答えよ。',a:'伝統的支配・カリスマ的支配・合法的支配'},
+  {q:'国家任務を国防・治安の最小限とする19世紀の国家観は？提唱者は？',a:'夜警国家（ラッサール）'},
+  {q:'「なすがままにさせなさい」を意味するフランス語で、自由放任主義の象徴は？',a:'レッセフェール'},
+  {q:'「神の見えざる手」を主張したイギリスの経済学者は？',a:'アダム＝スミス'},
+  {q:'20世紀に社会的弱者の生活を保障する国家観は？',a:'福祉国家'},
+],
+sk03:[
+  {q:'1215年、イギリスのジョン王に認めさせた「法の支配」の原型となる文書は？',a:'マグナカルタ（大憲章）'},
+  {q:'「国王といえども神と法の下にある」を引用し権利請願を提出した法律家は？',a:'エドワード＝コーク'},
+  {q:'イギリスで従うべき慣習法を何という？',a:'コモンロー'},
+  {q:'1628年、チャールズ1世に提出した不当課税・不当逮捕禁止を求める文書は？',a:'権利請願'},
+  {q:'「自然法の父」と呼ばれるオランダの法学者は？',a:'グロチウス'},
+  {q:'ホッブズの著書と、彼が描いた自然状態は？',a:'著書「リバイアサン」　自然状態：「万人の万人に対する闘争」'},
+  {q:'ロックの著書と、自然状態の説明は？',a:'著書「市民政府二論」　自然状態：自由・平等・平和な状態'},
+  {q:'ロックが主張した抵抗権とは？',a:'政府が人権侵害を行う場合、いつでも同意を撤回し国家を作り替えてよい権利'},
+  {q:'ロックの自然権（三つ）は？',a:'生命権・自由権・財産（所有）権'},
+  {q:'ルソーの著書と「一般意志」の説明は？',a:'著書「社会契約論」　一般意志：共同体の人々の共通の意志'},
+  {q:'ルソーが主張した民主制の形は？',a:'直接民主制'},
+  {q:'自由権を「国家からの自由」と呼ぶ理由は？',a:'国家に不作為（介入しないこと）を求める権利だから'},
+  {q:'世界ではじめて社会権を保障した憲法は何？制定年は？',a:'ワイマール憲法（1919年、ドイツ）'},
+],
+sk04:[
+  {q:'1689年、イギリス名誉革命で議会が認めさせた文書は？',a:'権利章典（立法権・徴税権・軍事権は議会にある）'},
+  {q:'世界で初めて自然権を明文化した1776年のアメリカの文書は？',a:'バージニア権利章典'},
+  {q:'「アメリカ独立宣言」の起草者は？',a:'ジェファーソン（ロックの影響を受ける）'},
+  {q:'1789年、自然権・立憲主義・国民主権・権力分立を定めたフランスの文書は？',a:'フランス人権宣言（起草：ラファイエット）'},
+  {q:'1941年、ローズヴェルトが提唱した「四つの自由」とは？',a:'①言論・表現の自由　②信仰の自由　③欠乏からの自由　④恐怖からの自由'},
+  {q:'1948年、国連で採択された法的拘束力のない人権保障の基準は？',a:'世界人権宣言'},
+  {q:'1966年、世界人権宣言を条約化した法的拘束力のある国際文書は？',a:'国際人権規約（A規約＝社会権、B規約＝自由権・参政権）'},
+  {q:'自由権確立(18世紀)・参政権確立(19世紀)・社会権確立(20世紀)の国家形態は？',a:'夜警国家→民主主義国家→福祉国家'},
+  {q:'1838年〜イギリスで起きた労働者による普通選挙要求運動は？',a:'チャーチスト運動'},
+  {q:'難民を迫害が予想される本国へ送還してはならない原則は？',a:'ノン＝ルフールマン原則（難民条約）'},
+  {q:'女子差別撤廃条約批准(1985)を受けて日本で制定された法律は？',a:'男女雇用機会均等法（国籍法も父母両系血統主義に改正）'},
+  {q:'1999年に制定された男女共同参画に関する日本の基本法は？',a:'男女共同参画社会基本法'},
+],
+sk05:[
+  {q:'イギリスの「不文憲法」とはどういうこと？',a:'マグナカルタ・権利請願・権利章典・コモンローなど慣習法・判例が憲法の役割を果たす'},
+  {q:'1911年制定の「議会法」により確立した原則は？',a:'下院優越の原則（下院：金銭法案先議権・内閣不信任決議権）'},
+  {q:'イギリスの二大政党は？',a:'保守党と労働党'},
+  {q:'影の内閣（シャドーキャビネット）とは？',a:'政権をとっていない政党がいつでも政権担当できるよう準備する内閣'},
+  {q:'アメリカ合衆国憲法を起草したのは誰か？世界最初の何と呼ばれる？',a:'マディソン。世界最初の成文憲法（1788年発効）'},
+  {q:'アメリカ大統領の三権は？',a:'①軍の統帥権　②議会への教書送付権　③法案拒否権'},
+  {q:'アメリカ議会が大統領の拒否を覆すには？（オーバーライド）',a:'両院で出席議員の3分の2以上の再可決'},
+  {q:'アメリカ大統領の被選挙権・任期・3選は？',a:'35歳以上・任期4年・3選禁止'},
+  {q:'中国の最高権力機関は？',a:'全国人民代表大会（全人代）　内閣相当：国務院　最高裁相当：最高人民法院'},
+  {q:'中国の権力集中制を何という？',a:'権力集中制（民主集中制）　→三権分立ではなく全人代に権力集中'},
+],
+sk06:[
+  {q:'大日本帝国憲法と日本国憲法の「主権」の違いは？',a:'明治憲法：天皇主権（欽定憲法）　日本国憲法：国民主権（民定憲法）'},
+  {q:'大日本帝国憲法で国民は何と呼ばれ、権利はどのように制限されたか？',a:'臣民。「法律の範囲内」という制限（法律の留保）があった'},
+  {q:'大日本帝国憲法が「外見的立憲主義」と呼ばれる理由は？',a:'形式は立憲主義だが国民の権利保障が不十分だったため'},
+  {q:'治安維持法（1925年）とは何か？',a:'社会主義運動・労働運動を弾圧した法律。男子普通選挙制と同時に制定'},
+  {q:'大日本帝国憲法での帝国議会・内閣・裁判所の役割は？',a:'議会：天皇の協賛機関　内閣：天皇の輔弼機関　裁判所：天皇の名において裁判'},
+  {q:'大日本帝国憲法の三つの特別裁判所は？',a:'軍法会議・行政裁判所・皇室裁判所'},
+  {q:'天皇機関説（美濃部達吉）と民本主義（吉野作造）の内容は？',a:'天皇機関説：天皇は国家機関の一つ。民本主義：政治目的は民衆の利福であるべき'},
+  {q:'マッカーサー三原則（1946年）とは？',a:'①天皇制の維持　②戦争放棄　③封建制度廃止'},
+  {q:'日本国憲法は硬性・軟性どちらか？改正手続きは？',a:'硬性憲法。衆参各院の2/3以上の賛成で発議→国民投票で過半数→天皇が国民の名で公布'},
+],
+sk07:[
+  {q:'日本国憲法14条の平等規定は？（主な差別禁止事由4つ）',a:'人種・信条・性別・社会的身分または門地（法の下の平等）'},
+  {q:'形式的平等と実質的平等の違いは？',a:'形式的平等：機会の平等。実質的平等：格差を考慮した結果の平等'},
+  {q:'「尊属殺人重罰規定違憲判決」の内容は？',a:'直系尊属殺人の重罰規定は平等原則に違反→違憲（現在削除）'},
+  {q:'アイヌ民族関連で廃止された法律と制定された法律は？',a:'廃止：北海道旧土人保護法　制定：アイヌ文化振興法（1997年）'},
+  {q:'「国籍法違憲判決」の内容は？',a:'出生後の認知について日本国籍を認めない国籍法規定は法の下の平等に反する→違憲'},
+  {q:'被差別部落問題で1922年に結成された組織は？',a:'全国水平社'},
+  {q:'合理的な根拠のある差別（合理的差別）の例を3つ挙げよ。',a:'累進課税・少年犯罪の軽い刑・外国人の公務員就任不可など'},
+],
+sk08:[
+  {q:'精神の自由の「内心の自由」と「表現の自由」の違いは？',a:'内心の自由：外部に表れない→制約なし。表現の自由：外部に表れる→公共の福祉で制約あり'},
+  {q:'「検閲」とは何か？日本国憲法での扱いは？',a:'行政機関が表現内容を事前に審査して発表禁止すること。→日本国憲法は禁止'},
+  {q:'「政教分離の原則」とは何か？',a:'国や地方公共団体が特定の宗教と結びつくことを禁止する原則'},
+  {q:'「三菱樹脂事件」の内容と最高裁判決は？',a:'学生運動を理由に採用拒否→最高裁：企業の採用の自由があり思想良心の自由侵害にあたらず（合憲）'},
+  {q:'「津地鎮祭訴訟」の最高裁判決は？',a:'地鎮祭は世俗的行事で政教分離に違反せず→合憲'},
+  {q:'「愛媛玉串料訴訟」の最高裁判決は？',a:'靖国神社への玉串料公費支出は政教分離違反→違憲'},
+  {q:'「家永教科書訴訟」の最高裁判決は？',a:'教科書検定は不合格でも書店販売可→「検閲」にあたらず合憲'},
+  {q:'「チャタレー事件」の最高裁判決は？',a:'刑法175条のわいせつ物頒布罪は公共の福祉の制限→合憲'},
+  {q:'身体の自由：罪刑法定主義とは？',a:'犯罪の内容と刑罰はあらかじめ法律で定めておかなければならない原則'},
+  {q:'無罪推定の原則とは？',a:'有罪が確定するまでは無罪として扱われる原則'},
+  {q:'「黙秘権」とは？',a:'自己に不利益な供述はしなくてよいという権利'},
+  {q:'「一事不再理」とは？',a:'無罪確定後、同一事件について再審理できないという原則'},
+],
+sk09:[
+  {q:'薬事法薬局距離制限違憲判決の内容は？',a:'薬局の距離制限は職業選択の自由を侵害→違憲（2ヶ月後に条文削除）'},
+  {q:'森林法共有林分割制規定違憲判決の内容は？',a:'共有林の分割制限は財産権を不当に侵害→違憲'},
+  {q:'憲法25条「健康で文化的な最低限度の生活を営む権利」をプログラム規定説で解釈すると？',a:'国家の努力目標を定めたもので、国民に具体的な権利を与えたものではない'},
+  {q:'「朝日訴訟」の内容と最高裁判決は？',a:'生活扶助600円は不十分→最高裁：25条はプログラム規定で厚生大臣の裁量内→合憲'},
+  {q:'「堀木訴訟」の内容と最高裁判決は？',a:'障害福祉年金と児童扶養手当の併給禁止→最高裁：社会福祉は国会の裁量→合憲'},
+  {q:'労働三権とは？',a:'団結権（労働組合結成）・団体交渉権（賃金交渉）・団体行動権（ストライキ）'},
+  {q:'公務員の争議行為制限の根拠は？警察・自衛隊は？',a:'公務員は全体の奉仕者→争議権禁止。警察・自衛隊員は労働三権全て不認定'},
+  {q:'最高裁判所裁判官の国民審査はどんな選挙と同時に？罷免の条件は？',a:'衆議院総選挙と同時。有効投票の過半数が罷免を求めた場合に罷免'},
+  {q:'憲法改正の手続きは？',a:'衆参各院で総議員の2/3以上の賛成→国民投票で有効投票の過半数の賛成→天皇が公布'},
+  {q:'「国家賠償請求権」とは？',a:'公務員の不法行為で損害を受けた人が国・地方公共団体に賠償を請求できる権利'},
+  {q:'「郵便法損害賠償免責規定違憲判決」（2002年）の内容は？',a:'書留郵便の遅れによる損害に対して国の賠償責任を定めない郵便法は憲法17条に違反→違憲'},
+],
+sk10:[
+  {q:'日本国憲法第9条の内容は？（3点）',a:'①国権の発動たる戦争の放棄　②戦力の不保持　③交戦権の否認'},
+  {q:'朝鮮戦争（1950年）後にGHQの命令で創設された組織は？',a:'警察予備隊（7万5000人）→保安隊→自衛隊（1954年）'},
+  {q:'自衛隊の役割3つは？承認が必要な出動は？',a:'①防衛出動②治安出動③災害派遣。①②：内閣総理大臣の命令＋国会の承認'},
+  {q:'「砂川事件」最高裁判決の内容は？',a:'外国軍隊は憲法9条の戦力にあたらない→米軍駐留は合憲。統治行為論により自衛隊の合憲性判断は回避'},
+  {q:'「長沼ナイキ基地訴訟」の各審の判決は？',a:'第一審：自衛隊は違憲判決。第二審：統治行為論で憲法判断回避'},
+  {q:'自衛隊に対する政府の統一見解は？',a:'自衛隊は「自衛のための必要最小限度の実力」であるから合憲'},
+  {q:'文民統制（シビリアンコントロール）とは？',a:'内閣総理大臣・防衛大臣を含む国務大臣は全て文民でなければならない原則'},
+  {q:'非核三原則（1971年、佐藤栄作内閣）とは？',a:'核兵器を「持たず・作らず・持ち込ませず」'},
+  {q:'1996年「日米安全保障共同宣言」の意義は？',a:'冷戦後の日米安保体制の再定義。「新ガイドライン」で周辺事態への対応を規定'},
+  {q:'PKO参加5原則とは？（5つ）',a:'①停戦合意②参加同意③中立④条件崩壊時の撤退⑤武器使用最小限（生命身体防衛のみ）'},
+  {q:'集団的自衛権の行使を可能とした「武力行使の新3要素」（2014年）とは？',a:'①存立危機事態　②他に適当な手段がないこと　③必要最小限度の実力行使'},
+  {q:'「マルタ会談」（1989年）とは？',a:'ブッシュ米大統領とゴルバチョフ・ソ連書記長の会談で冷戦の終結を宣言'},
+]
+};
+
+/* ========================================================
+   共通テスト過去問データ（各単元2〜3問）
+   ======================================================== */
+const KAKOMON = [
+  // 単元①
+  {unit:'sk01', year:'2023年共通テスト', q:'法に関する次の記述のうち、正しいものはどれか。',
+   choices:['①自然法とは、特定の社会が独自に発展させた慣習に基づく法を指す。','②成文法とは、文章の形で制定された法のことをいう。','③社会法とは、憲法や刑法などの公権力と国民の関係を定める法である。','④判例法とは、議会が制定した成文法の一種である。'],
+   ans:1, explain:'成文法は文章の形で制定された法（法律・条例など）。①は実定法の説明が誤り。③は公法の説明。④判例法は不文法の一種。'},
+  {unit:'sk01', year:'センター試験2019年', q:'国家の三要素として正しいものの組合せを選べ。',
+   choices:['①領域・人民・権力','②領域・主権・人民','③主権・国際連合加盟・人民','④主権・領域・議会'],
+   ans:1, explain:'イェリネックは著書「一般国家学」で国家の三要素を「領域・人民・主権」と定義した。'},
+  // 単元②
+  {unit:'sk02', year:'2022年共通テスト', q:'マックス・ウェーバーの支配の三類型に関する記述として正しいものはどれか。',
+   choices:['①伝統的支配の例として、ナポレオンによる支配があげられる。','②カリスマ的支配は独裁的支配になりやすく、ヒトラーなどが例とされる。','③合法的支配とは、血統による伝統的な支配のことである。','④カリスマ的支配は現代の議会制民主主義の基盤である。'],
+   ans:1, explain:'カリスマ的支配は超人間的な能力を持つカリスマによる支配。例：ナポレオン、ヒトラー。独裁的支配になりやすい。①はカリスマ的支配の例。③は伝統的支配の説明。'},
+  {unit:'sk02', year:'センター試験2018年', q:'夜警国家を提唱したドイツの社会主義者は誰か。',
+   choices:['①アダム＝スミス','②ラッサール','③マルクス','④マックス・ウェーバー'],
+   ans:1, explain:'ラッサールは「夜警国家」という言葉を使い、国家の任務を治安や国防など最小限にとどめる消極国家を批判的に描写した。'},
+  // 単元③
+  {unit:'sk03', year:'2024年共通テスト', q:'社会契約論に関する記述として正しいものを選べ。',
+   choices:['①ホッブズは自然状態を「自由・平等・平和な状態」と捉えた。','②ロックは君主への権力の全面譲渡を主張し、絶対王政を支持した。','③ルソーは「一般意志」概念を用いて直接民主制を主張した。','④ホッブズの思想はアメリカ独立革命に大きな影響を与えた。'],
+   ans:2, explain:'ルソーは著書「社会契約論」で一般意志（共同体全体の意志）に基づく直接民主制を主張した。①はロックの説明。②はホッブズ。④はロックの思想がアメリカ独立革命に影響。'},
+  {unit:'sk03', year:'センター試験2017年', q:'権利請願（1628年）に関して正しいのはどれか。',
+   choices:['①ジョン王に認めさせた不当逮捕禁止の文書である。','②法律家エドワード＝コークが提出し、チャールズ1世が承認した。','③フランス革命後に制定された人権宣言の元になった。','④世界で初めて自然権を明文化した文書である。'],
+   ans:1, explain:'権利請願は1628年、エドワード＝コークがチャールズ1世の不当課税・不当逮捕に対し提出。チャールズ1世はこれを承認した。①はマグナカルタの説明。'},
+  // 単元④
+  {unit:'sk04', year:'2023年共通テスト', q:'国際人権規約に関する記述として正しいものはどれか。',
+   choices:['①1948年に国連総会で採択され、法的拘束力がある。','②A規約は「市民的及び政治的権利に関する国際規約」で自由権を保障する。','③B規約は「経済的・社会的及び文化的権利に関する国際規約」である。','④1966年に採択され、世界人権宣言の内容を条約として法的拘束力を持たせたものである。'],
+   ans:3, explain:'国際人権規約は1966年採択。A規約＝社会権規約（経済的・社会的・文化的権利）、B規約＝自由権規約（市民的・政治的権利）。①は世界人権宣言（法的拘束力なし）の説明。'},
+  {unit:'sk04', year:'センター試験2020年', q:'フランス人権宣言（1789年）の内容に含まれないものはどれか。',
+   choices:['①自然権・天賦人権の保障','②立憲主義の原則','③社会権の保障','④国民主権・権力分立'],
+   ans:2, explain:'フランス人権宣言は自然権・天賦人権、立憲主義、国民主権、権力分立を明記しているが、社会権は20世紀のワイマール憲法（1919年）で初めて保障された。'},
+  // 単元⑤
+  {unit:'sk05', year:'2022年共通テスト', q:'アメリカ大統領制に関する記述として正しいものはどれか。',
+   choices:['①大統領は議会に対し連帯責任を負う。','②議会は大統領に対する不信任決議権を持つ。','③大統領は議会への法案提出権を持たないが、教書送付権を持つ。','④大統領の任期は6年で3選禁止である。'],
+   ans:2, explain:'アメリカ大統領は法案提出権・議会への出席権はないが、①教書送付権　②軍の統帥権　③法案拒否権を持つ。任期は4年・3選禁止。議会への不信任決議権はなく責任も負わない。'},
+  {unit:'sk05', year:'センター試験2018年', q:'イギリスの議院内閣制に関する正しい記述はどれか。',
+   choices:['①イギリスには明文の成文憲法がある。','②議院内閣制では内閣は議会に対し連帯責任を負う。','③下院より上院の権限が優越している。','④1911年の権利章典により下院優越の原則が確立した。'],
+   ans:1, explain:'議院内閣制の本質：議会の信任によって内閣が成立し、内閣は議会に対し連帯責任を負う。イギリスは不文憲法（①誤）。下院優越（③誤）。1911年の「議会法」により下院優越確立（④誤：権利章典は1689年）。'},
+  // 単元⑥
+  {unit:'sk06', year:'2023年共通テスト', q:'大日本帝国憲法と日本国憲法の比較として正しいものはどれか。',
+   choices:['①大日本帝国憲法では内閣総理大臣が国務大臣の任免権を持つ。','②大日本帝国憲法では裁判所に違憲立法審査権があった。','③日本国憲法は天皇が制定して国民に授けた欽定憲法である。','④大日本帝国憲法では帝国議会は天皇の「協賛機関」とされた。'],
+   ans:3, explain:'大日本帝国憲法では帝国議会は天皇の立法権の「協賛機関」。①内閣総理大臣の任免権なし（「同輩中の首席」）。②違憲立法審査権なし。③日本国憲法は民定憲法（欽定憲法は明治憲法）。'},
+  {unit:'sk06', year:'センター試験2019年', q:'大正デモクラシーに関する記述として正しいものはどれか。',
+   choices:['①天皇機関説は、天皇は国家を超えた絶対的な主権者であるとする理論である。','②民本主義は吉野作造が提唱し、政治の目的は民衆の利福を求めることであると主張した。','③1925年の普通選挙法で25歳以上の男女が有権者となった。','④大正デモクラシーはロシア革命の影響を全く受けなかった。'],
+   ans:1, explain:'吉野作造の民本主義：「天皇は主権者であることを認めるが、政治の目的は民衆の利福であるべき」。①は民本主義の説明（天皇機関説ではない）。③1925年は25歳以上の男子のみ（男女は1946年から）。'},
+  // 単元⑦
+  {unit:'sk07', year:'2024年共通テスト', q:'日本国憲法の平等権に関する違憲判決として正しいものはどれか。',
+   choices:['①津地鎮祭訴訟で最高裁は政教分離に違反するとして違憲とした。','②尊属殺人重罰規定は平等原則に違反するとして違憲とされた。','③議員定数不均衡は衆議院で3倍以上の格差が生じた場合に違憲とされた。','④国籍法違憲判決では父系優先血統主義は合憲とされた。'],
+   ans:1, explain:'尊属殺人重罰規定違憲判決：直系尊属の殺人に対する重罰規定は平等原則違反→違憲（現在削除）。①津地鎮祭は合憲。③4倍以上の格差で違憲。④国籍法は違憲判決（父系優先は違憲）。'},
+  // 単元⑧
+  {unit:'sk08', year:'2023年共通テスト', q:'表現の自由に関する最高裁判決の説明として正しいものはどれか。',
+   choices:['①家永教科書訴訟で、最高裁は教科書検定は「検閲」にあたると判断した。','②チャタレー事件で、最高裁は刑法175条は公共の福祉の制限であり合憲とした。','③東大ポポロ劇団事件で、最高裁は大学の自治が侵害されたとして違憲とした。','④東京都公安条例違反事件の第一審で、最高裁は合憲と判決した。'],
+   ans:1, explain:'チャタレー事件：わいせつ物頒布罪は性的秩序を守る公共の福祉の制限→合憲。①家永教科書訴訟では「検閲」にあたらず合憲。③東大ポポロ：演劇発表は政治活動→大学の自治外、合憲。④第一審は違憲判決（最高裁が合憲）。'},
+  // 単元⑨
+  {unit:'sk09', year:'2022年共通テスト', q:'社会権・労働権に関する記述として正しいものはどれか。',
+   choices:['①朝日訴訟で、最高裁は憲法25条が直接国民に具体的権利を与えたと判断した。','②公務員の争議行為は憲法上保障されており、全公務員に認められる。','③労働三権とは団結権・団体交渉権・団体行動権のことである。','④警察職員・自衛隊員には団結権のみ認められる。'],
+   ans:2, explain:'労働三権：①団結権（組合結成）②団体交渉権（賃金交渉）③団体行動権（争議権）。①朝日訴訟：25条はプログラム規定で具体的権利を与えるものではない。②公務員の争議権は禁止。④警察・自衛隊員は労働三権全て不認定。'},
+  {unit:'sk09', year:'センター試験2019年', q:'薬事法に関する最高裁の違憲判決で問題とされた権利は何か。',
+   choices:['①財産権','②職業選択の自由','③居住・移転の自由','④学問の自由'],
+   ans:1, explain:'薬事法薬局距離制限違憲判決：薬局開設に既存薬局からの距離制限を設けることは「職業選択の自由」（憲法22条）を侵害→違憲。'},
+  // 単元⑩
+  {unit:'sk10', year:'2024年共通テスト', q:'日本の平和主義・安全保障に関する記述として正しいものはどれか。',
+   choices:['①PKO参加5原則には、武器の使用を一切禁止するという原則が含まれる。','②非核三原則とは「持たず・作らず・持ち込ませず」を意味する。','③日本の自衛隊は1960年の日米安全保障条約締結の際に設置された。','④集団的自衛権は日本国憲法の制定当初から認められていた。'],
+   ans:1, explain:'非核三原則：1971年佐藤栄作内閣が「持たず・作らず・持ち込ませず」を国是とした。①PKO5原則では武器使用は必要最小限（生命・身体防衛のみ）で禁止ではない。③自衛隊は1954年設立。④集団的自衛権は2014年まで違憲解釈だった。'},
+  {unit:'sk10', year:'センター試験2020年', q:'冷戦の終結を宣言した会談は何か。正しいものを選べ。',
+   choices:['①ヤルタ会談（1945年）','②マルタ会談（1989年）','③ポツダム会談（1945年）','④サンフランシスコ会談（1951年）'],
+   ans:1, explain:'マルタ会談（1989年）：マルタ島でブッシュ米大統領とゴルバチョフ・ソ連共産党書記長が会談し、冷戦の終結を宣言した。'},
+];
+
+/* ========================================================
+   LocalStorage / 状態管理
+   ======================================================== */
+const LS_KEY  = 'seikei_gamba_v1';
+const LS_CAL  = 'seikei_cal_v1';
+const LS_BADGE= 'seikei_badges_v1';
+
+function loadData(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return{}}}
+function saveData(d){try{localStorage.setItem(LS_KEY,JSON.stringify(d))}catch(e){}}
+function getGrade(d,id){return(d[id]||{}).grade||''}
+function getCount(d,id){return(d[id]||{}).count||0}
+function getLast(d,id){return(d[id]||{}).last||''}
+
+function setGrade(btn){
+  const id=btn.dataset.id, grade=btn.dataset.grade;
+  const d=loadData();
+  if(!d[id])d[id]={};
+  if(d[id].grade===grade){d[id].grade='';} else {d[id].grade=grade;}
+  saveData(d); recordCalendar(); render(); checkBadges(d);
+}
+
+function recordCalendar(){
+  try{
+    const cal=JSON.parse(localStorage.getItem(LS_CAL)||'{}');
+    const today=new Date().toISOString().slice(0,10);
+    cal[today]=(cal[today]||0)+1;
+    localStorage.setItem(LS_CAL,JSON.stringify(cal));
+  }catch(e){}
+}
+
+/* ========================================================
+   バッジ定義
+   ======================================================== */
+const BADGES=[
+  {id:'first',icon:'🌱',name:'初回学習',cond:d=>UNITS.some(u=>getCount(d,u.id)>0)},
+  {id:'all5',icon:'📚',name:'5単元制覇',cond:d=>UNITS.filter(u=>getGrade(d,u.id)==='A').length>=5},
+  {id:'all10',icon:'🏆',name:'全単元A',cond:d=>UNITS.every(u=>getGrade(d,u.id)==='A')},
+  {id:'fc10',icon:'⚡',name:'フラッシュ10枚',cond:d=>(d._fcTotal||0)>=10},
+  {id:'fc50',icon:'🎯',name:'フラッシュ50枚',cond:d=>(d._fcTotal||0)>=50},
+  {id:'kakomon',icon:'📝',name:'過去問初挑戦',cond:d=>(d._kakoTotal||0)>=1},
+  {id:'streak3',icon:'🔥',name:'3日連続',cond:_=>getStreak()>=3},
+  {id:'streak7',icon:'💫',name:'7日連続',cond:_=>getStreak()>=7},
+];
+
+function getStreak(){
+  try{
+    const cal=JSON.parse(localStorage.getItem(LS_CAL)||'{}');
+    let streak=0;
+    for(let i=0;i<365;i++){
+      const d=new Date();d.setDate(d.getDate()-i);
+      const k=d.toISOString().slice(0,10);
+      if(cal[k]>0)streak++; else if(i>0)break;
+    }
+    return streak;
+  }catch(e){return 0;}
+}
+
+/* ========================================================
+   単元カード生成
+   ======================================================== */
+function buildUnitCards(){
+  const wrap=document.getElementById('unit-cards-wrap');
+  wrap.innerHTML=UNITS.map(u=>`
+  <div class="unit-card" id="uc-${u.id}">
+    <div class="unit-top">
+      <div class="unit-num">${u.num}</div>
+      <div class="unit-title">${u.title}</div>
+      <div class="unit-badges">
+        <span class="unit-type type-gamba">GAMBA</span>
+        <span class="unit-type type-fc">FC</span>
+        <span class="unit-type type-kakomon">過去問</span>
+      </div>
+    </div>
+    <div class="abc-row">
+      <span class="abc-lbl">理解度</span>
+      <button class="abc-btn" data-id="${u.id}" data-grade="A" onclick="setGrade(this)">A</button>
+      <button class="abc-btn" data-id="${u.id}" data-grade="B" onclick="setGrade(this)">B</button>
+      <button class="abc-btn" data-id="${u.id}" data-grade="C" onclick="setGrade(this)">C</button>
+    </div>
+    <div class="stat-row">
+      <div class="stat-item">学習回数：<span class="val" id="cnt-${u.id}">0</span>回</div>
+      <div class="rdots" id="dots-${u.id}"></div>
+      <div class="stat-item">最終：<span class="val" id="last-${u.id}">—</span></div>
+    </div>
+    <div class="link-row">
+      <a class="plink fc-link" href="#" onclick="goFlash('${u.id}');return false;">⚡ フラッシュカード</a>
+      <a class="plink ka-link" href="#" onclick="goKakomon('${u.id}');return false;">📝 過去問</a>
+    </div>
+  </div>`).join('');
+}
+
+/* フラッシュカードタブへ単元指定でジャンプ */
+function goFlash(id){
+  showTab('tab-flash', document.querySelector('.tnav-btn:nth-child(2)'));
+  // 対象単元を選択状態にする
+  document.querySelectorAll('.usel-btn').forEach(b=>{
+    if(b.dataset.id===id) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  updateSelectedUnits();
+}
+
+function goKakomon(id){
+  showTab('tab-kakomon', document.querySelector('.tnav-btn:nth-child(3)'));
+  document.querySelectorAll('.qunit-btn').forEach(b=>{
+    if(b.dataset.id===id) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  renderKakomon();
+}
+
+/* ========================================================
+   フラッシュカード　単元選択ボタン生成
+   ======================================================== */
+function buildUnitSel(){
+  const grid=document.getElementById('unitSelGrid');
+  grid.innerHTML=UNITS.map(u=>`
+  <button class="usel-btn" data-id="${u.id}" onclick="toggleUnitSel(this)">
+    ${u.num}${u.title.split('　')[0]}
+  </button>`).join('');
+  // 過去問単元選択
+  const qs=document.getElementById('kakomonUnitSel');
+  qs.innerHTML=`<button class="qunit-btn active" data-id="all" onclick="selKakoUnit(this)">全単元</button>`
+    +UNITS.map(u=>`<button class="qunit-btn" data-id="${u.id}" onclick="selKakoUnit(this)">${u.num}</button>`).join('');
+}
+
+function toggleUnitSel(btn){
+  btn.classList.toggle('active');
+  updateSelectedUnits();
+}
+
+/* ========================================================
+   フラッシュカード ロジック
+   ======================================================== */
+let fcCards=[], fcIdx=0, fcFlipped=false, fcSpeed=0, fcMode='term';
+let fcAutoTimer=null, fcAutoStart=null, fcOkCount=0, fcNgCount=0, fcTotalTime=0, fcTmrInt=null;
+let fcOkSet=new Set(), fcNgSet=new Set();
+
+function setSpeed(btn){
+  document.querySelectorAll('.spd-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  fcSpeed=parseInt(btn.dataset.sec)*1000;
+}
+function setMode(btn){
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  fcMode=btn.dataset.mode;
+}
+function shuffleCards(){
+  updateSelectedUnits();
+  fcCards=fcCards.sort(()=>Math.random()-.5);
+  if(document.getElementById('fcArena').classList.contains('on')) showFcCard();
+}
+
+function updateSelectedUnits(){
+  const sel=[...document.querySelectorAll('.usel-btn.active')].map(b=>b.dataset.id);
+  if(sel.length===0){
+    fcCards=UNITS.flatMap(u=>FLASH_DATA[u.id]||[]);
+  } else {
+    fcCards=sel.flatMap(id=>FLASH_DATA[id]||[]);
+  }
+}
+
+function startFlash(){
+  updateSelectedUnits();
+  if(fcCards.length===0){alert('単元を選んでください');return;}
+  fcIdx=0; fcFlipped=false; fcOkCount=0; fcNgCount=0; fcOkSet.clear(); fcNgSet.clear();
+  document.getElementById('fcOk').textContent='0';
+  document.getElementById('fcNg').textContent='0';
+  document.getElementById('fcArena').classList.add('on');
+  // タイマー
+  let sec=0; clearInterval(fcTmrInt);
+  fcTmrInt=setInterval(()=>{sec+=0.1;document.getElementById('fcTimer').textContent=sec.toFixed(1);},100);
+  showFcCard();
+  if(fcSpeed>0) startAutoTimer();
+}
+
+function stopFlash(){
+  clearInterval(fcAutoTimer); clearInterval(fcTmrInt);
+  document.getElementById('fcArena').classList.remove('on');
+  document.getElementById('fcAutoBar').style.width='0%';
+  document.getElementById('fcAutoBar').style.transition='none';
+}
+
+function showFcCard(){
+  if(fcCards.length===0)return;
+  const c=fcCards[fcIdx];
+  const card=document.getElementById('flashCard');
+  card.classList.remove('flip-anim');
+  void card.offsetWidth;
+  card.classList.add('flip-anim');
+
+  const unitId=getCardUnit(c);
+  const unit=UNITS.find(u=>u.id===unitId);
+  document.getElementById('fcUnitTag').textContent=unit?unit.num+unit.title.split('　')[0]:'';
+
+  if(fcMode==='term'){
+    document.getElementById('fcSideTag').textContent='問題';
+    document.getElementById('fcSideTag').className='fc-side-tag q';
+    document.getElementById('fcMainText').textContent=c.q;
+    document.getElementById('fcHint').textContent='';
+  } else {
+    document.getElementById('fcSideTag').textContent='意味→用語';
+    document.getElementById('fcSideTag').className='fc-side-tag q';
+    document.getElementById('fcMainText').textContent=c.a;
+    document.getElementById('fcHint').textContent='';
+  }
+  document.getElementById('fcAnswerArea').classList.remove('on');
+  document.getElementById('fcTapHint').style.display='block';
+  document.getElementById('fcAnsTxt').textContent='';
+  document.getElementById('fcCounter').textContent=(fcIdx+1)+' / '+fcCards.length;
+  document.getElementById('fcProgFill').style.width=((fcIdx+1)/fcCards.length*100)+'%';
+  document.getElementById('fcProgTxt').textContent=(fcIdx+1)+' / '+fcCards.length;
+  fcFlipped=false;
+
+  if(fcSpeed>0) startAutoTimer();
+}
+
+function getCardUnit(card){
+  for(const[id,arr] of Object.entries(FLASH_DATA)){
+    if(arr.includes(card)) return id;
+  }
+  return '';
+}
+
+function flipCard(){
+  if(fcFlipped)return;
+  fcFlipped=true;
+  const c=fcCards[fcIdx];
+  if(fcMode==='term'){
+    document.getElementById('fcAnsTxt').textContent=c.a;
+  } else {
+    document.getElementById('fcAnsTxt').textContent=c.q;
+  }
+  document.getElementById('fcAnswerArea').classList.add('on');
+  document.getElementById('fcSideTag').textContent='答え';
+  document.getElementById('fcSideTag').className='fc-side-tag a';
+  document.getElementById('fcTapHint').style.display='none';
+  clearAutoTimer();
+}
+
+function flipOrNext(){
+  if(!document.getElementById('fcArena').classList.contains('on'))return;
+  if(!fcFlipped) flipCard();
+  else fcNext();
+}
+
+function fcNext(){
+  clearAutoTimer();
+  if(fcIdx<fcCards.length-1){fcIdx++;showFcCard();}
+  else{
+    clearInterval(fcTmrInt);
+    // 完了バナー
+    document.getElementById('flashCard').querySelector('.fc-main-text').textContent='🎉 全カード完了！';
+    document.getElementById('flashCard').querySelector('.fc-hint').textContent='お疲れさまでした！';
+    document.getElementById('fcAnswerArea').classList.remove('on');
+    // 記録
+    recordFcProgress();
+  }
+}
+
+function fcPrev(){
+  clearAutoTimer();
+  if(fcIdx>0){fcIdx--;showFcCard();}
+}
+
+function markOk(){
+  fcOkSet.add(fcIdx);fcNgSet.delete(fcIdx);
+  fcOkCount=fcOkSet.size;fcNgCount=fcNgSet.size;
+  document.getElementById('fcOk').textContent=fcOkCount;
+  document.getElementById('fcNg').textContent=fcNgCount;
+  fcNext();
+}
+function markNg(){
+  fcNgSet.add(fcIdx);fcOkSet.delete(fcIdx);
+  fcOkCount=fcOkSet.size;fcNgCount=fcNgSet.size;
+  document.getElementById('fcOk').textContent=fcOkCount;
+  document.getElementById('fcNg').textContent=fcNgCount;
+  fcNext();
+}
+
+function startAutoTimer(){
+  clearAutoTimer();
+  if(fcSpeed===0)return;
+  const bar=document.getElementById('fcAutoBar');
+  bar.style.transition='none';bar.style.width='0%';
+  void bar.offsetWidth;
+  bar.style.transition='width '+fcSpeed+'ms linear';
+  bar.style.width='100%';
+  fcAutoTimer=setTimeout(()=>{
+    if(!fcFlipped) flipCard();
+    setTimeout(fcNext, 800);
+  }, fcSpeed);
+}
+function clearAutoTimer(){
+  clearTimeout(fcAutoTimer);
+  const bar=document.getElementById('fcAutoBar');
+  bar.style.transition='none';bar.style.width='0%';
+}
+
+function recordFcProgress(){
+  const d=loadData();
+  d._fcTotal=(d._fcTotal||0)+fcCards.length;
+  saveData(d);
+  checkBadges(d);
+}
+
+/* ========================================================
+   過去問
+   ======================================================== */
+let selectedKakoUnit='all';
+
+function selKakoUnit(btn){
+  document.querySelectorAll('.qunit-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedKakoUnit=btn.dataset.id;
+  renderKakomon();
+}
+
+function renderKakomon(){
+  const area=document.getElementById('kakomonArea');
+  const list=selectedKakoUnit==='all'?KAKOMON:KAKOMON.filter(q=>q.unit===selectedKakoUnit);
+  if(list.length===0){area.innerHTML='<p style="color:var(--muted);text-align:center;padding:20px">この単元の過去問は準備中です</p>';return;}
+  area.innerHTML=list.map((q,i)=>`
+  <div class="kakomon-card" id="kk${i}">
+    <div class="kk-head">
+      <span class="kk-year">${q.year}</span>
+      <span class="kk-q">${q.q}</span>
+    </div>
+    <div class="kk-body">
+      <div class="kk-choices">
+        ${q.choices.map((c,ci)=>`<button class="kk-choice" onclick="ansKakomon(${i},${ci})">${c}</button>`).join('')}
+      </div>
+      <button class="kk-ans-btn" onclick="showKakoExplain(${i})">💡 解説を見る</button>
+      <div class="kk-explain" id="kkex${i}">${q.explain}</div>
+    </div>
+  </div>`).join('');
+}
+
+function ansKakomon(qi, ci){
+  const list=selectedKakoUnit==='all'?KAKOMON:KAKOMON.filter(q=>q.unit===selectedKakoUnit);
+  const q=list[qi];
+  const card=document.getElementById('kk'+qi);
+  const btns=card.querySelectorAll('.kk-choice');
+  btns.forEach((b,idx)=>{
+    b.onclick=null;
+    if(idx===q.ans) b.classList.add('correct');
+    else if(idx===ci && ci!==q.ans) b.classList.add('wrong');
+  });
+  // 記録
+  const d=loadData();
+  d._kakoTotal=(d._kakoTotal||0)+1;
+  saveData(d);
+  checkBadges(d);
+  // 解説自動表示
+  showKakoExplain(qi);
+}
+
+function showKakoExplain(qi){
+  const ex=document.getElementById('kkex'+qi);
+  if(ex) ex.classList.add('on');
+}
+
+/* ========================================================
+   レンダリング
+   ======================================================== */
+function renderDots(id,cnt,grade){
+  const el=document.getElementById('dots-'+id);if(!el)return;
+  const max=7;let html='';
+  for(let i=0;i<max;i++){const done=i<cnt;const cls=done?(grade==='A'?'done perfect':'done'):'';html+=`<div class="rdot ${cls}"></div>`;}
+  if(cnt>max)html+=`<span style="font-size:.7em;color:var(--muted);margin-left:2px">+${cnt-max}</span>`;
+  el.innerHTML=html;
+}
+
+function render(){
+  const d=loadData();
+  let cntA=0,cntB=0,cntC=0,total=0;
+  UNITS.forEach(u=>{
+    const grade=getGrade(d,u.id),cnt=getCount(d,u.id),last=getLast(d,u.id);
+    total+=cnt;
+    if(grade==='A')cntA++;else if(grade==='B')cntB++;else if(grade==='C')cntC++;
+    document.querySelectorAll(`[data-id="${u.id}"]`).forEach(btn=>{
+      btn.className='abc-btn'+(grade===btn.dataset.grade?' '+grade:'');
+    });
+    const ce=document.getElementById('cnt-'+u.id);if(ce)ce.textContent=cnt;
+    renderDots(u.id,cnt,grade);
+    const le=document.getElementById('last-'+u.id);if(le)le.textContent=last||'—';
+    const card=document.getElementById('uc-'+u.id);
+    if(card)card.style.borderLeft=grade?`4px solid var(--${grade})`:'';
+  });
+  document.getElementById('sumTotal').textContent=total;
+  document.getElementById('sumA').textContent=cntA;
+  document.getElementById('sumB').textContent=cntB;
+  document.getElementById('sumC').textContent=cntC;
+  const pct=Math.round(UNITS.reduce((s,u)=>{const g=getGrade(d,u.id);return s+(g==='A'?100:g==='B'?60:g==='C'?30:0);},0)/UNITS.length);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progPct').textContent=pct+'%';
+  const chk=UNITS.filter(u=>getGrade(d,u.id)).length;
+  document.getElementById('cnt-seikei').textContent=`${chk}/10単元チェック済`;
+  document.getElementById('streakDisp').textContent=getStreak()+'日連続';
+  renderBadges(d);
+  renderCalendar();
+}
+
+function renderBadges(d){
+  const area=document.getElementById('badgeArea');
+  area.innerHTML=BADGES.map(b=>{
+    const earned=b.cond(d);
+    return `<div class="badge ${earned?'earned':'locked'}" title="${b.name}"><div class="badge-icon">${b.icon}</div><div class="badge-name">${b.name}</div></div>`;
+  }).join('');
+}
+
+function checkBadges(d){
+  const prev=JSON.parse(localStorage.getItem(LS_BADGE)||'[]');
+  BADGES.forEach(b=>{
+    if(!prev.includes(b.id)&&b.cond(d)){
+      prev.push(b.id);
+      localStorage.setItem(LS_BADGE,JSON.stringify(prev));
+      showAchieve(b.icon,b.name+'を獲得！','おめでとうございます！🎊');
+    }
+  });
+}
+
+function renderCalendar(){
+  const cal=JSON.parse(localStorage.getItem(LS_CAL)||'{}');
+  const grid=document.getElementById('calGrid');let html='';
+  for(let i=83;i>=0;i--){
+    const d2=new Date();d2.setDate(d2.getDate()-i);
+    const k=d2.toISOString().slice(0,10);const v=cal[k]||0;
+    const cls=v>=4?'s4':v>=3?'s3':v>=2?'s2':v>=1?'s1':'';
+    html+=`<div class="cal-day ${cls}" title="${k}：${v}回"></div>`;
+  }
+  grid.innerHTML=html;
+}
+
+/* ========================================================
+   タブ切り替え
+   ======================================================== */
+function showTab(id,btn){
+  document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('.tnav-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(id==='tab-kakomon') renderKakomon();
+}
+
+/* ========================================================
+   達成モーダル
+   ======================================================== */
+function showAchieve(emoji,title,sub){
+  document.getElementById('achieveEmoji').textContent=emoji;
+  document.getElementById('achieveTitle').textContent=title;
+  document.getElementById('achieveSub').textContent=sub;
+  document.getElementById('achieveModal').classList.add('open');
+  startConf();setTimeout(stopConf,4000);
+}
+function closeAchieve(){document.getElementById('achieveModal').classList.remove('open');stopConf();}
+
+/* 紙吹雪 */
+const cv=document.getElementById('cnv'),cx=cv.getContext('2d');let pts=[],raf=null;
+function startConf(){cv.width=innerWidth;cv.height=innerHeight;pts=[];for(let i=0;i<220;i++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height-cv.height,s:Math.random()*10+4,c:`hsl(${Math.random()*360},70%,62%)`,sp:Math.random()*3+2,r:Math.random()*Math.PI*2,dr:.05});af();}
+function af(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{p.y+=p.sp;p.r+=p.dr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s);cx.restore();if(p.y>cv.height)p.y=-20;});raf=requestAnimationFrame(af);}
+function stopConf(){if(raf){cancelAnimationFrame(raf);raf=null;}cx.clearRect(0,0,cv.width,cv.height);pts=[];}
+
+/* ========================================================
+   初期化
+   ======================================================== */
+buildUnitCards();
+buildUnitSel();
+render();
+</script>
+</body>
+</html>
