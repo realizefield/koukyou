@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>確認問題 幸福・正義・公正の考え方①（功利主義） | GAMBA公共（高認）</title>
+<style>
+:root{--primary:#0f766e;--primary-light:#ccfbf1;--primary-mid:#0d9488;--success:#16a34a;--success-light:#dcfce7;--danger:#dc2626;--danger-light:#fee2e2;--bg:#f0fdfa;--card:#fff;--border:#99f6e4;--text:#1e293b;--text-sub:#64748b;--radius:12px;--shadow:0 2px 12px rgba(15,118,110,.10);--accent:#b45309;--accent-light:#fef3c7;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'BIZ UDPGothic','BIZ UDP Gothic','Meiryo',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:15px;padding-bottom:80px;}
+.topnav{background:linear-gradient(135deg,#0f172a,#0f766e);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:.82em;font-weight:700;position:sticky;top:0;z-index:100;}
+.topnav .brand{opacity:.95;}.topnav .sep{opacity:.4;}.topnav a{color:#99f6e4;text-decoration:none;}.topnav a:hover{color:#fff;}
+.hero{background:linear-gradient(135deg,#78350f 0%,#b45309 55%,#0f766e 100%);color:#fff;padding:22px 18px 18px;position:relative;overflow:hidden;}
+.hero::before{content:'📋';position:absolute;right:16px;top:14px;font-size:4em;opacity:.12;pointer-events:none;}
+.crumb{font-size:.75em;opacity:.75;margin-bottom:5px;}
+.hero h1{font-size:clamp(1.15em,4.5vw,1.5em);font-weight:700;margin-bottom:5px;}
+.hero .sub{font-size:.82em;opacity:.88;}
+.hero .badges{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.hero .badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72em;font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);}
+.wrap{max-width:720px;margin:0 auto;padding:0 12px;}
+.progress-bar-wrap{background:#e2e8f0;border-radius:8px;height:8px;overflow:hidden;margin-top:14px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--primary));border-radius:8px;transition:width .4s ease;width:0%;}
+.progress-info{display:flex;justify-content:space-between;font-size:.76em;font-weight:700;color:var(--text-sub);margin:6px 2px 0;}
+.info-box{background:var(--accent-light);border:1.5px solid #fcd34d;border-radius:var(--radius);padding:12px 16px;margin:14px 0;font-size:.82em;line-height:1.7;color:#78350f;}
+.info-box strong{color:#92400e;}
+.q-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);margin:14px 0;box-shadow:var(--shadow);overflow:hidden;transition:border-color .2s;}
+.q-card.answered-correct{border-color:var(--success);}.q-card.answered-wrong{border-color:var(--danger);}
+.q-header{background:linear-gradient(135deg,#fffbeb,#fef3c7);padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #fcd34d;}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:.82em;font-weight:700;flex-shrink:0;}
+.q-type{font-size:.72em;font-weight:700;padding:2px 8px;border-radius:50px;background:#fef3c7;color:#92400e;border:1px solid #fcd34d;}
+.q-pref{font-size:.7em;color:var(--text-sub);margin-left:auto;}
+.q-body{padding:14px 14px 10px;}
+.q-stem{font-size:.92em;line-height:1.8;margin-bottom:12px;font-weight:600;}
+.q-choices{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.q-c{font-family:inherit;width:100%;text-align:left;padding:9px 14px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.86em;line-height:1.55;color:var(--text);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:flex-start;gap:8px;}
+.q-c:hover:not(:disabled){border-color:#fbbf24;background:#fffbeb;transform:translateX(2px);}
+.q-c .choice-label{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#fef3c7;color:var(--accent);font-size:.78em;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.q-c .choice-text{flex:1;}
+.q-c.correct{background:var(--success-light);border-color:var(--success);color:var(--success);}
+.q-c.correct .choice-label{background:var(--success);color:#fff;}
+.q-c.wrong{background:var(--danger-light);border-color:var(--danger);color:var(--danger);}
+.q-c.wrong .choice-label{background:var(--danger);color:#fff;}
+.q-c:disabled{cursor:not-allowed;transform:none;}
+.q-exp{display:none;margin:8px 0 4px;padding:10px 14px;border-radius:8px;font-size:.84em;line-height:1.75;}
+.q-exp.show{display:block;animation:fadeIn .25s ease;}
+.q-exp.exp-correct{background:var(--success-light);border-left:3px solid var(--success);}
+.q-exp.exp-wrong{background:var(--danger-light);border-left:3px solid var(--danger);}
+.q-source{font-size:.7em;color:var(--text-sub);text-align:right;padding:0 14px 10px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
+#score-panel{display:none;background:var(--card);border:2px solid var(--accent);border-radius:var(--radius);margin:16px 0;padding:20px;text-align:center;}
+#score-panel .score-main{font-size:2em;font-weight:700;color:var(--primary);margin:8px 0;}
+.score-main{font-size:2.2em;font-weight:700;color:var(--primary);margin:6px 0;}
+.score-stars{font-size:1.8em;margin:6px 0;}
+#score-panel .score-msg{font-size:.9em;color:var(--text-sub);}
+.score-msg{font-size:.9em;color:var(--text-sub);margin-bottom:14px;}
+.score-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0;margin-bottom:14px;}
+.chip{padding:4px 14px;border-radius:50px;font-size:.78em;font-weight:700;}
+.chip-ok{background:var(--success-light);color:var(--success);border:1px solid #86efac;}
+.chip-ng{background:var(--danger-light);color:var(--danger);border:1px solid #fca5a5;}
+.score-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+.score-actions a{text-decoration:none;padding:9px 20px;border-radius:50px;font-size:.86em;font-weight:700;border:1.5px solid;}
+.btn-back{background:#fff;color:var(--primary);border-color:var(--primary-mid);}
+.btn-next{background:var(--primary);color:#fff;border-color:var(--primary);}
+.pagenav{display:flex;gap:8px;padding:16px 12px 0;max-width:720px;margin:0 auto;}
+.pagenav a{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--text);display:block;}
+.pagenav a.next{text-align:right;border-color:var(--primary);background:var(--primary-light);}
+.pagenav a .label{display:block;font-size:.72em;color:var(--text-sub);margin-bottom:2px;}
+.pagenav a .title{display:block;font-size:.88em;font-weight:700;color:var(--primary);}
+.hanafubuki-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.petal{position:absolute;top:-20px;animation:fall linear forwards;opacity:.9;}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);}80%{opacity:.9;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.pass-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s;}
+.pass-overlay.show{opacity:1;pointer-events:all;}
+.pass-dialog{background:#fff;border-radius:20px;padding:32px 28px;text-align:center;max-width:340px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.25);transform:scale(.85);transition:transform .3s;}
+.pass-overlay.show .pass-dialog{transform:scale(1);}
+.pass-emoji{font-size:3.2em;margin-bottom:8px;}
+.pass-dialog h2{font-size:1.7em;font-weight:700;color:var(--success);margin-bottom:4px;}
+.pass-score{font-size:1.5em;font-weight:700;color:var(--primary);margin:8px 0 6px;}
+.pass-stars{font-size:1.6em;margin-bottom:10px;}
+.pass-dialog p{font-size:.88em;color:var(--text-sub);margin-bottom:14px;}
+.pass-dialog .btn{font-family:inherit;padding:10px 22px;border-radius:50px;font-size:.88em;font-weight:700;cursor:pointer;border:2px solid var(--primary);background:var(--primary);color:#fff;margin:4px;}
+.pass-dialog .btn.outline{background:#fff;color:var(--primary);}
+@media(max-width:480px){.q-body{padding:12px;}.q-c{padding:8px 10px;font-size:.83em;}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="brand">🏛️ GAMBA 公共（高認）</span><span class="sep">|</span>
+  <a href="c02_index.html">📋 単元表</a>
+  <a href="c02_ch2_l1.html">📖 レッスンへ戻る</a>
+</nav>
+<header class="hero">
+  <div class="wrap">
+    <div class="crumb">第2章 幸福・正義・公正と倫理 / L1 確認問題</div>
+    <h1>確認問題 <span style="font-size:.65em;opacity:.8;">全10問</span></h1>
+    <p class="sub">ベンサムの量的功利主義とミルの質的功利主義のまとめテストです。</p>
+    <div class="badges">
+      <span class="badge">📝 全10問</span>
+      <span class="badge">🎯 7問以上で合格</span>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+<div class="progress-bar-wrap"><div class="progress-fill" id="prog-fill"></div></div>
+<div class="progress-info">
+  <span id="prog-text">0 / 10 問 回答済み</span>
+  <span id="prog-score">正解 0問</span>
+</div>
+<main>
+<div class="info-box"><strong>💡 取り組み方：</strong>レッスン・練習問題の内容をもとにした確認テストです。<strong>7問以上正解で合格</strong>です！</div>
+
+<!-- 問1 -->
+<div class="q-card"><div class="q-header"><span class="q-num">1</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">行為の善悪を、その行為が生み出す結果によって判断する考え方を何というか。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">義務論</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">イ</span><span class="choice-text">功利主義</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">徳倫理</span></button>
+    <button class="q-c"><span class="choice-label">エ</span><span class="choice-text">実存主義</span></button>
+  </div>
+  <div class="q-exp"><strong>イ：功利主義</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問2 -->
+<div class="q-card"><div class="q-header"><span class="q-num">2</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">行為の動機よりも結果を重視する立場を何というか。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">動機主義</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">徳倫理</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">社会契約説</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">エ</span><span class="choice-text">帰結主義</span></button>
+  </div>
+  <div class="q-exp"><strong>エ：帰結主義</strong>が正解です。功利主義はその代表です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問3 -->
+<div class="q-card"><div class="q-header"><span class="q-num">3</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">快楽には量の違いしかないとする量的功利主義を唱えたイギリスの思想家は誰か。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">ロック</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">カント</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">ミル</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">エ</span><span class="choice-text">ベンサム</span></button>
+  </div>
+  <div class="q-exp"><strong>エ：ベンサム</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問4 -->
+<div class="q-card"><div class="q-header"><span class="q-num">4</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">ベンサムが道徳と立法の原理として掲げた言葉は何か。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">目的の王国</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">一般意志</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">ウ</span><span class="choice-text">最大多数の最大幸福</span></button>
+    <button class="q-c"><span class="choice-label">エ</span><span class="choice-text">万人の万人に対する闘争</span></button>
+  </div>
+  <div class="q-exp"><strong>ウ：最大多数の最大幸福</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問5 -->
+<div class="q-card"><div class="q-header"><span class="q-num">5</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">快楽と苦痛を数値化して比較しようとする考え方を何というか。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">帰納法</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">演繹法</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">弁証法</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">エ</span><span class="choice-text">快楽計算</span></button>
+  </div>
+  <div class="q-exp"><strong>エ：快楽計算</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問6 -->
+<div class="q-card"><div class="q-header"><span class="q-num">6</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">快楽には質の違いがあるとする質的功利主義を唱えた思想家は誰か。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">カント</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">ベンサム</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">ウ</span><span class="choice-text">ジョン=スチュアート=ミル</span></button>
+    <button class="q-c"><span class="choice-label">エ</span><span class="choice-text">アリストテレス</span></button>
+  </div>
+  <div class="q-exp"><strong>ウ：ジョン=スチュアート=ミル</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問7 -->
+<div class="q-card"><div class="q-header"><span class="q-num">7</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">ミルが述べた「満足した豚であるより、不満足な（　）である方がよい」の（　）に当てはまる語句は何か。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">神</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">動物</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">王</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">エ</span><span class="choice-text">人間</span></button>
+  </div>
+  <div class="q-exp"><strong>エ：人間</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問8 -->
+<div class="q-card"><div class="q-header"><span class="q-num">8</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">ミルが幸福について、量よりも重視したものは何か。</div>
+  <div class="q-choices">
+    <button class="q-c"><span class="choice-label">ア</span><span class="choice-text">権力の大きさ</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">名誉の量</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">富の量</span></button>
+    <button class="q-c" data-correct="true"><span class="choice-label">エ</span><span class="choice-text">快楽の質</span></button>
+  </div>
+  <div class="q-exp"><strong>エ：快楽の質</strong>が正解です。ミルは精神的な質の高い快楽を重視しました（質的功利主義）。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問9 -->
+<div class="q-card"><div class="q-header"><span class="q-num">9</span><span class="q-type">用語選択</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">ミルが人の道徳的行動の内面的な動機として重視したものは何か。</div>
+  <div class="q-choices">
+    <button class="q-c" data-correct="true"><span class="choice-label">ア</span><span class="choice-text">良心</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">抵抗権</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">一般意志</span></button>
+    <button class="q-c"><span class="choice-label">エ</span><span class="choice-text">快楽計算</span></button>
+  </div>
+  <div class="q-exp"><strong>ア：良心</strong>が正解です。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+<!-- 問10 -->
+<div class="q-card"><div class="q-header"><span class="q-num">10</span><span class="q-type">実践問題</span><span class="q-pref">江原予備校テキスト</span></div>
+<div class="q-body">
+  <div class="q-stem">次の記述のうち、功利主義の考え方として最も適切なものはどれか。
+① 行為の結果として生じる社会全体の幸福の量を重視する。
+② 自然権を守るために人々が契約を結んで国家をつくるとする。
+③ 極端を避けた中庸を実践することが徳であるとする。
+④ 行為者の動機や人格を重視し、普遍的な道徳法則に従うことを求める。</div>
+  <div class="q-choices">
+    <button class="q-c" data-correct="true"><span class="choice-label">ア</span><span class="choice-text">①</span></button>
+    <button class="q-c"><span class="choice-label">イ</span><span class="choice-text">②</span></button>
+    <button class="q-c"><span class="choice-label">ウ</span><span class="choice-text">③</span></button>
+    <button class="q-c"><span class="choice-label">エ</span><span class="choice-text">④</span></button>
+  </div>
+  <div class="q-exp"><strong>①</strong>が正解です。②は社会契約説の説明です、③は徳倫理、④は義務論。</div>
+</div><div class="q-source">出典：江原予備校テキスト</div></div>
+
+
+<div class="score-panel" id="score-panel" style="display:none;">
+  <div class="score-main" id="score-main"></div>
+  <div class="score-stars" id="score-stars"></div>
+  <div class="score-msg" id="score-msg"></div>
+  <div class="score-chips">
+    <span class="chip chip-ok" id="chip-ok"></span>
+    <span class="chip chip-ng" id="chip-ng"></span>
+  </div>
+  <div class="score-actions">
+    <a href="c02_ch2_l1.html" class="btn-back">📖 レッスンへ戻る</a>
+    <a href="c02_ch2_l2.html" class="btn-next">次のレッスンへ ▶</a>
+  </div>
+</div>
+</main>
+<nav class="pagenav">
+  <a href="c02_ch2_l1_practice.html"><span class="label">◀ 練習問題</span><span class="title">練習問題</span></a>
+  <a href="c02_ch2_l2.html" class="next"><span class="label">NEXT ▶</span><span class="title">次のレッスンへ</span></a>
+</nav>
+</div>
+<div class="hanafubuki-overlay" id="hanafubuki"></div>
+<div class="pass-overlay" id="pass-overlay">
+  <div class="pass-dialog">
+    <div class="pass-emoji">🌸</div><h2>合　格！</h2>
+    <div class="pass-score" id="pass-score-text"></div>
+    <div class="pass-stars" id="pass-stars-text"></div>
+    <p id="pass-msg"></p>
+    <button class="btn" onclick="location.href='c02_ch2_l2.html'">📋 次のレッスンへ</button>
+    <button class="btn outline" onclick="closePass()">閉じる</button>
+  </div>
+</div>
+
+<script>
+const TOTAL=10,PASS=7;let answered=0,correct=0;
+document.querySelectorAll('.q-card').forEach(card=>{
+  const btns=card.querySelectorAll('.q-c'),exp=card.querySelector('.q-exp');
+  btns.forEach(btn=>{btn.addEventListener('click',()=>{
+    if(btn.disabled)return;btns.forEach(b=>b.disabled=true);
+    const ok=btn.dataset.correct==='true';
+    if(ok){btn.classList.add('correct');exp.classList.add('show','exp-correct');card.classList.add('answered-correct');correct++;}
+    else{btn.classList.add('wrong');exp.classList.add('show','exp-wrong');card.classList.add('answered-wrong');btns.forEach(b=>{if(b.dataset.correct==='true')b.classList.add('correct');});}
+    answered++;updateProgress();if(answered===TOTAL)setTimeout(showResult,700);
+  });});
+});
+function updateProgress(){document.getElementById('prog-text').textContent=`${answered} / ${TOTAL} 問 回答済み`;document.getElementById('prog-score').textContent=`正解 ${correct}問`;document.getElementById('prog-fill').style.width=(answered/TOTAL*100)+'%';}
+function getStars(c){if(c===TOTAL)return '⭐⭐⭐';if(c>=PASS)return '⭐⭐';if(c>=PASS-2)return '⭐';return '';}
+function getMsg(c){
+  if(c===TOTAL)return '🎉 パーフェクト！第2章L1は完全制覇です！';
+  if(c>=TOTAL-2)return 'すばらしい！あと少しで満点です。';
+  if(c>=PASS)return '合格！これで完了です！';
+  if(c>=PASS-2)return 'もう少し！まちがえた問題を確認しよう。';
+  return 'もう一度レッスンをよく読んでから挑戦しよう！';
+}
+function showResult(){
+  const panel=document.getElementById('score-panel');
+  document.getElementById('score-main').textContent=`${correct} / ${TOTAL} 問正解`;
+  document.getElementById('score-stars').textContent=getStars(correct);
+  document.getElementById('score-msg').textContent=getMsg(correct);
+  document.getElementById('chip-ok').textContent=`✅ 正解 ${correct}問`;
+  document.getElementById('chip-ng').textContent=`❌ 不正解 ${TOTAL-correct}問`;
+  panel.style.display='block';panel.scrollIntoView({behavior:'smooth',block:'center'});
+  if(correct>=PASS)setTimeout(showPass,500);
+}
+function showPass(){
+  launchHanafubuki();
+  document.getElementById('pass-score-text').textContent=`${correct} / ${TOTAL} 問正解`;
+  document.getElementById('pass-stars-text').textContent=getStars(correct);
+  document.getElementById('pass-msg').textContent=getMsg(correct);
+  document.getElementById('pass-overlay').classList.add('show');
+}
+function closePass(){document.getElementById('pass-overlay').classList.remove('show');}
+function launchHanafubuki(){
+  const c=document.getElementById('hanafubuki');c.innerHTML='';
+  const p=['🌸','⚖️','✨','⭐','🎊','🎉','💮','🌷','🎀','🏆'];
+  for(let i=0;i<75;i++){const el=document.createElement('div');el.className='petal';el.textContent=p[Math.floor(Math.random()*p.length)];el.style.left=Math.random()*100+'vw';el.style.animationDuration=(2+Math.random()*3)+'s';el.style.animationDelay=(Math.random()*2)+'s';el.style.fontSize=(.8+Math.random()*1.4)+'em';c.appendChild(el);}
+  setTimeout(()=>{c.innerHTML='';},6000);
+}
+</script>
+</body>
+</html>

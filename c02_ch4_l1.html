@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第4章L1 資本主義経済と社会主義経済の歴史 | GAMBA公共（高認）</title>
+<style>
+:root{--primary:#0f766e;--primary-light:#ccfbf1;--primary-mid:#0d9488;--accent:#f59e0b;--accent-light:#fef3c7;--success:#16a34a;--success-light:#dcfce7;--danger:#dc2626;--danger-light:#fee2e2;--bg:#f0fdfa;--card:#fff;--border:#99f6e4;--text:#1e293b;--text-sub:#64748b;--radius:12px;--shadow:0 2px 12px rgba(15,118,110,.10);}
+*{box-sizing:border-box;margin:0;padding:0;}*::before,*::after{box-sizing:inherit;}
+body{font-family:'BIZ UDPGothic','BIZ UDP Gothic','Meiryo',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:15px;padding-bottom:80px;}
+.topnav{background:linear-gradient(135deg,#0f172a,#0f766e);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:.82em;font-weight:700;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(15,118,110,.3);}
+.topnav .sep{opacity:.4;}.topnav a{color:#99f6e4;text-decoration:none;}.topnav a:hover{color:#fff;}
+.hero{background:linear-gradient(135deg,#064e3b 0%,#0f766e 50%,#0d9488 100%);color:#fff;padding:24px 18px 20px;position:relative;overflow:hidden;}
+.hero::before{content:'💰';position:absolute;right:16px;top:12px;font-size:4.5em;opacity:.13;pointer-events:none;}
+.crumb{font-size:.75em;opacity:.75;margin-bottom:6px;}
+.hero h1{font-size:clamp(1.2em,4.6vw,1.6em);font-weight:700;margin-bottom:6px;}
+.hero .sub{font-size:.83em;opacity:.88;line-height:1.6;}
+.hero .badges{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.hero .badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72em;font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);}
+.wrap{max-width:720px;margin:0 auto;padding:0 12px;}
+.unit{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);}
+.unit-title{background:linear-gradient(135deg,#065f46,#0f766e);color:#fff;padding:10px 16px;font-size:.9em;font-weight:700;display:flex;align-items:center;gap:8px;border-radius:var(--radius) var(--radius) 0 0;}
+.unit-title .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.25);font-size:.85em;font-weight:700;flex-shrink:0;}
+.stage{padding:16px 16px 4px;}
+.stage-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.stage-label{font-size:.78em;font-weight:700;padding:3px 10px;border-radius:50px;background:var(--primary-light);color:var(--primary);}
+.stage-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.ch-btn{font-family:inherit;padding:5px 12px;border-radius:50px;font-size:.78em;font-weight:700;cursor:pointer;transition:all .15s;border:1.5px solid;}
+.ch-btn.start{background:#f0fdfa;border-color:var(--primary);color:var(--primary);}
+.ch-btn.start:hover{background:var(--primary);color:#fff;}
+.ch-btn.judge{background:#dcfce7;border-color:var(--success);color:var(--success);}
+.ch-btn.judge:hover{background:var(--success);color:#fff;}
+.ch-btn.example{background:#fef3c7;border-color:var(--accent);color:#92400e;}
+.ch-btn.reset{background:#f1f5f9;border-color:#94a3b8;color:#64748b;}
+.ch-btn.cancel{background:#fee2e2;border-color:var(--danger);color:var(--danger);}
+.challenge-timer{font-size:.82em;font-weight:700;color:var(--danger);min-width:48px;text-align:center;}
+.word-bank-inline{display:none;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid var(--accent);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.challenge-active .word-bank-inline{display:block;animation:fadeIn .2s ease;}
+.wb-title{font-size:.8em;font-weight:700;color:#92400e;margin-bottom:10px;}
+.wb-words{display:flex;gap:8px;flex-wrap:wrap;}
+.wb-word{font-family:inherit;padding:6px 16px;border-radius:50px;border:2px solid var(--accent);background:#fff;font-size:.86em;font-weight:700;color:#92400e;cursor:pointer;transition:all .15s;}
+.wb-word:hover{background:var(--accent);color:#fff;transform:translateY(-1px);}
+.wb-word.used{opacity:.3;pointer-events:none;text-decoration:line-through;}
+.wb-word.selected-word{background:var(--accent);color:#fff;box-shadow:0 0 0 3px #fbbf24;transform:translateY(-1px);}
+.read-box{background:#f8fefd;border:1px solid #99f6e4;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:.9em;line-height:1.9;}
+.read-box p{margin-bottom:.85em;}.read-box p:last-child{margin-bottom:0;}
+.kw-blank{display:inline-block;min-width:4em;padding:1px 6px;border-radius:4px;border-bottom:2px solid var(--primary-mid);color:var(--primary);font-weight:700;cursor:default;}
+.challenge-active .kw-blank{background:#e0e7ff;color:transparent;border:2px dashed var(--primary-mid);border-radius:6px;cursor:pointer;min-width:5em;text-align:center;display:inline-block;padding:1px 6px;}
+.challenge-active .kw-blank:hover{background:#c7d2fe;}
+.challenge-active .kw-blank.selected{background:#fef9c3;color:var(--text);border-color:var(--accent);}
+.challenge-active .kw-blank.correct-blink{background:#dcfce7;color:var(--success);border-color:var(--success);}
+.challenge-active .kw-blank.wrong-blink{background:#fee2e2;color:var(--danger);border-color:var(--danger);}
+.point-box{background:linear-gradient(135deg,#f0fdfa,#fef9c3);border:2px solid var(--accent);border-radius:10px;padding:12px 16px;margin-bottom:14px;}
+.point-box .label{font-size:.8em;font-weight:700;color:#92400e;display:block;margin-bottom:6px;}
+.point-box ul{padding-left:0;list-style:none;}
+.point-box li{font-size:.86em;line-height:1.75;color:var(--text);padding:2px 0 2px 16px;position:relative;}
+.point-box li::before{content:'✦';position:absolute;left:0;color:var(--accent);font-size:.75em;top:5px;}
+.person-box{background:#fff;border:1.5px solid #99f6e4;border-radius:10px;padding:11px 14px;margin-bottom:14px;}
+.person-box .pb-title{font-size:.8em;font-weight:700;color:#0f766e;margin-bottom:8px;}
+.person-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.person-card{background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:8px;padding:8px 10px;font-size:.82em;line-height:1.6;}
+.person-card strong{color:#0f766e;display:block;margin-bottom:2px;}
+.ranking{padding:8px 16px 12px;border-top:1px solid var(--border);}
+.ranking h3{font-size:.82em;font-weight:700;color:var(--primary);margin-bottom:6px;}
+.ranking-list{list-style:none;font-size:.8em;color:var(--text-sub);}
+.ranking-list li{padding:2px 0;}
+.minitest-block{border-top:1.5px solid var(--border);padding:14px 16px;background:#fafffe;}
+.mt-block-title{font-size:.82em;font-weight:700;color:var(--primary);margin-bottom:10px;}
+.minitest{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.mt-stem{font-size:.88em;line-height:1.75;margin-bottom:10px;}
+.mt-num{font-weight:700;color:var(--primary);background:var(--primary-light);padding:1px 7px;border-radius:5px;margin-right:6px;font-size:.85em;}
+.mt-choices{display:flex;flex-direction:column;gap:6px;}
+.mt-c{font-family:inherit;width:100%;text-align:left;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.87em;color:var(--text);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:flex-start;gap:8px;line-height:1.6;}
+.mt-c:hover:not(:disabled){border-color:var(--primary-mid);background:var(--primary-light);transform:translateX(2px);}
+.mt-c .cl{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#d1fae5;color:#065f46;font-size:.78em;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.mt-c .ct{flex:1;}
+.mt-c.correct{background:var(--success-light);border-color:var(--success);color:var(--success);}
+.mt-c.correct .cl{background:var(--success);color:#fff;}
+.mt-c.wrong{background:var(--danger-light);border-color:var(--danger);color:var(--danger);}
+.mt-c.wrong .cl{background:var(--danger);color:#fff;}
+.mt-c:disabled{cursor:not-allowed;transform:none;}
+.mt-exp{display:none;margin-top:8px;padding:9px 13px;border-radius:8px;font-size:.85em;line-height:1.7;}
+.mt-exp.show{display:block;animation:fadeIn .2s ease;}
+.mt-exp.ok{background:var(--success-light);border-left:3px solid var(--success);}
+.mt-exp.ng{background:var(--danger-light);border-left:3px solid var(--danger);}
+.mt-block-result{text-align:center;font-size:.9em;font-weight:700;padding:8px;color:var(--text-sub);min-height:28px;}
+.mt-block-reset{font-family:inherit;background:#f1f5f9;border:1.5px solid #cbd5e1;color:#64748b;padding:5px 16px;border-radius:50px;cursor:pointer;font-size:.78em;margin-top:4px;}
+.mt-block-reset:hover{background:#e2e8f0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+.fireworks-overlay{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;}
+.fw-particle{position:absolute;border-radius:50%;animation:fw-fly linear forwards;}
+@keyframes fw-fly{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:0;}}
+.fail-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#dc2626;color:#fff;padding:10px 20px;border-radius:50px;font-size:.84em;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:500;white-space:nowrap;}
+.fail-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.pass-time{font-size:1.4em;font-weight:700;color:var(--primary);margin-bottom:8px;}
+.lesson-end{background:var(--card);border:2px solid var(--accent);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center;}
+.lesson-end .end-title{font-size:.92em;font-weight:700;color:#92400e;margin-bottom:12px;}
+.lesson-end .links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.lesson-end .links a{text-decoration:none;padding:8px 16px;border-radius:8px;font-size:.82em;font-weight:700;transition:.15s;border:1.5px solid;}
+.lesson-end .links a.main-link{background:var(--primary);color:#fff;border-color:var(--primary);}
+.lesson-end .links a.sub-link{background:#fff;color:var(--primary);border-color:var(--primary-mid);}
+.pagenav{display:flex;gap:8px;padding:16px 12px 0;max-width:720px;margin:0 auto;}
+.pagenav a{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--text);transition:all .15s;display:block;}
+.pagenav a:hover{border-color:var(--primary-mid);box-shadow:var(--shadow);}
+.pagenav a.next{text-align:right;border-color:var(--primary);background:var(--primary-light);}
+.pagenav a .label{display:block;font-size:.72em;color:var(--text-sub);margin-bottom:2px;}
+.pagenav a .title{display:block;font-size:.88em;font-weight:700;color:var(--primary);}
+.hanafubuki-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.petal{position:absolute;top:-20px;animation:fall linear forwards;opacity:.9;}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);}80%{opacity:.9;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.pass-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s;}
+.pass-overlay.show{opacity:1;pointer-events:all;}
+.pass-dialog{background:#fff;border-radius:20px;padding:32px 28px;text-align:center;max-width:320px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.25);transform:scale(.85);transition:transform .3s;}
+.pass-overlay.show .pass-dialog{transform:scale(1);}
+.pass-emoji{font-size:3em;margin-bottom:8px;}
+.pass-dialog h2{font-size:1.6em;font-weight:700;color:var(--success);margin-bottom:6px;}
+.pass-dialog p{font-size:.9em;color:var(--text-sub);margin-bottom:14px;}
+.pass-dialog .btn{font-family:inherit;padding:10px 24px;border-radius:50px;font-size:.88em;font-weight:700;cursor:pointer;border:2px solid var(--primary);background:var(--primary);color:#fff;}
+@media(max-width:480px){.stage{padding:12px 12px 4px;}.mt-c{font-size:.84em;}.person-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="brand">🎓 GAMBA 公共（高認）</span><span class="sep">|</span>
+  <a href="c02_index.html">📋 単元表</a>
+</nav>
+<header class="hero">
+  <div class="wrap">
+    <div class="crumb">第4章 経済のしくみ / L1</div>
+    <h1>資本主義経済と社会主義経済の歴史</h1>
+    <p class="sub">産業革命から資本主義経済の成立、独占資本主義・世界恐慌・修正資本主義・新自由主義への変化、そして社会主義経済の歴史と現状までを学びます。</p>
+    <div class="badges">
+      <span class="badge">⏱ 約12分</span>
+      <span class="badge">📖 3ユニット</span>
+      <span class="badge">✏️ ミニテスト計12問</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap"><main>
+
+<!-- ユニット1: 資本主義経済の成立 -->
+<div class="unit">
+  <div class="unit-title"><span class="num">1</span>資本主義経済の成立</div>
+  <div class="stage challenge" data-ch-id="u1" data-target="#k4l1-u1">
+    <div class="stage-head">
+      <span class="stage-label">📖 説明</span>
+      <div class="stage-actions">
+        <span class="challenge-timer" style="display:none;">0:00.0</span>
+        <button class="ch-btn start">🎯 チャレンジ開始</button>
+        <button class="ch-btn judge" style="display:none;">✓ 判定</button>
+        <button class="ch-btn example" style="display:none;">📖 手本</button>
+        <button class="ch-btn reset" style="display:none;">↻ リセット</button>
+        <button class="ch-btn cancel" style="display:none;">⏹ 中断</button>
+      </div>
+    </div>
+    <div class="word-bank-inline">
+      <div class="wb-title">📚 語群 ― タップして選び、空欄をタップ！</div>
+      <div class="wb-words"></div>
+    </div>
+    <div class="read-box" id="k4l1-u1">
+      <p>18世紀イギリスで、蒸気機関の発明を動力として綿製品などが大量生産されるようになり、工場制手工業（マニュファクチュア）から工場制機械工業へと変わった産業の大変革を<span class="kw-blank" data-a="産業革命">産業革命</span>という。</p>
+      <p>私有財産のもとで資金を蓄えた資本家が、工場の機械など生産手段を私有し、労働者を雇って利益を追求する経済を<span class="kw-blank" data-a="資本主義経済">資本主義経済</span>という。</p>
+      <p>イギリスの経済学者<span class="kw-blank" data-a="アダム=スミス">アダム=スミス</span>は著書『<span class="kw-blank" data-a="諸国民の富">諸国民の富</span>』で、国家は経済活動に干渉せず自由放任にしておけば、市場での自由競争によって『<span class="kw-blank" data-a="見えざる手">見えざる手</span>』に導かれるように生産や消費が調整され、社会全体に利益がもたらされると説いた。</p>
+      <p>重農主義者で経済学者の<span class="kw-blank" data-a="ケネー">ケネー</span>は、政府はできるだけ経済に介入せず市場に自由な経済活動を保障すべきだとする自由放任主義（<span class="kw-blank" data-a="レッセ・フェール">レッセ・フェール</span>）を提唱した。</p>
+      <p>ドイツの国家社会主義者<span class="kw-blank" data-a="ラッサール">ラッサール</span>は、政府ができるだけ経済に介入せず外敵の防御と国内の治安維持だけを行うべきだという国家観を<span class="kw-blank" data-a="夜警国家">夜警国家</span>と呼んだ。</p>
+    </div>
+
+    <div class="person-box">
+      <div class="pb-title">👤 おさえておきたい人物</div>
+      <div class="person-grid">
+        <div class="person-card"><strong>アダム=スミス（英）</strong>『諸国民の富』・見えざる手・自由放任主義</div>
+        <div class="person-card"><strong>ケネー（仏）</strong>重農主義・レッセ・フェールを提唱</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <span class="label">★ ポイント</span>
+      <ul>
+        <li><strong>産業革命</strong>：18世紀イギリス。工場制手工業→工場制機械工業</li>
+        <li><strong>資本主義経済</strong>：私有財産＋生産手段の私有＋労働者を雇用して利潤を追求</li>
+        <li><strong>アダム=スミス</strong>『諸国民の富』：市場の自由競争＝「見えざる手」（自由放任主義）</li>
+        <li><strong>ケネーのレッセ・フェール</strong> ／ <strong>ラッサールの夜警国家</strong>：どちらも政府の消極的な役割を表す考え方</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ranking"><h3>🏆 ベストタイム</h3><ul id="ranking-u1" class="ranking-list"></ul></div>
+  <div class="minitest-block">
+    <div class="mt-block-title">✏️ ミニテスト①（全4問）</div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問1</span>18世紀イギリスで、蒸気機関の発明により工場制手工業から工場制機械工業へ変わった産業の大変革を何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c"><span class="cl">ア</span><span class="ct">技術革新</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">市民革命</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">ウ</span><span class="ct">産業革命</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">農業革命</span></button>
+      </div>
+      <div class="mt-exp">正解はウです。18世紀イギリスで蒸気機関の発明を動力として起きた産業の大変革を「産業革命」といいます。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問2</span>私有財産のもとで資本家が生産手段を私有し、労働者を雇って利益を追求する経済を何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c" data-correct="true"><span class="cl">ア</span><span class="ct">資本主義経済</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">封建経済</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">社会主義経済</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">計画経済</span></button>
+      </div>
+      <div class="mt-exp">正解はアです。私有財産・生産手段の私有・労働者の雇用による利潤追求を特徴とする経済を「資本主義経済」といいます。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問3</span>著書『諸国民の富』で、市場の自由競争が『見えざる手』に導かれて社会に利益をもたらすと説いたイギリスの経済学者は誰か。</div>
+      <div class="mt-choices">
+                <button class="mt-c"><span class="cl">ア</span><span class="ct">マルクス</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">ケネー</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">ケインズ</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">アダム=スミス</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。アダム=スミスは『諸国民の富（国富論）』で「見えざる手」による自由放任主義を説きました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問4</span>政府ができるだけ経済に介入せず、外敵の防御と国内の治安維持だけを行うべきだとする国家観を、ドイツのラッサールは何と呼んだか。</div>
+      <div class="mt-choices">
+                <button class="mt-c"><span class="cl">ア</span><span class="ct">福祉国家</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">帝国主義国家</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">警察国家</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">夜警国家</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。ラッサールは、自由放任主義のもとで政府の役割を必要最小限にとどめる国家観を「夜警国家」と呼びました。</div>
+    </div>
+    <div class="mt-block-result" id="mt-result-1"></div>
+    <div style="text-align:center;"><button class="mt-block-reset" onclick="resetBlock(this)">↻ もう一度</button></div>
+  </div>
+</div>
+
+<!-- ユニット2: 資本主義経済の変化 -->
+<div class="unit">
+  <div class="unit-title"><span class="num">2</span>資本主義経済の変化 ― 独占資本主義から新自由主義へ</div>
+  <div class="stage challenge" data-ch-id="u2" data-target="#k4l1-u2">
+    <div class="stage-head">
+      <span class="stage-label">📖 説明</span>
+      <div class="stage-actions">
+        <span class="challenge-timer" style="display:none;">0:00.0</span>
+        <button class="ch-btn start">🎯 チャレンジ開始</button>
+        <button class="ch-btn judge" style="display:none;">✓ 判定</button>
+        <button class="ch-btn example" style="display:none;">📖 手本</button>
+        <button class="ch-btn reset" style="display:none;">↻ リセット</button>
+        <button class="ch-btn cancel" style="display:none;">⏹ 中断</button>
+      </div>
+    </div>
+    <div class="word-bank-inline">
+      <div class="wb-title">📚 語群 ― タップして選び、空欄をタップ！</div>
+      <div class="wb-words"></div>
+    </div>
+    <div class="read-box" id="k4l1-u2">
+      <p>産業革命後、企業が銀行と結びついて吸収合併を進め、一部の巨大企業が市場を支配するようになった資本主義を<span class="kw-blank" data-a="独占資本主義">独占資本主義</span>という。政府も自国の利益や領土拡大を図り、武力による植民地拡大策に乗り出す<span class="kw-blank" data-a="帝国主義">帝国主義</span>国家が現れた。</p>
+      <p>第一次世界大戦後の反動で1929年、ニューヨーク・ウォール街の株価が暴落し、企業・銀行の倒産が相次ぐ<span class="kw-blank" data-a="世界恐慌">世界恐慌</span>が発生した。</p>
+      <p>イギリスの経済学者<span class="kw-blank" data-a="ケインズ">ケインズ</span>は著書『雇用・利子および貨幣の一般理論』で、実際に購買力を伴う需要である<span class="kw-blank" data-a="有効需要">有効需要</span>の不足が失業を招くとし、政府が公共投資によってこれを創出すべきだと説いた。</p>
+      <p>アメリカの<span class="kw-blank" data-a="フランクリン・ルーズベルト">フランクリン・ルーズベルト</span>大統領は1933年から<span class="kw-blank" data-a="ニューディール政策">ニューディール政策</span>を実施し、テネシー川流域開発公社（TVA）や全国産業復興法（NIRA）などを通じて有効需要の創出を図った。</p>
+      <p>ケインズの考えのように、政府が景気の調整や社会保障の整備を行う資本主義を<span class="kw-blank" data-a="修正資本主義">修正資本主義</span>（混合経済）といい、国民の福祉向上に政府が積極的に関わる国家を<span class="kw-blank" data-a="福祉国家">福祉国家</span>（大きな政府）という。</p>
+      <p>1973年の石油危機後、有効需要拡大策が財政赤字やスタグフレーション（不況とインフレの同時進行）を招いたことから反ケインズ主義が台頭し、規制緩和・民営化・減税による「小さな政府」を求める<span class="kw-blank" data-a="新自由主義">新自由主義</span>の動きが強まった（アメリカのレーガン大統領、イギリスのサッチャー首相、日本の中曽根康弘首相による国営企業民営化など）。</p>
+    </div>
+
+    <div class="person-box">
+      <div class="pb-title">👤 おさえておきたい人物・政策</div>
+      <div class="person-grid">
+        <div class="person-card"><strong>ケインズ（英）</strong>『雇用・利子および貨幣の一般理論』・有効需要・修正資本主義</div>
+        <div class="person-card"><strong>F・ルーズベルト（米）</strong>1933年〜ニューディール政策（TVA・NIRA）</div>
+        <div class="person-card"><strong>レーガン・サッチャー</strong>新自由主義・小さな政府・民営化</div>
+        <div class="person-card"><strong>中曽根康弘（日）</strong>国鉄→JR、電電公社→NTT、専売公社→JT</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <span class="label">★ ポイント</span>
+      <ul>
+        <li><strong>独占資本主義</strong>→<strong>帝国主義</strong>→1929年<strong>世界恐慌</strong>という流れをおさえる</li>
+        <li><strong>ケインズ</strong>：有効需要の不足＝不況の原因 → 政府の公共投資で有効需要を創出</li>
+        <li><strong>ニューディール政策</strong>（1933年〜）：TVA・NIRAなどで雇用創出</li>
+        <li><strong>修正資本主義（大きな政府）</strong> → 石油危機後、<strong>新自由主義（小さな政府）</strong>へ揺り戻し</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ranking"><h3>🏆 ベストタイム</h3><ul id="ranking-u2" class="ranking-list"></ul></div>
+  <div class="minitest-block">
+    <div class="mt-block-title">✏️ ミニテスト②（全4問）</div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問5</span>企業が銀行と結びついて吸収合併を進め、一部の巨大企業が市場を支配するようになった資本主義を何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c" data-correct="true"><span class="cl">ア</span><span class="ct">独占資本主義</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">新自由主義</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">社会主義市場経済</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">修正資本主義</span></button>
+      </div>
+      <div class="mt-exp">正解はアです。巨大企業が市場を支配するようになった資本主義を「独占資本主義」といいます。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問6</span>1929年にニューヨーク・ウォール街の株価が暴落し、企業・銀行の倒産が相次いだできごとを何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c"><span class="cl">ア</span><span class="ct">リーマンショック</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">イ</span><span class="ct">世界恐慌</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">石油危機</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">スタグフレーション</span></button>
+      </div>
+      <div class="mt-exp">正解はイです。1929年の株価暴落に始まる世界的不況を「世界恐慌」といいます。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問7</span>ケインズが著書『雇用・利子および貨幣の一般理論』で、不況・失業の原因になると説いた「購買力を伴う需要」を何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c"><span class="cl">ア</span><span class="ct">国富</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">供給量</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">ウ</span><span class="ct">有効需要</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">国民所得</span></button>
+      </div>
+      <div class="mt-exp">正解はウです。ケインズは「有効需要」の不足が不況・失業を招くとし、政府の公共投資による創出を主張しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問8</span>1973年の石油危機後、財政赤字やスタグフレーションを背景に台頭した、規制緩和・民営化・減税による「小さな政府」を求める考え方を何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c" data-correct="true"><span class="cl">ア</span><span class="ct">新自由主義</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">修正資本主義</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">帝国主義</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">福祉国家</span></button>
+      </div>
+      <div class="mt-exp">正解はアです。レーガン・サッチャー・中曽根康弘らが進めた「小さな政府」路線を「新自由主義」といいます。</div>
+    </div>
+    <div class="mt-block-result" id="mt-result-2"></div>
+    <div style="text-align:center;"><button class="mt-block-reset" onclick="resetBlock(this)">↻ もう一度</button></div>
+  </div>
+</div>
+
+<!-- ユニット3: 社会主義経済 -->
+<div class="unit">
+  <div class="unit-title"><span class="num">3</span>社会主義経済</div>
+  <div class="stage challenge" data-ch-id="u3" data-target="#k4l1-u3">
+    <div class="stage-head">
+      <span class="stage-label">📖 説明</span>
+      <div class="stage-actions">
+        <span class="challenge-timer" style="display:none;">0:00.0</span>
+        <button class="ch-btn start">🎯 チャレンジ開始</button>
+        <button class="ch-btn judge" style="display:none;">✓ 判定</button>
+        <button class="ch-btn example" style="display:none;">📖 手本</button>
+        <button class="ch-btn reset" style="display:none;">↻ リセット</button>
+        <button class="ch-btn cancel" style="display:none;">⏹ 中断</button>
+      </div>
+    </div>
+    <div class="word-bank-inline">
+      <div class="wb-title">📚 語群 ― タップして選び、空欄をタップ！</div>
+      <div class="wb-words"></div>
+    </div>
+    <div class="read-box" id="k4l1-u3">
+      <p>産業革命がもたらした貧富の差や過酷な労働問題を背景に、ドイツの経済学者<span class="kw-blank" data-a="マルクス">マルクス</span>は著書『<span class="kw-blank" data-a="資本論">資本論</span>』で、生産手段の公有化・計画経済・利潤の平等分配により貧富の差のない社会を目指す<span class="kw-blank" data-a="社会主義経済">社会主義経済</span>を提唱した。</p>
+      <p>社会主義経済はソ連・中国・東ヨーロッパなどで採用されたが、労働意欲の低下などから1990年代に多くが破綻した。</p>
+      <p>中国は体制としては社会主義を維持しつつ、資本主義的な市場経済を導入する<span class="kw-blank" data-a="社会主義市場経済">社会主義市場経済</span>に転換した。中国の農村部では、政府に一定量の生産を請け負い、それを超えた分は農家が自由に販売できる<span class="kw-blank" data-a="生産責任制">生産責任制</span>が導入された。</p>
+      <p>外国の資本や技術の導入を認める特別地域を<span class="kw-blank" data-a="経済特区">経済特区</span>といい、シェンチェン・チューハイ・スワトウ・アモイ・ハイナン省の5地域が指定され、税制優遇などにより外国企業の誘致を進めている。ただし内陸部との貧富の差の拡大などの課題も生じている。</p>
+    </div>
+
+    <div class="person-box">
+      <div class="pb-title">👤 おさえておきたい人物</div>
+      <div class="person-grid">
+        <div class="person-card"><strong>マルクス（独）</strong>『資本論』・生産手段の公有化・計画経済・社会主義経済</div>
+        <div class="person-card"><strong>中国</strong>社会主義市場経済・生産責任制・経済特区（5地域）</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <span class="label">★ ポイント</span>
+      <ul>
+        <li><strong>マルクス</strong>『資本論』：生産手段の公有化＋計画経済＋利潤の平等分配＝社会主義経済</li>
+        <li>ソ連・東欧の社会主義経済は1990年代に<strong>破綻</strong></li>
+        <li><strong>中国</strong>：社会主義体制のまま市場経済を導入する<strong>社会主義市場経済</strong>へ</li>
+        <li><strong>生産責任制</strong>（余剰分は自由販売）・<strong>経済特区</strong>（外資導入の特別地域）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ranking"><h3>🏆 ベストタイム</h3><ul id="ranking-u3" class="ranking-list"></ul></div>
+  <div class="minitest-block">
+    <div class="mt-block-title">✏️ ミニテスト③（全4問）</div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問9</span>著書『資本論』で、生産手段の公有化・計画経済・利潤の平等分配による社会主義経済を提唱したドイツの経済学者は誰か。</div>
+      <div class="mt-choices">
+                <button class="mt-c" data-correct="true"><span class="cl">ア</span><span class="ct">マルクス</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">ラッサール</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">アダム=スミス</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">ケインズ</span></button>
+      </div>
+      <div class="mt-exp">正解はアです。マルクスは『資本論』で社会主義経済を提唱しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問10</span>ソ連・東ヨーロッパなどで採用された社会主義経済は、労働意欲の低下などから、いつ頃多くが破綻したか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">1930年代</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">1950年代</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">1970年代</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">1990年代</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。ソ連・東欧の社会主義経済は1990年代に多くが破綻しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問11</span>中国が、社会主義体制を維持しながら資本主義的な市場経済を導入した経済体制を何というか。</div>
+      <div class="mt-choices">
+                <button class="mt-c"><span class="cl">ア</span><span class="ct">新自由主義</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">修正資本主義</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">ウ</span><span class="ct">社会主義市場経済</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">計画経済</span></button>
+      </div>
+      <div class="mt-exp">正解はウです。中国は「社会主義市場経済」に転換しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問12</span>中国で、外国の資本や技術の導入を認め、税制優遇などにより外国企業の誘致を行う特別地域を何というか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">生産責任制</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">郷鎮企業</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">ウ</span><span class="ct">経済特区</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">自由貿易協定</span></button>
+      </div>
+      <div class="mt-exp">正解はウです。シェンチェンなど5地域が「経済特区」に指定されています。</div>
+    </div>
+    <div class="mt-block-result" id="mt-result-3"></div>
+    <div style="text-align:center;"><button class="mt-block-reset" onclick="resetBlock(this)">↻ もう一度</button></div>
+  </div>
+</div>
+
+<div class="lesson-end">
+  <div class="end-title">🎉 資本主義経済と社会主義経済の歴史 完了！次に進もう</div>
+  <div class="links">
+    <a href="c02_ch4_l1_practice.html" class="main-link">📝 練習問題へ</a>
+    <a href="c02_index.html" class="sub-link">📋 単元表へ</a>
+  </div>
+</div>
+<nav class="pagenav">
+  <a href="c02_index.html"><span class="label">◀ 単元表</span><span class="title">GAMBA 公共（高認）</span></a>
+  <a href="c02_ch4_l1_practice.html" class="next"><span class="label">NEXT ▶</span><span class="title">練習問題</span></a>
+</nav>
+</main></div>
+
+<div class="fail-toast" id="fail-toast"></div>
+<div class="hanafubuki-overlay" id="hanafubuki"></div>
+<div class="pass-overlay" id="pass-overlay">
+  <div class="pass-dialog">
+    <div class="pass-emoji">🌸</div><h2>合　格！</h2>
+    <div class="pass-time" id="pass-time-display"></div>
+    <p id="pass-msg">全問正解！すばらしい！</p>
+    <button class="btn" onclick="closePass()">つぎへ進む</button>
+  </div>
+</div>
+
+<script>
+const RANKING_MAX=5;
+document.querySelectorAll('.stage.challenge').forEach(function(stage){
+  var sel=null,tmr=null,t0=0;
+  var cid=stage.dataset.chId,tsel=stage.dataset.target;
+  var wbEl=stage.querySelector('.wb-words'),telEl=stage.querySelector('.challenge-timer');
+  var bS=stage.querySelector('.ch-btn.start'),bJ=stage.querySelector('.ch-btn.judge');
+  var bE=stage.querySelector('.ch-btn.example'),bR=stage.querySelector('.ch-btn.reset'),bC=stage.querySelector('.ch-btn.cancel');
+  var rb=document.querySelector(tsel);
+  if(!rb)return;
+  function getBlanks(){return rb.querySelectorAll('.kw-blank');}
+  function getAnss(){return Array.from(getBlanks()).map(function(b){return b.dataset.a;});}
+  function stopTmr(){if(tmr){clearInterval(tmr);tmr=null;}}
+  function pickW(btn){stage.querySelectorAll('.wb-word').forEach(function(w){w.classList.remove('selected-word');});if(sel===btn){sel=null;return;}btn.classList.add('selected-word');sel=btn;}
+  function fillB(b){
+    if(!sel)return;
+    var prev=b.dataset.filled;
+    if(prev){stage.querySelectorAll('.wb-word').forEach(function(w){if(w.textContent===prev&&w.classList.contains('used'))w.classList.remove('used');});}
+    b.textContent=sel.textContent;b.dataset.filled=sel.textContent;
+    b.classList.add('selected');b.classList.remove('correct-blink','wrong-blink');
+    sel.classList.add('used');sel.classList.remove('selected-word');sel=null;
+  }
+  function endCh(ok){
+    stopTmr();stage.classList.remove('challenge-active');
+    if(bS)bS.style.display='';if(bJ)bJ.style.display='none';if(bE)bE.style.display='none';if(bR)bR.style.display='none';if(bC)bC.style.display='none';if(telEl)telEl.style.display='none';
+    if(!ok){var ans=getAnss();getBlanks().forEach(function(b,i){b.textContent=ans[i];});}
+  }
+  if(bS)bS.addEventListener('click',function(){
+    sel=null;stage.classList.add('challenge-active');
+    var ans=getAnss();
+    getBlanks().forEach(function(b){b.textContent='　　';b.classList.remove('selected','correct-blink','wrong-blink');b.dataset.filled='';});
+    var ws=chShuffle(Array.from(new Set(ans)));wbEl.innerHTML='';
+    ws.forEach(function(w){var btn=document.createElement('button');btn.className='wb-word';btn.textContent=w;btn.addEventListener('click',function(){pickW(btn);});wbEl.appendChild(btn);});
+    if(bS)bS.style.display='none';if(bJ)bJ.style.display='';if(bE)bE.style.display='';if(bR)bR.style.display='';if(bC)bC.style.display='';if(telEl)telEl.style.display='';
+    t0=Date.now();stopTmr();tmr=setInterval(function(){if(telEl)telEl.textContent=chFmt(Date.now()-t0);},100);
+    getBlanks().forEach(function(b){var f=b.cloneNode(true);b.parentNode.replaceChild(f,b);f.textContent='　　';f.dataset.filled='';f.classList.remove('selected','correct-blink','wrong-blink');f.addEventListener('click',function(){fillB(f);});});
+  });
+  if(bJ)bJ.addEventListener('click',function(){
+    var ans=getAnss();var ok=true;
+    getBlanks().forEach(function(b,i){
+      if(b.dataset.filled===ans[i]){b.classList.add('correct-blink');b.classList.remove('wrong-blink','selected');}
+      else{b.classList.add('wrong-blink');b.classList.remove('correct-blink','selected');ok=false;
+        var w=b.dataset.filled;
+        if(w){stage.querySelectorAll('.wb-word').forEach(function(bw){if(bw.textContent===w&&bw.classList.contains('used'))bw.classList.remove('used','selected-word');});b.textContent='　　';b.dataset.filled='';}
+      }
+    });
+    if(ok){stopTmr();var ms=Date.now()-t0;chSaveR(cid,ms);chShowR(cid);endCh(true);chShowPassC(chFmt(ms));}
+    else{chShowFT('まだ間違いがあります！');}
+  });
+  if(bE)bE.addEventListener('click',function(){stopTmr();var ans=getAnss();getBlanks().forEach(function(b,i){b.textContent=ans[i];b.dataset.filled=ans[i];b.classList.remove('selected','wrong-blink');b.classList.add('correct-blink');});stage.querySelectorAll('.wb-word').forEach(function(w){w.classList.add('used');});});
+  if(bR)bR.addEventListener('click',function(){stopTmr();endCh(false);setTimeout(function(){if(bS)bS.click();},80);});
+  if(bC)bC.addEventListener('click',function(){endCh(false);});
+});
+function chSaveR(id,ms){var k='gcr_ch4l1_'+id;var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(ms);a.sort(function(x,y){return x-y;});a=a.slice(0,RANKING_MAX);localStorage.setItem(k,JSON.stringify(a));}
+function chShowR(id){var k='gcr_ch4l1_'+id;var a=JSON.parse(localStorage.getItem(k)||'[]');var ul=document.getElementById('ranking-'+id);if(ul)ul.innerHTML=a.map(function(ms,i){return '<li>'+(i+1)+'位：'+chFmt(ms)+'</li>';}).join('')||'<li>まだ記録がありません</li>';}
+function chFmt(ms){var s=Math.floor(ms/1000),d=Math.floor((ms%1000)/100);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'.'+d;}
+function chShowPassC(t){var el=document.getElementById('pass-time-display');if(el)el.textContent='⏱ '+t;showPass('チャレンジ完了！');}
+function chShowFT(msg){var t=document.getElementById('fail-toast');if(t){t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}}
+function chShuffle(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=arr[i];arr[i]=arr[j];arr[j]=tmp;}return arr;}
+document.querySelectorAll('.minitest').forEach(function(mt){
+  var exp=mt.querySelector('.mt-exp');
+  var btns=mt.querySelectorAll('.mt-c');
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      if(btn.disabled)return;
+      btns.forEach(function(b){b.disabled=true;});
+      var ok=btn.dataset.correct==='true';
+      if(ok){btn.classList.add('correct');if(exp){exp.classList.add('show','ok');}miniHanafubuki();}
+      else{btn.classList.add('wrong');if(exp){exp.classList.add('show','ng');}btns.forEach(function(b){if(b.dataset.correct==='true')b.classList.add('correct');});}
+      checkBlockResult(mt.closest('.minitest-block'));
+    });
+  });
+});
+function checkBlockResult(block){
+  var tests=block.querySelectorAll('.minitest');
+  var resultEl=block.querySelector('.mt-block-result');
+  var correct=0,answered=0;
+  tests.forEach(function(t){var c=t.querySelector('.mt-c.correct,.mt-c.wrong');if(!c)return;answered++;if(c.classList.contains('correct'))correct++;});
+  if(answered<tests.length)return;
+  if(correct===tests.length){resultEl.innerHTML='🎉 全問正解！';resultEl.style.color='var(--success)';checkAllDone();}
+  else{resultEl.innerHTML=correct+'/'+tests.length+'問 正解。';resultEl.style.color='var(--danger)';}
+}
+function checkAllDone(){
+  var blocks=document.querySelectorAll('.minitest-block');var allDone=true;
+  blocks.forEach(function(b){var res=b.querySelector('.mt-block-result');if(!res||res.textContent.indexOf('全問正解')<0)allDone=false;});
+  if(allDone){launchFireworks();setTimeout(function(){showPass('全ミニテスト完了！');},600);}
+}
+function resetBlock(btn){
+  var block=btn.closest('.minitest-block');
+  block.querySelectorAll('.mt-c').forEach(function(b){b.classList.remove('correct','wrong');b.disabled=false;});
+  block.querySelectorAll('.mt-exp').forEach(function(e){e.classList.remove('show','ok','ng');});
+  var r=block.querySelector('.mt-block-result');if(r){r.innerHTML='';r.style.color='';}
+}
+function launchFireworks(){
+  var fwEl=document.getElementById('fireworks-overlay');
+  if(!fwEl){fwEl=document.createElement('div');fwEl.id='fireworks-overlay';fwEl.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;';document.body.appendChild(fwEl);}
+  fwEl.innerHTML='';
+  var colors=['#f59e0b','#ef4444','#3b82f6','#10b981','#8b5cf6','#f97316','#ec4899','#facc15','#fff'];
+  for(var b=0;b<12;b++){
+    (function(b){setTimeout(function(){
+      var cx=15+Math.random()*70,cy=10+Math.random()*60;
+      var cnt=22+Math.floor(Math.random()*18);
+      var c1=colors[Math.floor(Math.random()*colors.length)];
+      var c2=colors[Math.floor(Math.random()*colors.length)];
+      for(var i=0;i<cnt;i++){
+        var angle=(360/cnt)*i+Math.random()*10;
+        var dist=60+Math.random()*90;
+        var rad=angle*Math.PI/180;
+        var p=document.createElement('div');
+        p.style.cssText='position:absolute;border-radius:50%;animation:fw-fly linear forwards;left:'+cx+'vw;top:'+cy+'vh;width:'+(3+Math.random()*5)+'px;height:'+(3+Math.random()*5)+'px;background:'+(i%2===0?c1:c2)+';--fx:'+(Math.cos(rad)*dist)+'px;--fy:'+(Math.sin(rad)*dist)+'px;animation-duration:'+(0.6+Math.random()*0.7)+'s;';
+        fwEl.appendChild(p);
+      }
+    },b*180);})(b);
+  }
+  setTimeout(function(){if(fwEl)fwEl.innerHTML='';},4500);
+}
+function miniHanafubuki(){
+  var c=document.getElementById('hanafubuki');
+  var p=['🌸','💰','⚖️','✨','⭐','🎊','🎉','💮','🌷','🏆'];
+  for(var i=0;i<28;i++){
+    var el=document.createElement('div');el.className='petal';
+    el.textContent=p[Math.floor(Math.random()*p.length)];
+    el.style.left=Math.random()*100+'vw';
+    el.style.animationDuration=(1.2+Math.random()*1.5)+'s';
+    el.style.animationDelay=(Math.random()*0.6)+'s';
+    el.style.fontSize=(.8+Math.random()*1.0)+'em';
+    c.appendChild(el);
+  }
+  setTimeout(function(){Array.from(c.children).slice(0,28).forEach(function(el){el.remove();});},3000);
+}
+function showPass(msg){launchHanafubuki();document.getElementById('pass-msg').textContent=msg;document.getElementById('pass-overlay').classList.add('show');}
+function closePass(){document.getElementById('pass-overlay').classList.remove('show');}
+function launchHanafubuki(){
+  var c=document.getElementById('hanafubuki');c.innerHTML='';
+  var p=['🌸','💰','⚖️','✨','⭐','🎊','🎉','💮','🌷','🎀','🏆'];
+  for(var i=0;i<65;i++){
+    var el=document.createElement('div');el.className='petal';
+    el.textContent=p[Math.floor(Math.random()*p.length)];
+    el.style.left=Math.random()*100+'vw';
+    el.style.animationDuration=(2+Math.random()*2.5)+'s';
+    el.style.animationDelay=(Math.random()*1.5)+'s';
+    el.style.fontSize=(.9+Math.random()*1.2)+'em';
+    c.appendChild(el);
+  }
+  setTimeout(function(){c.innerHTML='';},5500);
+}
+chShowR('u1');chShowR('u2');chShowR('u3');
+</script>
+</body>
+</html>

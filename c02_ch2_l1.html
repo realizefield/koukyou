@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第2章L1 幸福・正義・公正の考え方①（功利主義） | GAMBA公共（高認）</title>
+<style>
+:root{--primary:#0f766e;--primary-light:#ccfbf1;--primary-mid:#0d9488;--accent:#f59e0b;--accent-light:#fef3c7;--success:#16a34a;--success-light:#dcfce7;--danger:#dc2626;--danger-light:#fee2e2;--bg:#f0fdfa;--card:#fff;--border:#99f6e4;--text:#1e293b;--text-sub:#64748b;--radius:12px;--shadow:0 2px 12px rgba(15,118,110,.10);}
+*{box-sizing:border-box;margin:0;padding:0;}*::before,*::after{box-sizing:inherit;}
+body{font-family:'BIZ UDPGothic','BIZ UDP Gothic','Meiryo',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:15px;padding-bottom:80px;}
+.topnav{background:linear-gradient(135deg,#0f172a,#0f766e);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:.82em;font-weight:700;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(15,118,110,.3);}
+.topnav .sep{opacity:.4;}.topnav a{color:#99f6e4;text-decoration:none;}.topnav a:hover{color:#fff;}
+.hero{background:linear-gradient(135deg,#064e3b 0%,#0f766e 50%,#0d9488 100%);color:#fff;padding:24px 18px 20px;position:relative;overflow:hidden;}
+.hero::before{content:'⚖️';position:absolute;right:16px;top:12px;font-size:4.5em;opacity:.13;pointer-events:none;}
+.crumb{font-size:.75em;opacity:.75;margin-bottom:6px;}
+.hero h1{font-size:clamp(1.2em,4.6vw,1.6em);font-weight:700;margin-bottom:6px;}
+.hero .sub{font-size:.83em;opacity:.88;line-height:1.6;}
+.hero .badges{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.hero .badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72em;font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);}
+.wrap{max-width:720px;margin:0 auto;padding:0 12px;}
+.unit{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);}
+.unit-title{background:linear-gradient(135deg,#065f46,#0f766e);color:#fff;padding:10px 16px;font-size:.9em;font-weight:700;display:flex;align-items:center;gap:8px;border-radius:var(--radius) var(--radius) 0 0;}
+.unit-title .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.25);font-size:.85em;font-weight:700;flex-shrink:0;}
+.stage{padding:16px 16px 4px;}
+.stage-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.stage-label{font-size:.78em;font-weight:700;padding:3px 10px;border-radius:50px;background:var(--primary-light);color:var(--primary);}
+.stage-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.ch-btn{font-family:inherit;padding:5px 12px;border-radius:50px;font-size:.78em;font-weight:700;cursor:pointer;transition:all .15s;border:1.5px solid;}
+.ch-btn.start{background:#f0fdfa;border-color:var(--primary);color:var(--primary);}
+.ch-btn.start:hover{background:var(--primary);color:#fff;}
+.ch-btn.judge{background:#dcfce7;border-color:var(--success);color:var(--success);}
+.ch-btn.judge:hover{background:var(--success);color:#fff;}
+.ch-btn.example{background:#fef3c7;border-color:var(--accent);color:#92400e;}
+.ch-btn.reset{background:#f1f5f9;border-color:#94a3b8;color:#64748b;}
+.ch-btn.cancel{background:#fee2e2;border-color:var(--danger);color:var(--danger);}
+.challenge-timer{font-size:.82em;font-weight:700;color:var(--danger);min-width:48px;text-align:center;}
+.word-bank-inline{display:none;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid var(--accent);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.challenge-active .word-bank-inline{display:block;animation:fadeIn .2s ease;}
+.wb-title{font-size:.8em;font-weight:700;color:#92400e;margin-bottom:10px;}
+.wb-words{display:flex;gap:8px;flex-wrap:wrap;}
+.wb-word{font-family:inherit;padding:6px 16px;border-radius:50px;border:2px solid var(--accent);background:#fff;font-size:.86em;font-weight:700;color:#92400e;cursor:pointer;transition:all .15s;}
+.wb-word:hover{background:var(--accent);color:#fff;transform:translateY(-1px);}
+.wb-word.used{opacity:.3;pointer-events:none;text-decoration:line-through;}
+.wb-word.selected-word{background:var(--accent);color:#fff;box-shadow:0 0 0 3px #fbbf24;transform:translateY(-1px);}
+.read-box{background:#f8fefd;border:1px solid #99f6e4;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:.9em;line-height:1.9;}
+.read-box p{margin-bottom:.85em;}.read-box p:last-child{margin-bottom:0;}
+.kw-blank{display:inline-block;min-width:4em;padding:1px 6px;border-radius:4px;border-bottom:2px solid var(--primary-mid);color:var(--primary);font-weight:700;cursor:default;}
+.challenge-active .kw-blank{background:#e0e7ff;color:transparent;border:2px dashed var(--primary-mid);border-radius:6px;cursor:pointer;min-width:5em;text-align:center;display:inline-block;padding:1px 6px;}
+.challenge-active .kw-blank:hover{background:#c7d2fe;}
+.challenge-active .kw-blank.selected{background:#fef9c3;color:var(--text);border-color:var(--accent);}
+.challenge-active .kw-blank.correct-blink{background:#dcfce7;color:var(--success);border-color:var(--success);}
+.challenge-active .kw-blank.wrong-blink{background:#fee2e2;color:var(--danger);border-color:var(--danger);}
+.point-box{background:linear-gradient(135deg,#f0fdfa,#fef9c3);border:2px solid var(--accent);border-radius:10px;padding:12px 16px;margin-bottom:14px;}
+.point-box .label{font-size:.8em;font-weight:700;color:#92400e;display:block;margin-bottom:6px;}
+.point-box ul{padding-left:0;list-style:none;}
+.point-box li{font-size:.86em;line-height:1.75;color:var(--text);padding:2px 0 2px 16px;position:relative;}
+.point-box li::before{content:'✦';position:absolute;left:0;color:var(--accent);font-size:.75em;top:5px;}
+.person-box{background:#fff;border:1.5px solid #99f6e4;border-radius:10px;padding:11px 14px;margin-bottom:14px;}
+.person-box .pb-title{font-size:.8em;font-weight:700;color:#0f766e;margin-bottom:8px;}
+.person-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.person-card{background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:8px;padding:8px 10px;font-size:.82em;line-height:1.6;}
+.person-card strong{color:#0f766e;display:block;margin-bottom:2px;}
+.ranking{padding:8px 16px 12px;border-top:1px solid var(--border);}
+.ranking h3{font-size:.82em;font-weight:700;color:var(--primary);margin-bottom:6px;}
+.ranking-list{list-style:none;font-size:.8em;color:var(--text-sub);}
+.ranking-list li{padding:2px 0;}
+.minitest-block{border-top:1.5px solid var(--border);padding:14px 16px;background:#fafffe;}
+.mt-block-title{font-size:.82em;font-weight:700;color:var(--primary);margin-bottom:10px;}
+.minitest{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.mt-stem{font-size:.88em;line-height:1.75;margin-bottom:10px;}
+.mt-num{font-weight:700;color:var(--primary);background:var(--primary-light);padding:1px 7px;border-radius:5px;margin-right:6px;font-size:.85em;}
+.mt-choices{display:flex;flex-direction:column;gap:6px;}
+.mt-c{font-family:inherit;width:100%;text-align:left;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.87em;color:var(--text);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:flex-start;gap:8px;line-height:1.6;}
+.mt-c:hover:not(:disabled){border-color:var(--primary-mid);background:var(--primary-light);transform:translateX(2px);}
+.mt-c .cl{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#d1fae5;color:#065f46;font-size:.78em;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.mt-c .ct{flex:1;}
+.mt-c.correct{background:var(--success-light);border-color:var(--success);color:var(--success);}
+.mt-c.correct .cl{background:var(--success);color:#fff;}
+.mt-c.wrong{background:var(--danger-light);border-color:var(--danger);color:var(--danger);}
+.mt-c.wrong .cl{background:var(--danger);color:#fff;}
+.mt-c:disabled{cursor:not-allowed;transform:none;}
+.mt-exp{display:none;margin-top:8px;padding:9px 13px;border-radius:8px;font-size:.85em;line-height:1.7;}
+.mt-exp.show{display:block;animation:fadeIn .2s ease;}
+.mt-exp.ok{background:var(--success-light);border-left:3px solid var(--success);}
+.mt-exp.ng{background:var(--danger-light);border-left:3px solid var(--danger);}
+.mt-block-result{text-align:center;font-size:.9em;font-weight:700;padding:8px;color:var(--text-sub);min-height:28px;}
+.mt-block-reset{font-family:inherit;background:#f1f5f9;border:1.5px solid #cbd5e1;color:#64748b;padding:5px 16px;border-radius:50px;cursor:pointer;font-size:.78em;margin-top:4px;}
+.mt-block-reset:hover{background:#e2e8f0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+.fireworks-overlay{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;}
+.fw-particle{position:absolute;border-radius:50%;animation:fw-fly linear forwards;}
+@keyframes fw-fly{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:0;}}
+.fail-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#dc2626;color:#fff;padding:10px 20px;border-radius:50px;font-size:.84em;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:500;white-space:nowrap;}
+.fail-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.pass-time{font-size:1.4em;font-weight:700;color:var(--primary);margin-bottom:8px;}
+.lesson-end{background:var(--card);border:2px solid var(--accent);border-radius:var(--radius);padding:16px;margin:16px 0;text-align:center;}
+.lesson-end .end-title{font-size:.92em;font-weight:700;color:#92400e;margin-bottom:12px;}
+.lesson-end .links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.lesson-end .links a{text-decoration:none;padding:8px 16px;border-radius:8px;font-size:.82em;font-weight:700;transition:.15s;border:1.5px solid;}
+.lesson-end .links a.main-link{background:var(--primary);color:#fff;border-color:var(--primary);}
+.lesson-end .links a.sub-link{background:#fff;color:var(--primary);border-color:var(--primary-mid);}
+.pagenav{display:flex;gap:8px;padding:16px 12px 0;max-width:720px;margin:0 auto;}
+.pagenav a{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--text);transition:all .15s;display:block;}
+.pagenav a:hover{border-color:var(--primary-mid);box-shadow:var(--shadow);}
+.pagenav a.next{text-align:right;border-color:var(--primary);background:var(--primary-light);}
+.pagenav a .label{display:block;font-size:.72em;color:var(--text-sub);margin-bottom:2px;}
+.pagenav a .title{display:block;font-size:.88em;font-weight:700;color:var(--primary);}
+.hanafubuki-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.petal{position:absolute;top:-20px;animation:fall linear forwards;opacity:.9;}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);}80%{opacity:.9;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.pass-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s;}
+.pass-overlay.show{opacity:1;pointer-events:all;}
+.pass-dialog{background:#fff;border-radius:20px;padding:32px 28px;text-align:center;max-width:320px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.25);transform:scale(.85);transition:transform .3s;}
+.pass-overlay.show .pass-dialog{transform:scale(1);}
+.pass-emoji{font-size:3em;margin-bottom:8px;}
+.pass-dialog h2{font-size:1.6em;font-weight:700;color:var(--success);margin-bottom:6px;}
+.pass-dialog p{font-size:.9em;color:var(--text-sub);margin-bottom:14px;}
+.pass-dialog .btn{font-family:inherit;padding:10px 24px;border-radius:50px;font-size:.88em;font-weight:700;cursor:pointer;border:2px solid var(--primary);background:var(--primary);color:#fff;}
+@media(max-width:480px){.stage{padding:12px 12px 4px;}.mt-c{font-size:.84em;}.person-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="brand">🎓 GAMBA 公共（高認）</span><span class="sep">|</span>
+  <a href="c02_index.html">📋 単元表</a>
+</nav>
+<header class="hero">
+  <div class="wrap">
+    <div class="crumb">第2章 幸福・正義・公正と倫理 / L1</div>
+    <h1>幸福・正義・公正の考え方①（功利主義）</h1>
+    <p class="sub">行為の結果を重んじる「功利主義」の考え方を、ベンサムの量的功利主義とミルの質的功利主義から学びます。</p>
+    <div class="badges">
+      <span class="badge">⏱ 約12分</span>
+      <span class="badge">📖 3ユニット</span>
+      <span class="badge">✏️ ミニテスト計12問</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap"><main>
+
+<!-- ユニット1: 幸福と功利主義の考え方 -->
+<div class="unit">
+  <div class="unit-title"><span class="num">1</span>幸福と功利主義の考え方</div>
+  <div class="stage challenge" data-ch-id="u1" data-target="#k2l1-u1">
+    <div class="stage-head">
+      <span class="stage-label">📖 説明</span>
+      <div class="stage-actions">
+        <span class="challenge-timer" style="display:none;">0:00.0</span>
+        <button class="ch-btn start">🎯 チャレンジ開始</button>
+        <button class="ch-btn judge" style="display:none;">✓ 判定</button>
+        <button class="ch-btn example" style="display:none;">📖 手本</button>
+        <button class="ch-btn reset" style="display:none;">↻ リセット</button>
+        <button class="ch-btn cancel" style="display:none;">⏹ 中断</button>
+      </div>
+    </div>
+    <div class="word-bank-inline">
+      <div class="wb-title">📚 語群 ― タップして選び、空欄をタップ！</div>
+      <div class="wb-words"></div>
+    </div>
+    <div class="read-box" id="k2l1-u1">
+      <p>行為の善悪を、その行為が生み出す<span class="kw-blank" data-a="結果">結果</span>（幸福や快楽の量）によって判断しようとする考え方を<span class="kw-blank" data-a="功利主義">功利主義</span>という。行為そのものの動機ではなく、行為がもたらす結果を重視することから、このような立場を<span class="kw-blank" data-a="帰結主義">帰結主義</span>ともよぶ。</p>
+      <p>人間は誰しも<span class="kw-blank" data-a="快楽">快楽</span>を求め<span class="kw-blank" data-a="苦痛">苦痛</span>を避けようとする存在であり、社会全体の幸福を最大にする行為こそが正しい行為である、というのが功利主義の基本的な考え方である。</p>
+    </div>
+
+    <div class="point-box">
+      <span class="label">★ ポイント</span>
+      <ul>
+        <li><strong>功利主義</strong>：行為の結果として生じる幸福・快楽の量によって善悪を判断する立場</li>
+        <li><strong>帰結主義</strong>：行為の動機よりも結果を重視する考え方</li>
+        <li>代表的な思想家はイギリスの<strong>ベンサム</strong>と<strong>ミル</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ranking"><h3>🏆 ベストタイム</h3><ul id="ranking-u1" class="ranking-list"></ul></div>
+  <div class="minitest-block">
+    <div class="mt-block-title">✏️ ミニテスト①（全4問）</div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問1</span>行為の善悪を、その行為が生み出す結果（幸福や快楽の量）によって判断しようとする考え方を何というか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">義務論</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">イ</span><span class="ct">功利主義</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">実存主義</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">徳倫理</span></button>
+      </div>
+      <div class="mt-exp">正解はイです。行為の結果を重視して善悪を判断する考え方を功利主義といいます。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問2</span>行為の動機よりも、行為がもたらす結果を重視する立場を何というか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">動機主義</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">イ</span><span class="ct">帰結主義</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">義務論</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">社会契約説</span></button>
+      </div>
+      <div class="mt-exp">正解はイです。行為の結果を重視する立場を帰結主義といいます。功利主義はその代表です。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問3</span>功利主義の基本的な考え方として正しいものはどれか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">行為の動機のみを重視する</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">人間は快楽を避け苦痛を求める存在である</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">神の意志に従うことが正しい行為である</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">社会全体の幸福を最大にする行為が正しい行為である</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。功利主義は社会全体の幸福（快楽）を最大にする行為を善とします。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問4</span>功利主義を代表するイギリスの思想家の組み合わせとして正しいものはどれか。</div>
+      <div class="mt-choices">
+        <button class="mt-c" data-correct="true"><span class="cl">ア</span><span class="ct">ベンサムとミル</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">ソクラテスとプラトン</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">カントとアリストテレス</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">ロックとルソー</span></button>
+      </div>
+      <div class="mt-exp">正解はアです。功利主義を代表する思想家はベンサムとミルです。</div>
+    </div>
+    <div class="mt-block-result" id="mt-result-1"></div>
+    <div style="text-align:center;"><button class="mt-block-reset" onclick="resetBlock(this)">↻ もう一度</button></div>
+  </div>
+</div>
+
+
+<!-- ユニット2: ベンサムの量的功利主義 -->
+<div class="unit">
+  <div class="unit-title"><span class="num">2</span>ベンサムの量的功利主義</div>
+  <div class="stage challenge" data-ch-id="u2" data-target="#k2l1-u2">
+    <div class="stage-head">
+      <span class="stage-label">📖 説明</span>
+      <div class="stage-actions">
+        <span class="challenge-timer" style="display:none;">0:00.0</span>
+        <button class="ch-btn start">🎯 チャレンジ開始</button>
+        <button class="ch-btn judge" style="display:none;">✓ 判定</button>
+        <button class="ch-btn example" style="display:none;">📖 手本</button>
+        <button class="ch-btn reset" style="display:none;">↻ リセット</button>
+        <button class="ch-btn cancel" style="display:none;">⏹ 中断</button>
+      </div>
+    </div>
+    <div class="word-bank-inline">
+      <div class="wb-title">📚 語群 ― タップして選び、空欄をタップ！</div>
+      <div class="wb-words"></div>
+    </div>
+    <div class="read-box" id="k2l1-u2">
+      <p>イギリスの思想家<span class="kw-blank" data-a="ベンサム">ベンサム</span>は、快楽には量の違いしかないと考え、これを<span class="kw-blank" data-a="量的功利主義">量的功利主義</span>とよぶ。</p>
+      <p>ベンサムは、一人ひとりの幸福が集まって社会全体の幸福になると考え、『<span class="kw-blank" data-a="最大多数の最大幸福">最大多数の最大幸福</span>』を道徳と立法の原理とした。</p>
+      <p>また、快楽と苦痛を数値化して比較しようとする考え方を<span class="kw-blank" data-a="快楽計算">快楽計算</span>という。</p>
+    </div>
+
+    <div class="person-box">
+      <div class="pb-title">👤 おさえておきたい人物</div>
+      <div class="person-grid">
+        <div class="person-card"><strong>ベンサム（英）</strong>量的功利主義・最大多数の最大幸福</div><div class="person-card"><strong>快楽計算</strong>快楽と苦痛を数値化して比較する考え方</div>
+      </div>
+    </div>
+    <div class="point-box">
+      <span class="label">★ ポイント</span>
+      <ul>
+        <li><strong>ベンサム</strong>：快楽には量の違いしかないとする量的功利主義を主張</li>
+        <li><strong>「最大多数の最大幸福」</strong>：一人ひとりの幸福の集約が社会全体の幸福になるという考え</li>
+        <li><strong>快楽計算</strong>：快楽と苦痛を数値化して比較する考え方</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ranking"><h3>🏆 ベストタイム</h3><ul id="ranking-u2" class="ranking-list"></ul></div>
+  <div class="minitest-block">
+    <div class="mt-block-title">✏️ ミニテスト②（全4問）</div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問5</span>イギリスの思想家で、快楽には量の違いしかないとする量的功利主義を主張したのは誰か。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">ミル</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">ロック</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">カント</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">ベンサム</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。ベンサムは量的功利主義を主張しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問6</span>ベンサムが道徳と立法の原理として掲げた言葉はどれか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">目的の王国</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">万人の万人に対する闘争</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">我思う、ゆえに我あり</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">最大多数の最大幸福</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。ベンサムは「最大多数の最大幸福」を掲げました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問7</span>快楽と苦痛を数値化して比較しようとするベンサムの考え方を何というか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">一般意志</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">弁証法</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">道徳法則</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">快楽計算</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。快楽と苦痛を数値化する考え方を快楽計算といいます。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問8</span>ベンサムの量的功利主義の説明として正しいものはどれか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">快楽には質の違いがあるとした</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">徳（中庸）を重視した</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">道徳法則への服従を重視した</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">快楽には量の違いしかないとした</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。ベンサムは快楽の量のみを問題にしました（量的功利主義）。</div>
+    </div>
+    <div class="mt-block-result" id="mt-result-2"></div>
+    <div style="text-align:center;"><button class="mt-block-reset" onclick="resetBlock(this)">↻ もう一度</button></div>
+  </div>
+</div>
+
+
+<!-- ユニット3: ミルの質的功利主義 -->
+<div class="unit">
+  <div class="unit-title"><span class="num">3</span>ミルの質的功利主義</div>
+  <div class="stage challenge" data-ch-id="u3" data-target="#k2l1-u3">
+    <div class="stage-head">
+      <span class="stage-label">📖 説明</span>
+      <div class="stage-actions">
+        <span class="challenge-timer" style="display:none;">0:00.0</span>
+        <button class="ch-btn start">🎯 チャレンジ開始</button>
+        <button class="ch-btn judge" style="display:none;">✓ 判定</button>
+        <button class="ch-btn example" style="display:none;">📖 手本</button>
+        <button class="ch-btn reset" style="display:none;">↻ リセット</button>
+        <button class="ch-btn cancel" style="display:none;">⏹ 中断</button>
+      </div>
+    </div>
+    <div class="word-bank-inline">
+      <div class="wb-title">📚 語群 ― タップして選び、空欄をタップ！</div>
+      <div class="wb-words"></div>
+    </div>
+    <div class="read-box" id="k2l1-u3">
+      <p>イギリスの思想家<span class="kw-blank" data-a="ジョン=スチュアート=ミル">ジョン=スチュアート=ミル</span>は、産業革命によって生じた労働問題を反省し、快楽には量だけでなく質の違いがあるとする<span class="kw-blank" data-a="質的功利主義">質的功利主義</span>を唱えた。</p>
+      <p>ミルは幸福は精神的なものでなければならないとし、「満足した<span class="kw-blank" data-a="豚">豚</span>であるより、不満足な<span class="kw-blank" data-a="人間">人間</span>である方がよく、満足した馬鹿であるより、不満足なソクラテスである方がよい」と述べた。</p>
+      <p>また、ミルは、人が道徳的に行動する内面的な動機として<span class="kw-blank" data-a="良心">良心</span>の大切さを説いた。</p>
+    </div>
+
+    <div class="person-box">
+      <div class="pb-title">👤 おさえておきたい人物</div>
+      <div class="person-grid">
+        <div class="person-card"><strong>ジョン=スチュアート=ミル（英）</strong>質的功利主義</div><div class="person-card"><strong>名言</strong>「満足した豚より不満足な人間」</div>
+      </div>
+    </div>
+    <div class="point-box">
+      <span class="label">★ ポイント</span>
+      <ul>
+        <li><strong>ミル</strong>：快楽には質の違いがあるとする質的功利主義を主張</li>
+        <li>「満足した豚であるより、不満足な人間である方がよい」</li>
+        <li><strong>良心</strong>（内的な道徳的動機）の大切さを重視</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ranking"><h3>🏆 ベストタイム</h3><ul id="ranking-u3" class="ranking-list"></ul></div>
+  <div class="minitest-block">
+    <div class="mt-block-title">✏️ ミニテスト③（全4問）</div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問9</span>イギリスの思想家で、快楽には質の違いがあるとする質的功利主義を主張したのは誰か。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">ベンサム</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">カント</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">ウ</span><span class="ct">ジョン=スチュアート=ミル</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">アリストテレス</span></button>
+      </div>
+      <div class="mt-exp">正解はウです。ミルは質的功利主義を主張しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問10</span>ミルが述べた「満足した豚であるより、不満足な（　）である方がよい」の（　）に当てはまる語句はどれか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">王</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">神</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">動物</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">エ</span><span class="ct">人間</span></button>
+      </div>
+      <div class="mt-exp">正解はエです。ミルは「満足した豚であるより、不満足な人間である方がよい」と述べました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問11</span>ミルが幸福について重視したものはどれか。</div>
+      <div class="mt-choices">
+        <button class="mt-c"><span class="cl">ア</span><span class="ct">快楽の量のみ</span></button>
+        <button class="mt-c" data-correct="true"><span class="cl">イ</span><span class="ct">精神的な質の高い快楽</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">富の量</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">名誉の量</span></button>
+      </div>
+      <div class="mt-exp">正解はイです。ミルは快楽の質、特に精神的な幸福を重視しました。</div>
+    </div>
+    <div class="minitest">
+      <div class="mt-stem"><span class="mt-num">問12</span>ミルが人の道徳的行動の内面的な動機として重視したものは何か。</div>
+      <div class="mt-choices">
+        <button class="mt-c" data-correct="true"><span class="cl">ア</span><span class="ct">良心</span></button>
+        <button class="mt-c"><span class="cl">イ</span><span class="ct">一般意志</span></button>
+        <button class="mt-c"><span class="cl">ウ</span><span class="ct">快楽計算</span></button>
+        <button class="mt-c"><span class="cl">エ</span><span class="ct">抵抗権</span></button>
+      </div>
+      <div class="mt-exp">正解はアです。ミルは良心という内的な動機を重視しました。</div>
+    </div>
+    <div class="mt-block-result" id="mt-result-3"></div>
+    <div style="text-align:center;"><button class="mt-block-reset" onclick="resetBlock(this)">↻ もう一度</button></div>
+  </div>
+</div>
+
+<div class="lesson-end">
+  <div class="end-title">🎉 幸福・正義・公正の考え方①（功利主義） 完了！次に進もう</div>
+  <div class="links">
+    <a href="c02_ch2_l1_practice.html" class="main-link">📝 練習問題へ</a>
+    <a href="c02_index.html" class="sub-link">📋 単元表へ</a>
+  </div>
+</div>
+<nav class="pagenav">
+  <a href="c02_ch1_l2.html"><span class="label">◀ L2</span><span class="title">欲求と自己形成</span></a>
+  <a href="c02_ch2_l1_practice.html" class="next"><span class="label">NEXT ▶</span><span class="title">練習問題</span></a>
+</nav>
+</main></div>
+
+<div class="fail-toast" id="fail-toast"></div>
+<div class="hanafubuki-overlay" id="hanafubuki"></div>
+<div class="pass-overlay" id="pass-overlay">
+  <div class="pass-dialog">
+    <div class="pass-emoji">🌸</div><h2>合　格！</h2>
+    <div class="pass-time" id="pass-time-display"></div>
+    <p id="pass-msg">全問正解！すばらしい！</p>
+    <button class="btn" onclick="closePass()">つぎへ進む</button>
+  </div>
+</div>
+
+<script>
+const RANKING_MAX=5;
+document.querySelectorAll('.stage.challenge').forEach(function(stage){
+  var sel=null,tmr=null,t0=0;
+  var cid=stage.dataset.chId,tsel=stage.dataset.target;
+  var wbEl=stage.querySelector('.wb-words'),telEl=stage.querySelector('.challenge-timer');
+  var bS=stage.querySelector('.ch-btn.start'),bJ=stage.querySelector('.ch-btn.judge');
+  var bE=stage.querySelector('.ch-btn.example'),bR=stage.querySelector('.ch-btn.reset'),bC=stage.querySelector('.ch-btn.cancel');
+  var rb=document.querySelector(tsel);
+  if(!rb)return;
+  function getBlanks(){return rb.querySelectorAll('.kw-blank');}
+  function getAnss(){return Array.from(getBlanks()).map(function(b){return b.dataset.a;});}
+  function stopTmr(){if(tmr){clearInterval(tmr);tmr=null;}}
+  function pickW(btn){stage.querySelectorAll('.wb-word').forEach(function(w){w.classList.remove('selected-word');});if(sel===btn){sel=null;return;}btn.classList.add('selected-word');sel=btn;}
+  function fillB(b){
+    if(!sel)return;
+    var prev=b.dataset.filled;
+    if(prev){stage.querySelectorAll('.wb-word').forEach(function(w){if(w.textContent===prev&&w.classList.contains('used'))w.classList.remove('used');});}
+    b.textContent=sel.textContent;b.dataset.filled=sel.textContent;
+    b.classList.add('selected');b.classList.remove('correct-blink','wrong-blink');
+    sel.classList.add('used');sel.classList.remove('selected-word');sel=null;
+  }
+  function endCh(ok){
+    stopTmr();stage.classList.remove('challenge-active');
+    if(bS)bS.style.display='';if(bJ)bJ.style.display='none';if(bE)bE.style.display='none';if(bR)bR.style.display='none';if(bC)bC.style.display='none';if(telEl)telEl.style.display='none';
+    if(!ok){var ans=getAnss();getBlanks().forEach(function(b,i){b.textContent=ans[i];});}
+  }
+  if(bS)bS.addEventListener('click',function(){
+    sel=null;stage.classList.add('challenge-active');
+    var ans=getAnss();
+    getBlanks().forEach(function(b){b.textContent='　　';b.classList.remove('selected','correct-blink','wrong-blink');b.dataset.filled='';});
+    var ws=chShuffle(Array.from(new Set(ans)));wbEl.innerHTML='';
+    ws.forEach(function(w){var btn=document.createElement('button');btn.className='wb-word';btn.textContent=w;btn.addEventListener('click',function(){pickW(btn);});wbEl.appendChild(btn);});
+    if(bS)bS.style.display='none';if(bJ)bJ.style.display='';if(bE)bE.style.display='';if(bR)bR.style.display='';if(bC)bC.style.display='';if(telEl)telEl.style.display='';
+    t0=Date.now();stopTmr();tmr=setInterval(function(){if(telEl)telEl.textContent=chFmt(Date.now()-t0);},100);
+    getBlanks().forEach(function(b){var f=b.cloneNode(true);b.parentNode.replaceChild(f,b);f.textContent='　　';f.dataset.filled='';f.classList.remove('selected','correct-blink','wrong-blink');f.addEventListener('click',function(){fillB(f);});});
+  });
+  if(bJ)bJ.addEventListener('click',function(){
+    var ans=getAnss();var ok=true;
+    getBlanks().forEach(function(b,i){
+      if(b.dataset.filled===ans[i]){b.classList.add('correct-blink');b.classList.remove('wrong-blink','selected');}
+      else{b.classList.add('wrong-blink');b.classList.remove('correct-blink','selected');ok=false;
+        var w=b.dataset.filled;
+        if(w){stage.querySelectorAll('.wb-word').forEach(function(bw){if(bw.textContent===w&&bw.classList.contains('used'))bw.classList.remove('used','selected-word');});b.textContent='　　';b.dataset.filled='';}
+      }
+    });
+    if(ok){stopTmr();var ms=Date.now()-t0;chSaveR(cid,ms);chShowR(cid);endCh(true);chShowPassC(chFmt(ms));}
+    else{chShowFT('まだ間違いがあります！');}
+  });
+  if(bE)bE.addEventListener('click',function(){stopTmr();var ans=getAnss();getBlanks().forEach(function(b,i){b.textContent=ans[i];b.dataset.filled=ans[i];b.classList.remove('selected','wrong-blink');b.classList.add('correct-blink');});stage.querySelectorAll('.wb-word').forEach(function(w){w.classList.add('used');});});
+  if(bR)bR.addEventListener('click',function(){stopTmr();endCh(false);setTimeout(function(){if(bS)bS.click();},80);});
+  if(bC)bC.addEventListener('click',function(){endCh(false);});
+});
+function chSaveR(id,ms){var k='gcr_ch2l1_'+id;var a=JSON.parse(localStorage.getItem(k)||'[]');a.push(ms);a.sort(function(x,y){return x-y;});a=a.slice(0,RANKING_MAX);localStorage.setItem(k,JSON.stringify(a));}
+function chShowR(id){var k='gcr_ch2l1_'+id;var a=JSON.parse(localStorage.getItem(k)||'[]');var ul=document.getElementById('ranking-'+id);if(ul)ul.innerHTML=a.map(function(ms,i){return '<li>'+(i+1)+'位：'+chFmt(ms)+'</li>';}).join('')||'<li>まだ記録がありません</li>';}
+function chFmt(ms){var s=Math.floor(ms/1000),d=Math.floor((ms%1000)/100);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'.'+d;}
+function chShowPassC(t){var el=document.getElementById('pass-time-display');if(el)el.textContent='⏱ '+t;showPass('チャレンジ完了！');}
+function chShowFT(msg){var t=document.getElementById('fail-toast');if(t){t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}}
+function chShuffle(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=arr[i];arr[i]=arr[j];arr[j]=tmp;}return arr;}
+document.querySelectorAll('.minitest').forEach(function(mt){
+  var exp=mt.querySelector('.mt-exp');
+  var btns=mt.querySelectorAll('.mt-c');
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      if(btn.disabled)return;
+      btns.forEach(function(b){b.disabled=true;});
+      var ok=btn.dataset.correct==='true';
+      if(ok){btn.classList.add('correct');if(exp){exp.classList.add('show','ok');}miniHanafubuki();}
+      else{btn.classList.add('wrong');if(exp){exp.classList.add('show','ng');}btns.forEach(function(b){if(b.dataset.correct==='true')b.classList.add('correct');});}
+      checkBlockResult(mt.closest('.minitest-block'));
+    });
+  });
+});
+function checkBlockResult(block){
+  var tests=block.querySelectorAll('.minitest');
+  var resultEl=block.querySelector('.mt-block-result');
+  var correct=0,answered=0;
+  tests.forEach(function(t){var c=t.querySelector('.mt-c.correct,.mt-c.wrong');if(!c)return;answered++;if(c.classList.contains('correct'))correct++;});
+  if(answered<tests.length)return;
+  if(correct===tests.length){resultEl.innerHTML='🎉 全問正解！';resultEl.style.color='var(--success)';checkAllDone();}
+  else{resultEl.innerHTML=correct+'/'+tests.length+'問 正解。';resultEl.style.color='var(--danger)';}
+}
+function checkAllDone(){
+  var blocks=document.querySelectorAll('.minitest-block');var allDone=true;
+  blocks.forEach(function(b){var res=b.querySelector('.mt-block-result');if(!res||res.textContent.indexOf('全問正解')<0)allDone=false;});
+  if(allDone){launchFireworks();setTimeout(function(){showPass('全ミニテスト完了！');},600);}
+}
+function resetBlock(btn){
+  var block=btn.closest('.minitest-block');
+  block.querySelectorAll('.mt-c').forEach(function(b){b.classList.remove('correct','wrong');b.disabled=false;});
+  block.querySelectorAll('.mt-exp').forEach(function(e){e.classList.remove('show','ok','ng');});
+  var r=block.querySelector('.mt-block-result');if(r){r.innerHTML='';r.style.color='';}
+}
+function launchFireworks(){
+  var fwEl=document.getElementById('fireworks-overlay');
+  if(!fwEl){fwEl=document.createElement('div');fwEl.id='fireworks-overlay';fwEl.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden;';document.body.appendChild(fwEl);}
+  fwEl.innerHTML='';
+  var colors=['#f59e0b','#ef4444','#3b82f6','#10b981','#8b5cf6','#f97316','#ec4899','#facc15','#fff'];
+  for(var b=0;b<12;b++){
+    (function(b){setTimeout(function(){
+      var cx=15+Math.random()*70,cy=10+Math.random()*60;
+      var cnt=22+Math.floor(Math.random()*18);
+      var c1=colors[Math.floor(Math.random()*colors.length)];
+      var c2=colors[Math.floor(Math.random()*colors.length)];
+      for(var i=0;i<cnt;i++){
+        var angle=(360/cnt)*i+Math.random()*10;
+        var dist=60+Math.random()*90;
+        var rad=angle*Math.PI/180;
+        var p=document.createElement('div');
+        p.style.cssText='position:absolute;border-radius:50%;animation:fw-fly linear forwards;left:'+cx+'vw;top:'+cy+'vh;width:'+(3+Math.random()*5)+'px;height:'+(3+Math.random()*5)+'px;background:'+(i%2===0?c1:c2)+';--fx:'+(Math.cos(rad)*dist)+'px;--fy:'+(Math.sin(rad)*dist)+'px;animation-duration:'+(0.6+Math.random()*0.7)+'s;';
+        fwEl.appendChild(p);
+      }
+    },b*180);})(b);
+  }
+  setTimeout(function(){if(fwEl)fwEl.innerHTML='';},4500);
+}
+function miniHanafubuki(){
+  var c=document.getElementById('hanafubuki');
+  var p=['⚖️','✨','⭐','🎊','🎉','💮','🌷','🏆'];
+  for(var i=0;i<28;i++){
+    var el=document.createElement('div');el.className='petal';
+    el.textContent=p[Math.floor(Math.random()*p.length)];
+    el.style.left=Math.random()*100+'vw';
+    el.style.animationDuration=(1.2+Math.random()*1.5)+'s';
+    el.style.animationDelay=(Math.random()*0.6)+'s';
+    el.style.fontSize=(.8+Math.random()*1.0)+'em';
+    c.appendChild(el);
+  }
+  setTimeout(function(){Array.from(c.children).slice(0,28).forEach(function(el){el.remove();});},3000);
+}
+function showPass(msg){launchHanafubuki();document.getElementById('pass-msg').textContent=msg;document.getElementById('pass-overlay').classList.add('show');}
+function closePass(){document.getElementById('pass-overlay').classList.remove('show');}
+function launchHanafubuki(){
+  var c=document.getElementById('hanafubuki');c.innerHTML='';
+  var p=['🌸','⚖️','✨','⭐','🎊','🎉','💮','🌷','🎀','🏆'];
+  for(var i=0;i<65;i++){
+    var el=document.createElement('div');el.className='petal';
+    el.textContent=p[Math.floor(Math.random()*p.length)];
+    el.style.left=Math.random()*100+'vw';
+    el.style.animationDuration=(2+Math.random()*2.5)+'s';
+    el.style.animationDelay=(Math.random()*1.5)+'s';
+    el.style.fontSize=(.9+Math.random()*1.2)+'em';
+    c.appendChild(el);
+  }
+  setTimeout(function(){c.innerHTML='';},5500);
+}
+chShowR('u1');chShowR('u2');chShowR('u3');
+
+</script>
+</body>
+</html>
