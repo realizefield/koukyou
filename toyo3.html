@@ -43,8 +43,6 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
 .s-head-q{background:var(--red);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:10px}
 .s-icon{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.86em;flex-shrink:0}
 .s-ht{font-size:.94em;font-weight:700;letter-spacing:.04em;flex:1}
-.aud-btn{background:rgba(255,255,255,.18);color:#fff;border:1.5px solid rgba(255,255,255,.45);border-radius:6px;padding:5px 11px;font-size:.78em;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;font-family:'BIZ UDGothic',sans-serif}
-.aud-btn svg{width:14px;height:14px;fill:currentColor}
 .s-body{padding:18px 20px}
 .person-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
 .person-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
@@ -135,7 +133,6 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
   <div class="s-head-e">
     <div class="s-icon">明</div>
     <div class="s-ht">明治の啓蒙思想</div>
-    <button class="aud-btn" onclick="playAudio('jp1')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
   </div>
   <div class="s-body">
     <div class="person-row">
@@ -169,7 +166,6 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
   <div class="s-head-e">
     <div class="s-icon">大</div>
     <div class="s-ht">大正デモクラシーと日本思想</div>
-    <button class="aud-btn" onclick="playAudio('jp2')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
   </div>
   <div class="s-body">
     <div class="person-row">
@@ -194,7 +190,6 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
   <div class="s-head-e">
     <div class="s-icon">近</div>
     <div class="s-ht">近代日本の独自思想</div>
-    <button class="aud-btn" onclick="playAudio('jp3')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>音声解説</button>
   </div>
   <div class="s-body">
     <div class="person-row">
@@ -382,13 +377,12 @@ body{font-family:'BIZ UDGothic','Meiryo',sans-serif;background:var(--paper);colo
     </div>
   </div>
 </div>
-<a class="home-btn" href="index.html">🏠 単元表に戻る</a>
+<a class="home-btn" href="c02_index.html">🏠 単元表に戻る</a>
 <script>
 const EW=["天賦人権論", "脱亜論", "東洋のルソー", "民約論", "二つのJ", "不敬事件", "民本主義", "モンスーン型", "純粋経験", "絶対無", "常民", "民俗学", "甘えの構造"];
 const QW=["福沢諭吉", "中江兆民", "内村鑑三", "吉野作造", "和辻哲郎", "西田幾多郎", "柳田国男", "土居健郎", "天賦人権論", "脱亜論", "東洋のルソー", "民約論", "二つのJ", "不敬事件", "民本主義", "モンスーン型", "純粋経験", "絶対無", "常民", "民俗学", "甘えの構造"];
-const AFILES={'jp1':'audio/toyo3_jp1.wav','jp2':'audio/toyo3_jp2.wav','jp3':'audio/toyo3_jp3.wav'};
 const REC_KEY='timer_toyo3_'+new Date().toISOString().slice(0,10);
-var _selChip=null,_mSel=null,_tInt=null,_t0=0,_pausedMs=0,_curAud=null,_currentWords=[];
+var _selChip=null,_mSel=null,_tInt=null,_t0=0,_pausedMs=0,_currentWords=[];
 function _el(id){return document.getElementById(id);}
 function _show(id){var e=_el(id);if(e)e.style.display='inline-block';}
 function _hide(id){var e=_el(id);if(e)e.style.display='none';}
@@ -423,7 +417,6 @@ function _hideBanner(){var b=_el('jbanner');if(b)b.style.display='none';}
 function _showScore(ok,tot){var p=_el('spill');p.textContent=ok+' / '+tot+' 問正解';p.style.display='inline-block';}
 function _saveRecord(ms){try{var recs=JSON.parse(localStorage.getItem(REC_KEY)||'[]');var ts=new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});recs.push({ms:ms,ts:ts});recs.sort(function(a,b){return a.ms-b.ms;});if(recs.length>3)recs=recs.slice(0,3);localStorage.setItem(REC_KEY,JSON.stringify(recs));_renderRecords();}catch(e){}}
 function _renderRecords(){try{var recs=JSON.parse(localStorage.getItem(REC_KEY)||'[]');var el2=_el('recordList');if(!el2)return;if(!recs.length){el2.innerHTML='<div class="rp-empty">まだ記録がありません</div>';return;}el2.innerHTML=recs.map(function(r,i){var m=String(Math.floor(r.ms/60000)).padStart(2,'0');var s=String(Math.floor((r.ms%60000)/1000)).padStart(2,'0');var ds=String(Math.floor((r.ms%1000)/100));return '<div class="rp-row"><div class="rp-rank r'+(i+1)+'">'+(i+1)+'</div><div class="rp-time">'+m+':'+s+'.'+ds+'</div><div class="rp-date">'+r.ts+'</div></div>';}).join('');}catch(e){}}
-function playAudio(key){if(_curAud){_curAud.pause();_curAud.currentTime=0;}if(!AFILES[key])return;_curAud=new Audio(AFILES[key]);_curAud.onerror=function(){alert('音声ファイルが見つかりません:\n'+AFILES[key]);_curAud=null;};_curAud.play();}
 var _popup=null,_popupTarget=null;
 function _makePopup(){var p=document.getElementById('_blankPopup');if(!p){p=document.createElement('div');p.id='_blankPopup';document.body.appendChild(p);document.addEventListener('click',function(e){if(_popup&&_popup.style.display==='flex'&&!_popup.contains(e.target)&&e.target!==_popupTarget){_closePopup();}});}return p;}
 function _openPopup(blank){var p=_makePopup();_popup=p;_popupTarget=blank;p.innerHTML='';var words=_currentWords.length?_currentWords:QW;words.forEach(function(w){var btn=document.createElement('button');btn.style.cssText='font-family:\'BIZ UDGothic\',sans-serif;font-size:.85em;font-weight:700;background:#5d4037;color:#fff;border:none;padding:5px 12px;border-radius:4px;cursor:pointer;white-space:nowrap;margin:2px;';btn.textContent=w;btn.addEventListener('click',function(e){e.stopPropagation();blank.textContent=w;blank.classList.remove('ok','ng','show');_closePopup();});p.appendChild(btn);});var rect=blank.getBoundingClientRect();var pw=Math.min(340,window.innerWidth-24);var left=Math.max(12,Math.min(rect.left,window.innerWidth-pw-12));var top=rect.bottom+6;if(top+180>window.innerHeight)top=rect.top-190;p.style.cssText='display:flex;flex-wrap:wrap;gap:5px;padding:10px 12px;position:fixed;z-index:1000;background:#fff;border:2px solid #5d4037;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.22);max-width:'+pw+'px;left:'+left+'px;top:'+top+'px;';}

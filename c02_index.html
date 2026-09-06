@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAMBA 公共（高認）単元表</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'BIZ UDPGothic','Hiragino Kaku Gothic ProN','Yu Gothic UI',Meiryo,sans-serif;background:#f0fdfa;color:#1e293b;min-height:100vh;font-size:15px}
+.top-header{background:linear-gradient(135deg,#0f172a 0%,#0f766e 55%,#0d9488 100%);color:#fff;padding:16px 16px 0;text-align:center}
+.top-header h1{font-size:1.15rem;font-weight:800;letter-spacing:.04em}
+.top-header p{font-size:.78rem;margin-top:3px;opacity:.85}
+.summary-bar{background:rgba(0,0,0,.22);margin-top:12px;padding:9px 14px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.78rem;color:#fff}
+.sum-item{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.sum-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sum-dot-a{background:#4ade80}.sum-dot-b{background:#fbbf24}.sum-dot-c{background:#f87171}.sum-dot-n{background:#94a3b8}
+.sum-count{font-weight:800;font-size:1rem;min-width:18px;text-align:center}
+.tab-nav{background:rgba(255,255,255,.97);border-bottom:2px solid #99f6e4;padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;z-index:300;backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tnav{font-family:inherit;font-size:.8em;font-weight:700;padding:7px 18px;border:2px solid #99f6e4;border-radius:50px;background:#fff;color:#6b7a99;cursor:pointer;transition:.14s}
+.tnav:hover{border-color:#0d9488;color:#0d9488}
+.tnav.on{background:#0d9488;color:#fff;border-color:#0d9488}
+.tab-sec{display:none}.tab-sec.on{display:block}
+.wrap{max-width:960px;margin:0 auto;padding:14px 12px 70px}
+.notice{background:#fff;border:1.5px solid #99f6e4;border-radius:14px;padding:12px 16px;margin-bottom:16px;font-size:.82rem;line-height:1.7;color:#134e4a}
+.notice strong{color:#0f766e}
+.progress-wrap{background:#fff;border-radius:14px;border:1px solid #99f6e4;padding:13px 16px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.progress-lbl{font-size:.8rem;font-weight:800;color:#0d9488;margin-bottom:8px}
+.progress-bar-bg{background:#ccfbf1;border-radius:20px;height:12px;overflow:hidden}
+.progress-bar-fill{background:linear-gradient(90deg,#0d9488,#0f766e);height:100%;border-radius:20px;transition:.6s}
+.progress-pct{font-size:.8rem;font-weight:700;color:#0d9488;margin-top:5px;text-align:right}
+.unit{background:#fff;border-radius:14px;border:1px solid #99f6e4;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden}
+.unit-hd{padding:11px 16px;display:flex;align-items:center;gap:10px;color:#fff}
+.unit-num{background:rgba(255,255,255,.2);border-radius:7px;padding:3px 10px;font-size:.78rem;font-weight:800;white-space:nowrap}
+.unit-title{font-size:1rem;font-weight:800;flex:1}
+.unit-badge{font-size:.72rem;background:rgba(255,255,255,.25);border-radius:999px;padding:2px 9px;font-weight:700;white-space:nowrap}
+.unit-body{padding:12px 14px}
+.group-label{font-size:.75rem;font-weight:800;color:#64748b;margin:12px 0 8px;letter-spacing:.05em;padding-bottom:4px;border-bottom:1.5px dashed #99f6e4;display:flex;align-items:center;gap:7px}
+.group-label:first-child{margin-top:0}
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:4px}
+.sec-card{border-radius:10px;border:1.5px solid #99f6e4;overflow:hidden;transition:.18s;background:#fff;display:flex;flex-direction:column}
+.sec-card:hover{box-shadow:0 3px 14px rgba(13,148,136,.15);transform:translateY(-1px)}
+.sec-card.planned{opacity:.62}
+.sc-hd{background:#f0fdfa;border-bottom:2px solid #0d9488;padding:9px 12px;display:flex;align-items:center;gap:8px}
+.sc-num{background:#0d9488;color:#fff;border-radius:7px;padding:3px 9px;font-size:.75rem;font-weight:800;flex-shrink:0}
+.sc-title{font-size:.88rem;font-weight:800;flex:1;color:#0f766e;line-height:1.3}
+.sc-status{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:50px;white-space:nowrap;flex-shrink:0;background:#e2e8f0;color:#64748b;border:1px solid #cbd5e1}
+.sc-status.done{background:#dcfce7;color:#16a34a;border-color:#16a34a}
+.sc-status.partial{background:#fef3c7;color:#92400e;border-color:#fbbf24}
+.sc-status.studying{background:#e0e7ff;color:#1d4ed8;border-color:#818cf8}
+.sc-status.planned{background:#f1f5f9;color:#94a3b8;border-color:#cbd5e1}
+.sc-body{padding:8px 12px;background:#fff;flex:1}
+.sc-topics{list-style:none;margin:0;padding:0}
+.sc-topics li{font-size:.78rem;color:#475569;padding:2px 0;border-bottom:1px solid #f0fdfa;line-height:1.5}
+.sc-topics li:last-child{border-bottom:none}
+.sc-topics li::before{content:"・";color:#0d9488}
+.sc-meta{display:flex;align-items:center;gap:12px;padding:4px 12px 6px;font-size:.72rem;color:#64748b;background:#f8fefd;border-top:1px dashed #99f6e4}
+.sc-meta-item{display:flex;align-items:center;gap:3px}
+.sc-meta-val{font-weight:700;color:#0f766e}
+.sc-btn-row{display:flex;gap:5px;padding:8px 12px 0;flex-wrap:wrap}
+.sc-btn{flex:1;min-width:60px;text-align:center;padding:8px 4px;border-radius:8px;font-size:.78rem;font-weight:800;text-decoration:none;transition:.13s;border:none;cursor:pointer;display:block;color:#fff;font-family:inherit;background:#0d9488}
+.sc-btn:hover{background:#0f766e}
+.sc-btn-sub{background:#7c3aed}.sc-btn-sub:hover{background:#6d28d9}
+.sc-btn-planned{flex:1;text-align:center;padding:8px 4px;border-radius:8px;font-size:.76rem;font-weight:700;color:#94a3b8;background:#f1f5f9;margin:8px 12px 0}
+.abc-row{display:flex;gap:5px;padding:8px 12px 10px}
+.abc-lbl{font-size:.68rem;color:#64748b;font-weight:700;align-self:center;margin-right:2px;white-space:nowrap}
+.abc-btn{flex:1;padding:7px 2px;border-radius:20px;font-size:.75rem;font-weight:800;font-family:inherit;cursor:pointer;transition:.13s;border:2px solid;text-align:center;background:#fff}
+.abc-a{border-color:#16a34a;color:#16a34a}.abc-a.sel{background:#16a34a;color:#fff}
+.abc-b{border-color:#d97706;color:#d97706}.abc-b.sel{background:#d97706;color:#fff}
+.abc-c{border-color:#dc2626;color:#dc2626}.abc-c.sel{background:#dc2626;color:#fff}
+.abc-btn:hover{opacity:.8}
+.sec-card.s-a{border-color:#16a34a}.sec-card.s-a .sc-hd{background:#dcfce7!important;border-bottom-color:#16a34a!important}
+.sec-card.s-b{border-color:#d97706}.sec-card.s-b .sc-hd{background:#fef3c7!important;border-bottom-color:#d97706!important}
+.sec-card.s-c{border-color:#dc2626}.sec-card.s-c .sc-hd{background:#fee2e2!important;border-bottom-color:#dc2626!important}
+.record-wrap{background:#fff;border-radius:14px;border:1px solid #99f6e4;padding:14px 16px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.record-title{font-size:.88rem;font-weight:800;color:#0d9488;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #ccfbf1}
+.prog-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0fdfa}
+.prog-row:last-child{border-bottom:none}
+.prog-num{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700}
+.prog-title{flex:1;font-size:.85rem;font-weight:700}
+.prog-grade{font-size:.73em;font-weight:700;padding:3px 10px;border-radius:50px;background:#f0fdfa;color:#64748b;border:1px solid #99f6e4}
+.prog-grade.a{background:#16a34a;color:#fff;border-color:#16a34a}
+.prog-grade.b{background:#d97706;color:#fff;border-color:#d97706}
+.prog-grade.c{background:#dc2626;color:#fff;border-color:#dc2626}
+.prog-meta{font-size:.68em;color:#64748b;white-space:nowrap}
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:900;align-items:center;justify-content:center}
+.modal-ov.open{display:flex}
+.modal-box{background:#fff;border-radius:18px;padding:34px 38px;text-align:center;max-width:340px;width:90%;box-shadow:0 16px 56px rgba(0,0,0,.22);position:relative;overflow:hidden}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#0d9488,#0f766e)}
+.modal-emoji{font-size:3em;margin-bottom:12px}
+.modal-title{font-size:1.2em;font-weight:900;margin-bottom:8px}
+.modal-sub{font-size:.87em;color:#64748b;margin-bottom:22px;line-height:1.6}
+.modal-close{font-family:inherit;font-size:.9em;font-weight:700;background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;border:none;border-radius:50px;padding:11px 32px;cursor:pointer}
+canvas#cnf{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:none}
+.unit-hd.ch1{background:linear-gradient(90deg,#134e4a,#0f766e)}
+.unit-hd.ch2{background:linear-gradient(90deg,#78350f,#b45309)}
+.unit-hd.ch3{background:linear-gradient(90deg,#1e3a8a,#2563eb)}
+.unit-hd.ch4{background:linear-gradient(90deg,#3730a3,#6366f1)}
+.unit-hd.ch5{background:linear-gradient(90deg,#701a75,#a21caf)}
+.unit-hd.ch6{background:linear-gradient(90deg,#064e3b,#047857)}
+.unit-hd.ch7{background:linear-gradient(90deg,#7c2d12,#c2410c)}
+.unit-hd.ch8{background:linear-gradient(90deg,#0c4a6e,#0369a1)}
+@media(max-width:480px){.unit-title{font-size:.9rem}.sec-grid{grid-template-columns:1fr}.sc-btn{font-size:.73rem;padding:7px 2px}}
+</style>
+</head>
+<body>
+<canvas id="cnf"></canvas>
+<div class="top-header">
+  <h1>🎓 GAMBA 公共（高認）単元表</h1>
+  <p>高卒認定試験レベル — 青年期・思想／政治／経済／国際社会</p>
+  <div class="summary-bar">
+    <div class="sum-item"><span class="sum-dot sum-dot-a"></span>A 完璧 <span class="sum-count" id="cnt-a">0</span></div>
+    <div class="sum-item"><span class="sum-dot sum-dot-b"></span>B 良好 <span class="sum-count" id="cnt-b">0</span></div>
+    <div class="sum-item"><span class="sum-dot sum-dot-c"></span>C 要復習 <span class="sum-count" id="cnt-c">0</span></div>
+    <div class="sum-item"><span class="sum-dot sum-dot-n"></span>未学習 <span class="sum-count" id="cnt-n">0</span></div>
+  </div>
+</div>
+<div class="tab-nav">
+  <button class="tnav on" onclick="switchTab('tab-units',this)">📋 単元表</button>
+  <button class="tnav"    onclick="switchTab('tab-record',this)">📊 学習記録</button>
+</div>
+<div class="wrap">
+<div class="tab-sec on" id="tab-units">
+  <div class="notice">📘 このコースは<strong>高卒認定試験「公共」レベル</strong>の学習内容です。中学公民の内容と一部重なりますが、思想・青年期分野や、より詳しい政治・経済のしくみを扱います。中学公民の基礎に不安がある場合は、先に<a href="civics_index.html" style="color:#0f766e;font-weight:700;">GAMBA 公民（中学）単元表</a>で土台を固めることをおすすめします。</div>
+  <div class="progress-wrap">
+    <div class="progress-lbl">📊 習熟度（全単元）</div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progFill" style="width:0%"></div></div>
+    <div class="progress-pct" id="progPct">0%　A評価 <span id="progNote">0 / 29</span> 単元</div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch1"><span class="unit-num">第1章</span><span class="unit-title">青年期と自己形成</span><span class="unit-badge">3レッスン</span></div>
+    <div class="unit-body"><div class="group-label">🌱 青年期の意義・欲求と適応・キャリア形成</div><div class="sec-grid" id="grid-ch1"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch2"><span class="unit-num">第2章</span><span class="unit-title">幸福・正義・公正と倫理的な考え方</span><span class="unit-badge">6レッスン</span></div>
+    <div class="unit-body"><div class="group-label">⚖️ 功利主義・義務論・社会契約説・東西の先哲</div><div class="sec-grid" id="grid-ch2"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch3"><span class="unit-num">第3章</span><span class="unit-title">現代社会の特色と課題</span><span class="unit-badge">3レッスン</span></div>
+    <div class="unit-body"><div class="group-label">🌍 情報化社会・消費者問題・多文化共生</div><div class="sec-grid" id="grid-ch3"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch4"><span class="unit-num">第4章</span><span class="unit-title">民主政治の基本原理と日本国憲法</span><span class="unit-badge">3レッスン</span></div>
+    <div class="unit-body"><div class="group-label">🗳️ 民主政治・立憲主義・基本的人権</div><div class="sec-grid" id="grid-ch4"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch5"><span class="unit-num">第5章</span><span class="unit-title">日本の政治機構</span><span class="unit-badge">4レッスン</span></div>
+    <div class="unit-body"><div class="group-label">🏛️ 国会・内閣・裁判所・地方自治</div><div class="sec-grid" id="grid-ch5"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch6"><span class="unit-num">第6章</span><span class="unit-title">現代の経済社会</span><span class="unit-badge">5レッスン</span></div>
+    <div class="unit-body"><div class="group-label">💰 市場・企業・金融・財政・国民所得</div><div class="sec-grid" id="grid-ch6"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch7"><span class="unit-num">第7章</span><span class="unit-title">社会保障と環境</span><span class="unit-badge">2レッスン</span></div>
+    <div class="unit-body"><div class="group-label">🌿 社会保障制度・環境問題と循環型社会</div><div class="sec-grid" id="grid-ch7"></div></div>
+  </div>
+  <div class="unit">
+    <div class="unit-hd ch8"><span class="unit-num">第8章</span><span class="unit-title">国際社会と日本</span><span class="unit-badge">3レッスン</span></div>
+    <div class="unit-body"><div class="group-label">🌐 国際政治・国際経済・地球的課題</div><div class="sec-grid" id="grid-ch8"></div></div>
+  </div>
+</div>
+<div class="tab-sec" id="tab-record">
+  <div class="record-wrap"><div class="record-title">📊 単元別　理解度一覧</div><div id="record-list"></div></div>
+</div>
+</div>
+<div class="modal-ov" id="modal" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-emoji" id="modal-emoji"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <button class="modal-close" onclick="closeModal()">閉じる</button>
+  </div>
+</div>
+<script>'use strict';
+const UNITS=[
+  {id:'k01',num:'L01',title:'青年期をどう捉えるか',sub:['マージナルマン・モラトリアム・第二の誕生','ハヴィガースト・エリクソンの発達課題','現代の青年期（ニート・フリーター等）'],group:'ch1',status:'live',file:'c02_ch1_l1.html'},
+  {id:'k02',num:'L02',title:'欲求と自己形成',sub:['欲求の分類とマズロー','欲求不満・葛藤と防衛機制','パーソナリティの3要素と類型論'],group:'ch1',status:'live',file:'c02_ch1_l2.html'},
+  {id:'k03',num:'L03',title:'職業選択とキャリア形成',sub:['生きがいと職業観','ワークライフバランス','青年期から社会参加へ'],group:'ch1',status:'live',file:'c02_ch1_l3.html'},
+  {id:'k04',num:'L04',title:'幸福・正義・公正の考え方①（功利主義）',sub:['ベンサムの量的功利主義','ミルの質的功利主義','最大多数の最大幸福'],group:'ch2',status:'live',file:'c02_ch2_l1.html'},
+  {id:'k05',num:'L05',title:'幸福・正義・公正の考え方②（義務論・徳倫理）',sub:['カントの義務論・定言命法','アリストテレスの徳倫理・中庸','動機主義と結果主義の比較'],group:'ch2',status:'live',file:'c02_ch2_l2.html'},
+  {id:'k06',num:'L06',title:'社会契約説と人間の尊厳',sub:['ホッブズ『リヴァイアサン』','ロックの抵抗権・所有権','ルソーの一般意志'],group:'ch2',status:'live',file:'c02_ch2_l3.html'},
+  {id:'k07',num:'L07',title:'東洋哲学① 中国の思想（諸子百家）',sub:['儒家（孔子・孟子・荀子）','墨家（墨子）・道家（老子）','法家（韓非子）'],group:'ch2',status:'live',file:'toyo1.html',single:true},
+  {id:'k08',num:'L08',title:'東洋哲学② 朱子学・陽明学',sub:['朱子学（朱熹）','陽明学（王陽明）','日本への伝来と影響'],group:'ch2',status:'live',file:'toyo2.html',single:true},
+  {id:'k09',num:'L09',title:'東洋哲学③ 日本の思想',sub:['日本の伝統思想','神仏習合・国学など','近代日本の思想家'],group:'ch2',status:'live',file:'toyo3.html',single:true},
+  {id:'k10',num:'L10',title:'情報化社会とグローバル化',sub:['AI・ビッグデータと情報リテラシー','情報格差（デジタルデバイド）','グローバル化の光と影'],group:'ch3',status:'live',file:'c02_ch3_l1.html'},
+  {id:'k11',num:'L11',title:'消費者問題と契約',sub:['契約自由の原則と成年年齢18歳','消費者契約法・クーリングオフ','多重債務と消費者保護'],group:'ch3',status:'live',file:'c02_ch3_l2.html'},
+  {id:'k12',num:'L12',title:'多文化共生と持続可能な社会',sub:['多文化共生社会とダイバーシティ','SDGsと持続可能な開発','伝統文化の継承と変容'],group:'ch3',status:'live',file:'c02_ch3_l3.html'},
+  {id:'k13',num:'L13',title:'民主政治の基本原理と選挙制度',sub:['直接民主制と間接民主制','選挙の4原則・選挙制度の種類','政治的無関心と一票の格差'],group:'ch4',status:'live',file:'c02_g4_l1.html'},
+  {id:'k14',num:'L14',title:'日本国憲法の基本原理',sub:['立憲主義と法の支配','国民主権・基本的人権の尊重・平和主義','憲法改正の手続き'],group:'ch4',status:'live',file:'c02_g4_l2.html'},
+  {id:'k15',num:'L15',title:'基本的人権の保障',sub:['平等権・自由権・社会権','新しい人権（環境権・知る権利など）','人権をめぐる主な判例'],group:'ch4',status:'live',file:'c02_g4_l3.html'},
+  {id:'k16',num:'L16',title:'国会のしくみと立法過程',sub:['国会の地位と権限・衆参の違い','法律ができるまでの流れ','衆議院の優越'],group:'ch5',status:'live',file:'c02_g5_l1.html'},
+  {id:'k17',num:'L17',title:'内閣のしくみと行政',sub:['議院内閣制のしくみ','行政の役割と行政改革','公務員制度'],group:'ch5',status:'live',file:'c02_g5_l2.html'},
+  {id:'k18',num:'L18',title:'裁判所と司法制度',sub:['三審制と違憲審査権','裁判員制度の意義','司法権の独立'],group:'ch5',status:'live',file:'c02_g5_l3.html'},
+  {id:'k19',num:'L19',title:'地方自治のしくみ',sub:['住民自治と団体自治','直接請求権の詳細','地方分権と地方財政'],group:'ch5',status:'live',file:'c02_g5_l4.html'},
+  {id:'k20',num:'L20',title:'資本主義経済と社会主義経済の歴史',sub:['産業革命・アダム=スミス・ケインズ','独占資本主義から新自由主義へ','マルクスと社会主義経済・中国の改革開放'],group:'ch6',status:'live',file:'c02_ch4_l1.html'},
+  {id:'k21',num:'L21',title:'市場経済のしくみと企業',sub:['需要・供給と価格のしくみ','株式会社のしくみ','独占・寡占と公正取引委員会'],group:'ch6',status:'live',file:'c02_g6_l1.html'},
+  {id:'k22',num:'L22',title:'戦後日本経済のあゆみ',sub:['高度経済成長とその後','安定成長・バブル経済','産業構造の変化'],group:'ch6',status:'live',file:'c02_g6_l2.html'},
+  {id:'k23',num:'L23',title:'戦後の国際経済と地域経済統合',sub:['ブレトンウッズ体制・GATT・WTO','地域経済統合（EU・ASEANなど）','為替相場のしくみ'],group:'ch6',status:'live',file:'c02_g6_l3.html'},
+  {id:'k24',num:'L24',title:'発展途上国の経済問題',sub:['南北問題・南南問題','ODA・NIEO','新興工業経済地域（NIES）'],group:'ch6',status:'live',file:'c02_g6_l4.html'},
+  {id:'k25',num:'L25',title:'社会保障制度と少子高齢化',sub:['社会保障の4つの柱','年金制度と少子高齢化問題','介護保険と社会福祉'],group:'ch7',status:'live',file:'c02_g7_l1.html'},
+  {id:'k26',num:'L26',title:'環境問題と循環型社会',sub:['四大公害と環境基本法','循環型社会と3R','脱炭素社会への取り組み'],group:'ch7',status:'live',file:'c02_g7_l2.html'},
+  {id:'k27',num:'L27',title:'国際連合とPKO',sub:['国際連合のしくみと役割','PKO国連平和維持活動・NGO','国際司法裁判所など専門機関'],group:'ch8',status:'live',file:'c02_g8_l1.html'},
+  {id:'k28',num:'L28',title:'冷戦後の国際政治と日本外交',sub:['湾岸戦争・同時多発テロ','冷戦の終結とその後の国際情勢','第二次大戦後の日本外交'],group:'ch8',status:'live',file:'c02_g8_l2.html'},
+  {id:'k29',num:'L29',title:'地球的課題とこれからの社会',sub:['SDGsと持続可能な社会づくり','防災・減災と共生社会','公共的な空間の主体としての私たち'],group:'ch8',status:'live',file:'c02_g8_l3.html'},
+];
+const KEY_GRADE=id=>'gk_grade_'+id;
+const KEY_CNT  =id=>'gk_cnt_'  +id;
+const KEY_LAST =id=>'gk_last_' +id;
+const getGrade=id=>localStorage.getItem(KEY_GRADE(id))||'';
+const getCount=id=>parseInt(localStorage.getItem(KEY_CNT(id))||'0');
+const getLast =id=>localStorage.getItem(KEY_LAST(id))||'';
+function setGrade(id,g){
+  localStorage.setItem(KEY_GRADE(id),g);
+  const d=new Date().toLocaleDateString('ja-JP',{month:'numeric',day:'numeric'});
+  localStorage.setItem(KEY_CNT(id), getCount(id)+1);
+  localStorage.setItem(KEY_LAST(id),d);
+}
+function buildCards(){
+  const grids={ch1:'grid-ch1',ch2:'grid-ch2',ch3:'grid-ch3',ch4:'grid-ch4',ch5:'grid-ch5',ch6:'grid-ch6',ch7:'grid-ch7',ch8:'grid-ch8'};
+  UNITS.forEach(u=>{
+    const el=document.createElement('div');
+    el.className='sec-card'+(u.status==='planned'?' planned':''); el.dataset.id=u.id;
+    let body;
+    if(u.status==='live'&&u.single){
+      body=`
+      <div class="sc-btn-row">
+        <a href="${u.file}" class="sc-btn">📖 学習する（説明＋練習一体型）</a>
+      </div>
+      <div class="abc-row">
+        <span class="abc-lbl">理解度：</span>
+        <button class="abc-btn abc-a" onclick="rate('${u.id}','a',this)">A 完璧</button>
+        <button class="abc-btn abc-b" onclick="rate('${u.id}','b',this)">B 良好</button>
+        <button class="abc-btn abc-c" onclick="rate('${u.id}','c',this)">C 要復習</button>
+      </div>`;
+    } else if(u.status==='live'&&u.hasPractice===false){
+      body=`
+      <div class="sc-btn-row">
+        <a href="${u.file}" class="sc-btn">📖 レッスン（練習・確認問題は準備中）</a>
+      </div>
+      <div class="abc-row">
+        <span class="abc-lbl">理解度：</span>
+        <button class="abc-btn abc-a" onclick="rate('${u.id}','a',this)">A 完璧</button>
+        <button class="abc-btn abc-b" onclick="rate('${u.id}','b',this)">B 良好</button>
+        <button class="abc-btn abc-c" onclick="rate('${u.id}','c',this)">C 要復習</button>
+      </div>`;
+    } else if(u.status==='live'){
+      body=`
+      <div class="sc-btn-row">
+        <a href="${u.file}" class="sc-btn">📖 レッスン</a>
+        <a href="${u.file.replace('.html','_practice.html')}" class="sc-btn">📝 練習問題</a>
+        <a href="${u.file.replace('.html','_check.html')}" class="sc-btn sc-btn-sub">📋 確認問題</a>
+      </div>
+      <div class="abc-row">
+        <span class="abc-lbl">理解度：</span>
+        <button class="abc-btn abc-a" onclick="rate('${u.id}','a',this)">A 完璧</button>
+        <button class="abc-btn abc-b" onclick="rate('${u.id}','b',this)">B 良好</button>
+        <button class="abc-btn abc-c" onclick="rate('${u.id}','c',this)">C 要復習</button>
+      </div>`;
+    } else {
+      body=`<div class="sc-btn-planned">🚧 準備中（近日公開）</div>`;
+    }
+    el.innerHTML=`
+      <div class="sc-hd">
+        <span class="sc-num">${u.num}</span>
+        <span class="sc-title">${u.title}</span>
+        <span class="sc-status${u.status==='planned'?' planned':''}" id="st-${u.id}">${u.status==='planned'?'準備中':'未学習'}</span>
+      </div>
+      <div class="sc-body"><ul class="sc-topics">${u.sub.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      ${u.status==='live'?`<div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-${u.id}">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-${u.id}">─</span></div></div>`:''}
+      ${body}`;
+    document.getElementById(grids[u.group]).appendChild(el);
+  });
+}
+function rate(id,g,btn){
+  setGrade(id,g); render();
+  const msgs={a:['🌟','完璧！','この調子でどんどん進もう！'],b:['📘','良好！','もう一度復習するとさらに定着するよ。'],c:['📌','要復習','苦手部分をレッスンで確認してみよう。']};
+  const[em,title,sub]=msgs[g];
+  document.getElementById('modal-emoji').textContent=em;
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-sub').textContent=sub;
+  document.getElementById('modal').classList.add('open');
+  if(g==='a') launchConfetti();
+}
+function render(){
+  let ca=0,cb=0,cc=0,cn=0;
+  UNITS.forEach(u=>{
+    if(u.status!=='live'){return;}
+    const g=getGrade(u.id); const cnt=getCount(u.id); const last=getLast(u.id);
+    const card=document.querySelector(`[data-id="${u.id}"]`);
+    if(card){
+      card.classList.remove('s-a','s-b','s-c');
+      if(g) card.classList.add('s-'+g);
+      card.querySelectorAll('.abc-btn').forEach(b=>{b.classList.remove('sel');if(b.classList.contains('abc-'+g))b.classList.add('sel');});
+    }
+    const ce=document.getElementById('cnt-'+u.id); if(ce)ce.textContent=cnt;
+    const le=document.getElementById('last-'+u.id); if(le)le.textContent=last||'─';
+    const st=document.getElementById('st-'+u.id);
+    if(st){
+      if(g==='a'){st.className='sc-status done';st.textContent='✅ 完璧';}
+      else if(g==='b'){st.className='sc-status partial';st.textContent='📘 良好';}
+      else if(g==='c'){st.className='sc-status partial';st.textContent='📌 要復習';}
+      else if(cnt>0){st.className='sc-status studying';st.textContent='学習中';}
+      else{st.className='sc-status';st.textContent='未学習';}
+    }
+    if(g==='a')ca++; else if(g==='b')cb++; else if(g==='c')cc++; else cn++;
+  });
+  const total=UNITS.filter(u=>u.status==='live').length;
+  document.getElementById('cnt-a').textContent=ca;
+  document.getElementById('cnt-b').textContent=cb;
+  document.getElementById('cnt-c').textContent=cc;
+  document.getElementById('cnt-n').textContent=cn;
+  const pct=total?Math.round(ca/total*100):0;
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progPct').innerHTML=`${pct}%　A評価 <span id="progNote">${ca} / ${UNITS.length}</span> 単元（公開中 ${total}／全27）`;
+  buildRecord();
+}
+function buildRecord(){
+  const el=document.getElementById('record-list'); el.innerHTML='';
+  UNITS.forEach(u=>{
+    const g=u.status==='live'?getGrade(u.id):'';
+    const cnt=u.status==='live'?getCount(u.id):0;
+    const last=u.status==='live'?getLast(u.id):'';
+    const row=document.createElement('div'); row.className='prog-row';
+    const label=u.status==='live'?(g?{a:'A 完璧',b:'B 良好',c:'C 要復習'}[g]:'未学習'):'準備中';
+    row.innerHTML=`<div class="prog-num">${u.num}</div><div class="prog-title">${u.title}</div><div class="prog-grade${g?' '+g:''}">${label}</div><div class="prog-meta">${u.status==='live'?(cnt+'回 / '+(last||'─')):'―'}</div>`;
+    el.appendChild(row);
+  });
+}
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tnav').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on'); btn.classList.add('on');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function launchConfetti(){
+  const cvs=document.getElementById('cnf');
+  cvs.width=innerWidth; cvs.height=innerHeight; cvs.style.display='block';
+  const ctx=cvs.getContext('2d');
+  const parts=Array.from({length:120},()=>({
+    x:Math.random()*innerWidth,y:-10,
+    vx:(Math.random()-.5)*4,vy:Math.random()*4+2,
+    r:Math.random()*6+3,
+    color:['#f472b6','#facc15','#34d399','#60a5fa','#f87171','#a78bfa'][Math.floor(Math.random()*6)],
+    rot:Math.random()*360,rv:(Math.random()-.5)*8,
+  }));
+  let frame;
+  function draw(){
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    parts.forEach(p=>{
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);ctx.restore();
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;
+    });
+    if(parts.some(p=>p.y<innerHeight)){frame=requestAnimationFrame(draw);}
+    else{cvs.style.display='none';cancelAnimationFrame(frame);}
+  }
+  draw();
+  setTimeout(()=>{cvs.style.display='none';cancelAnimationFrame(frame);},3500);
+}
+document.addEventListener('DOMContentLoaded',()=>{buildCards();render();});
+</script>
+</body>
+</html>
