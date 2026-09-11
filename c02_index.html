@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/tinbu/Downloads/c02_index.html -->
-<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GAMBA 公共（高認）単元表</title>
 <style>
@@ -111,601 +111,56 @@ canvas#cnf{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;display:
     <div class="sum-item"><span class="sum-dot sum-dot-a"></span>A 完璧 <span class="sum-count" id="cnt-a">0</span></div>
     <div class="sum-item"><span class="sum-dot sum-dot-b"></span>B 良好 <span class="sum-count" id="cnt-b">0</span></div>
     <div class="sum-item"><span class="sum-dot sum-dot-c"></span>C 要復習 <span class="sum-count" id="cnt-c">0</span></div>
-    <div class="sum-item"><span class="sum-dot sum-dot-n"></span>未学習 <span class="sum-count" id="cnt-n">29</span></div>
+    <div class="sum-item"><span class="sum-dot sum-dot-n"></span>未学習 <span class="sum-count" id="cnt-n">0</span></div>
   </div>
 </div>
 <div class="tab-nav">
-  <button class="tnav on" onclick="switchTab(&#39;tab-units&#39;,this)">📋 単元表</button>
-  <button class="tnav" onclick="switchTab(&#39;tab-record&#39;,this)">📊 学習記録</button>
+  <button class="tnav on" onclick="switchTab('tab-units',this)">📋 単元表</button>
+  <button class="tnav"    onclick="switchTab('tab-record',this)">📊 学習記録</button>
 </div>
 <div class="wrap">
 <div class="tab-sec on" id="tab-units">
-  <div class="notice">📘 このコースは<strong>高卒認定試験「公共」レベル</strong>の学習内容です。中学公民の内容と一部重なりますが、思想・青年期分野や、より詳しい政治・経済のしくみを扱います。中学公民の基礎に不安がある場合は、先に<a href="file:///C:/Users/tinbu/Downloads/civics_index.html" style="color:#0f766e;font-weight:700;">GAMBA 公民（中学）単元表</a>で土台を固めることをおすすめします。</div>
+  <div class="notice">📘 このコースは<strong>高卒認定試験「公共」レベル</strong>の学習内容です。中学公民の内容と一部重なりますが、思想・青年期分野や、より詳しい政治・経済のしくみを扱います。中学公民の基礎に不安がある場合は、先に<a href="civics_index.html" style="color:#0f766e;font-weight:700;">GAMBA 公民（中学）単元表</a>で土台を固めることをおすすめします。</div>
   <div class="progress-wrap">
     <div class="progress-lbl">📊 習熟度（全単元）</div>
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progFill" style="width:0%"></div></div>
-    <div class="progress-pct" id="progPct">0%　A評価 <span id="progNote">0 / 29</span> 単元（公開中 29／全27）</div>
+    <div class="progress-pct" id="progPct">0%　A評価 <span id="progNote">0 / 29</span> 単元</div>
   </div>
   <div class="unit">
     <div class="unit-hd ch1"><span class="unit-num">第1章</span><span class="unit-title">青年期と自己形成</span><span class="unit-badge">3レッスン</span></div>
-    <div class="unit-body"><div class="group-label">🌱 青年期の意義・欲求と適応・キャリア形成</div><div class="sec-grid" id="grid-ch1"><div class="sec-card" data-id="k01">
-      <div class="sc-hd">
-        <span class="sc-num">L01</span>
-        <span class="sc-title">青年期をどう捉えるか</span>
-        <span class="sc-status" id="st-k01">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>マージナルマン・モラトリアム・第二の誕生</li><li>ハヴィガースト・エリクソンの発達課題</li><li>現代の青年期（ニート・フリーター等）</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k01">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k01">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k01&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k01&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k01&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k02">
-      <div class="sc-hd">
-        <span class="sc-num">L02</span>
-        <span class="sc-title">欲求と自己形成</span>
-        <span class="sc-status" id="st-k02">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>欲求の分類とマズロー</li><li>欲求不満・葛藤と防衛機制</li><li>パーソナリティの3要素と類型論</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k02">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k02">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k02&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k02&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k02&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k03">
-      <div class="sc-hd">
-        <span class="sc-num">L03</span>
-        <span class="sc-title">職業選択とキャリア形成</span>
-        <span class="sc-status" id="st-k03">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>生きがいと職業観</li><li>ワークライフバランス</li><li>青年期から社会参加へ</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k03">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k03">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch1_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k03&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k03&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k03&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">🌱 青年期の意義・欲求と適応・キャリア形成</div><div class="sec-grid" id="grid-ch1"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch2"><span class="unit-num">第2章</span><span class="unit-title">幸福・正義・公正と倫理的な考え方</span><span class="unit-badge">6レッスン</span></div>
-    <div class="unit-body"><div class="group-label">⚖️ 功利主義・義務論・社会契約説・東西の先哲</div><div class="sec-grid" id="grid-ch2"><div class="sec-card" data-id="k04">
-      <div class="sc-hd">
-        <span class="sc-num">L04</span>
-        <span class="sc-title">幸福・正義・公正の考え方①（功利主義）</span>
-        <span class="sc-status" id="st-k04">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>ベンサムの量的功利主義</li><li>ミルの質的功利主義</li><li>最大多数の最大幸福</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k04">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k04">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k04&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k04&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k04&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k05">
-      <div class="sc-hd">
-        <span class="sc-num">L05</span>
-        <span class="sc-title">幸福・正義・公正の考え方②（義務論・徳倫理）</span>
-        <span class="sc-status" id="st-k05">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>カントの義務論・定言命法</li><li>アリストテレスの徳倫理・中庸</li><li>動機主義と結果主義の比較</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k05">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k05">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k05&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k05&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k05&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k06">
-      <div class="sc-hd">
-        <span class="sc-num">L06</span>
-        <span class="sc-title">社会契約説と人間の尊厳</span>
-        <span class="sc-status" id="st-k06">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>ホッブズ『リヴァイアサン』</li><li>ロックの抵抗権・所有権</li><li>ルソーの一般意志</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k06">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k06">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch2_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k06&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k06&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k06&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k07">
-      <div class="sc-hd">
-        <span class="sc-num">L07</span>
-        <span class="sc-title">東洋哲学① 中国の思想（諸子百家）</span>
-        <span class="sc-status" id="st-k07">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>儒家（孔子・孟子・荀子）</li><li>墨家（墨子）・道家（老子）</li><li>法家（韓非子）</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k07">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k07">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/toyo1.html" class="sc-btn">📖 学習する（説明＋練習一体型）</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k07&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k07&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k07&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k08">
-      <div class="sc-hd">
-        <span class="sc-num">L08</span>
-        <span class="sc-title">東洋哲学② 朱子学・陽明学</span>
-        <span class="sc-status" id="st-k08">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>朱子学（朱熹）</li><li>陽明学（王陽明）</li><li>日本への伝来と影響</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k08">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k08">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/toyo2.html" class="sc-btn">📖 学習する（説明＋練習一体型）</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k08&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k08&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k08&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k09">
-      <div class="sc-hd">
-        <span class="sc-num">L09</span>
-        <span class="sc-title">東洋哲学③ 日本の思想</span>
-        <span class="sc-status" id="st-k09">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>日本の伝統思想</li><li>神仏習合・国学など</li><li>近代日本の思想家</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k09">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k09">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/toyo3.html" class="sc-btn">📖 学習する（説明＋練習一体型）</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k09&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k09&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k09&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">⚖️ 功利主義・義務論・社会契約説・東西の先哲</div><div class="sec-grid" id="grid-ch2"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch3"><span class="unit-num">第3章</span><span class="unit-title">現代社会の特色と課題</span><span class="unit-badge">3レッスン</span></div>
-    <div class="unit-body"><div class="group-label">🌍 情報化社会・消費者問題・多文化共生</div><div class="sec-grid" id="grid-ch3"><div class="sec-card" data-id="k10">
-      <div class="sc-hd">
-        <span class="sc-num">L10</span>
-        <span class="sc-title">情報化社会とグローバル化</span>
-        <span class="sc-status" id="st-k10">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>AI・ビッグデータと情報リテラシー</li><li>情報格差（デジタルデバイド）</li><li>グローバル化の光と影</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k10">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k10">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k10&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k10&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k10&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k11">
-      <div class="sc-hd">
-        <span class="sc-num">L11</span>
-        <span class="sc-title">消費者問題と契約</span>
-        <span class="sc-status" id="st-k11">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>契約自由の原則と成年年齢18歳</li><li>消費者契約法・クーリングオフ</li><li>多重債務と消費者保護</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k11">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k11">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k11&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k11&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k11&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k12">
-      <div class="sc-hd">
-        <span class="sc-num">L12</span>
-        <span class="sc-title">多文化共生と持続可能な社会</span>
-        <span class="sc-status" id="st-k12">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>多文化共生社会とダイバーシティ</li><li>SDGsと持続可能な開発</li><li>伝統文化の継承と変容</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k12">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k12">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch3_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k12&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k12&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k12&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">🌍 情報化社会・消費者問題・多文化共生</div><div class="sec-grid" id="grid-ch3"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch4"><span class="unit-num">第4章</span><span class="unit-title">民主政治の基本原理と日本国憲法</span><span class="unit-badge">3レッスン</span></div>
-    <div class="unit-body"><div class="group-label">🗳️ 民主政治・立憲主義・基本的人権</div><div class="sec-grid" id="grid-ch4"><div class="sec-card" data-id="k13">
-      <div class="sc-hd">
-        <span class="sc-num">L13</span>
-        <span class="sc-title">民主政治の基本原理と選挙制度</span>
-        <span class="sc-status" id="st-k13">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>直接民主制と間接民主制</li><li>選挙の4原則・選挙制度の種類</li><li>政治的無関心と一票の格差</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k13">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k13">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k13&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k13&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k13&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k14">
-      <div class="sc-hd">
-        <span class="sc-num">L14</span>
-        <span class="sc-title">日本国憲法の基本原理</span>
-        <span class="sc-status" id="st-k14">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>立憲主義と法の支配</li><li>国民主権・基本的人権の尊重・平和主義</li><li>憲法改正の手続き</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k14">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k14">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k14&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k14&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k14&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k15">
-      <div class="sc-hd">
-        <span class="sc-num">L15</span>
-        <span class="sc-title">基本的人権の保障</span>
-        <span class="sc-status" id="st-k15">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>平等権・自由権・社会権</li><li>新しい人権（環境権・知る権利など）</li><li>人権をめぐる主な判例</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k15">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k15">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g4_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k15&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k15&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k15&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">🗳️ 民主政治・立憲主義・基本的人権</div><div class="sec-grid" id="grid-ch4"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch5"><span class="unit-num">第5章</span><span class="unit-title">日本の政治機構</span><span class="unit-badge">4レッスン</span></div>
-    <div class="unit-body"><div class="group-label">🏛️ 国会・内閣・裁判所・地方自治</div><div class="sec-grid" id="grid-ch5"><div class="sec-card" data-id="k16">
-      <div class="sc-hd">
-        <span class="sc-num">L16</span>
-        <span class="sc-title">国会のしくみと立法過程</span>
-        <span class="sc-status" id="st-k16">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>国会の地位と権限・衆参の違い</li><li>法律ができるまでの流れ</li><li>衆議院の優越</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k16">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k16">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k16&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k16&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k16&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k17">
-      <div class="sc-hd">
-        <span class="sc-num">L17</span>
-        <span class="sc-title">内閣のしくみと行政</span>
-        <span class="sc-status" id="st-k17">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>議院内閣制のしくみ</li><li>行政の役割と行政改革</li><li>公務員制度</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k17">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k17">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k17&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k17&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k17&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k18">
-      <div class="sc-hd">
-        <span class="sc-num">L18</span>
-        <span class="sc-title">裁判所と司法制度</span>
-        <span class="sc-status" id="st-k18">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>三審制と違憲審査権</li><li>裁判員制度の意義</li><li>司法権の独立</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k18">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k18">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k18&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k18&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k18&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k19">
-      <div class="sc-hd">
-        <span class="sc-num">L19</span>
-        <span class="sc-title">地方自治のしくみ</span>
-        <span class="sc-status" id="st-k19">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>住民自治と団体自治</li><li>直接請求権の詳細</li><li>地方分権と地方財政</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k19">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k19">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l4.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l4_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g5_l4_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k19&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k19&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k19&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">🏛️ 国会・内閣・裁判所・地方自治</div><div class="sec-grid" id="grid-ch5"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch6"><span class="unit-num">第6章</span><span class="unit-title">現代の経済社会</span><span class="unit-badge">5レッスン</span></div>
-    <div class="unit-body"><div class="group-label">💰 市場・企業・金融・財政・国民所得</div><div class="sec-grid" id="grid-ch6"><div class="sec-card" data-id="k20">
-      <div class="sc-hd">
-        <span class="sc-num">L20</span>
-        <span class="sc-title">資本主義経済と社会主義経済の歴史</span>
-        <span class="sc-status" id="st-k20">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>産業革命・アダム=スミス・ケインズ</li><li>独占資本主義から新自由主義へ</li><li>マルクスと社会主義経済・中国の改革開放</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k20">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k20">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch4_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch4_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_ch4_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k20&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k20&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k20&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k21">
-      <div class="sc-hd">
-        <span class="sc-num">L21</span>
-        <span class="sc-title">市場経済のしくみと企業</span>
-        <span class="sc-status" id="st-k21">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>需要・供給と価格のしくみ</li><li>株式会社のしくみ</li><li>独占・寡占と公正取引委員会</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k21">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k21">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k21&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k21&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k21&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k22">
-      <div class="sc-hd">
-        <span class="sc-num">L22</span>
-        <span class="sc-title">戦後日本経済のあゆみ</span>
-        <span class="sc-status" id="st-k22">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>高度経済成長とその後</li><li>安定成長・バブル経済</li><li>産業構造の変化</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k22">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k22">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k22&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k22&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k22&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k23">
-      <div class="sc-hd">
-        <span class="sc-num">L23</span>
-        <span class="sc-title">戦後の国際経済と地域経済統合</span>
-        <span class="sc-status" id="st-k23">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>ブレトンウッズ体制・GATT・WTO</li><li>地域経済統合（EU・ASEANなど）</li><li>為替相場のしくみ</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k23">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k23">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k23&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k23&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k23&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k24">
-      <div class="sc-hd">
-        <span class="sc-num">L24</span>
-        <span class="sc-title">発展途上国の経済問題</span>
-        <span class="sc-status" id="st-k24">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>南北問題・南南問題</li><li>ODA・NIEO</li><li>新興工業経済地域（NIES）</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k24">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k24">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l4.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l4_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g6_l4_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k24&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k24&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k24&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">💰 市場・企業・金融・財政・国民所得</div><div class="sec-grid" id="grid-ch6"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch7"><span class="unit-num">第7章</span><span class="unit-title">社会保障と環境</span><span class="unit-badge">2レッスン</span></div>
-    <div class="unit-body"><div class="group-label">🌿 社会保障制度・環境問題と循環型社会</div><div class="sec-grid" id="grid-ch7"><div class="sec-card" data-id="k25">
-      <div class="sc-hd">
-        <span class="sc-num">L25</span>
-        <span class="sc-title">社会保障制度と少子高齢化</span>
-        <span class="sc-status" id="st-k25">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>社会保障の4つの柱</li><li>年金制度と少子高齢化問題</li><li>介護保険と社会福祉</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k25">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k25">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g7_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g7_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g7_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k25&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k25&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k25&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k26">
-      <div class="sc-hd">
-        <span class="sc-num">L26</span>
-        <span class="sc-title">環境問題と循環型社会</span>
-        <span class="sc-status" id="st-k26">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>四大公害と環境基本法</li><li>循環型社会と3R</li><li>脱炭素社会への取り組み</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k26">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k26">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g7_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g7_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g7_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k26&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k26&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k26&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">🌿 社会保障制度・環境問題と循環型社会</div><div class="sec-grid" id="grid-ch7"></div></div>
   </div>
   <div class="unit">
     <div class="unit-hd ch8"><span class="unit-num">第8章</span><span class="unit-title">国際社会と日本</span><span class="unit-badge">3レッスン</span></div>
-    <div class="unit-body"><div class="group-label">🌐 国際政治・国際経済・地球的課題</div><div class="sec-grid" id="grid-ch8"><div class="sec-card" data-id="k27">
-      <div class="sc-hd">
-        <span class="sc-num">L27</span>
-        <span class="sc-title">国際連合とPKO</span>
-        <span class="sc-status" id="st-k27">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>国際連合のしくみと役割</li><li>PKO国連平和維持活動・NGO</li><li>国際司法裁判所など専門機関</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k27">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k27">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l1.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l1_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l1_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k27&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k27&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k27&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k28">
-      <div class="sc-hd">
-        <span class="sc-num">L28</span>
-        <span class="sc-title">冷戦後の国際政治と日本外交</span>
-        <span class="sc-status" id="st-k28">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>湾岸戦争・同時多発テロ</li><li>冷戦の終結とその後の国際情勢</li><li>第二次大戦後の日本外交</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k28">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k28">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l2.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l2_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l2_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k28&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k28&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k28&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div><div class="sec-card" data-id="k29">
-      <div class="sc-hd">
-        <span class="sc-num">L29</span>
-        <span class="sc-title">地球的課題とこれからの社会</span>
-        <span class="sc-status" id="st-k29">未学習</span>
-      </div>
-      <div class="sc-body"><ul class="sc-topics"><li>SDGsと持続可能な社会づくり</li><li>防災・減災と共生社会</li><li>公共的な空間の主体としての私たち</li></ul></div>
-      <div class="sc-meta"><div class="sc-meta-item">📖 学習回数 <span class="sc-meta-val" id="cnt-k29">0</span></div><div class="sc-meta-item">📅 最終日 <span class="sc-meta-val" id="last-k29">─</span></div></div>
-      
-      <div class="sc-btn-row">
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l3.html" class="sc-btn">📖 レッスン</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l3_practice.html" class="sc-btn">📝 練習問題</a>
-        <a href="file:///C:/Users/tinbu/Downloads/c02_g8_l3_check.html" class="sc-btn sc-btn-sub">📋 確認問題</a>
-      </div>
-      <div class="abc-row">
-        <span class="abc-lbl">理解度：</span>
-        <button class="abc-btn abc-a" onclick="rate(&#39;k29&#39;,&#39;a&#39;,this)">A 完璧</button>
-        <button class="abc-btn abc-b" onclick="rate(&#39;k29&#39;,&#39;b&#39;,this)">B 良好</button>
-        <button class="abc-btn abc-c" onclick="rate(&#39;k29&#39;,&#39;c&#39;,this)">C 要復習</button>
-      </div></div></div></div>
+    <div class="unit-body"><div class="group-label">🌐 国際政治・国際経済・地球的課題</div><div class="sec-grid" id="grid-ch8"></div></div>
   </div>
 </div>
 <div class="tab-sec" id="tab-record">
-  <div class="record-wrap"><div class="record-title">📊 単元別　理解度一覧</div><div id="record-list"><div class="prog-row"><div class="prog-num">L01</div><div class="prog-title">青年期をどう捉えるか</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L02</div><div class="prog-title">欲求と自己形成</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L03</div><div class="prog-title">職業選択とキャリア形成</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L04</div><div class="prog-title">幸福・正義・公正の考え方①（功利主義）</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L05</div><div class="prog-title">幸福・正義・公正の考え方②（義務論・徳倫理）</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L06</div><div class="prog-title">社会契約説と人間の尊厳</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L07</div><div class="prog-title">東洋哲学① 中国の思想（諸子百家）</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L08</div><div class="prog-title">東洋哲学② 朱子学・陽明学</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L09</div><div class="prog-title">東洋哲学③ 日本の思想</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L10</div><div class="prog-title">情報化社会とグローバル化</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L11</div><div class="prog-title">消費者問題と契約</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L12</div><div class="prog-title">多文化共生と持続可能な社会</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L13</div><div class="prog-title">民主政治の基本原理と選挙制度</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L14</div><div class="prog-title">日本国憲法の基本原理</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L15</div><div class="prog-title">基本的人権の保障</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L16</div><div class="prog-title">国会のしくみと立法過程</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L17</div><div class="prog-title">内閣のしくみと行政</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L18</div><div class="prog-title">裁判所と司法制度</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L19</div><div class="prog-title">地方自治のしくみ</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L20</div><div class="prog-title">資本主義経済と社会主義経済の歴史</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L21</div><div class="prog-title">市場経済のしくみと企業</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L22</div><div class="prog-title">戦後日本経済のあゆみ</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L23</div><div class="prog-title">戦後の国際経済と地域経済統合</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L24</div><div class="prog-title">発展途上国の経済問題</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L25</div><div class="prog-title">社会保障制度と少子高齢化</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L26</div><div class="prog-title">環境問題と循環型社会</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L27</div><div class="prog-title">国際連合とPKO</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L28</div><div class="prog-title">冷戦後の国際政治と日本外交</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div><div class="prog-row"><div class="prog-num">L29</div><div class="prog-title">地球的課題とこれからの社会</div><div class="prog-grade">未学習</div><div class="prog-meta">0回 / ─</div></div></div></div>
+  <div class="record-wrap"><div class="record-title">📊 単元別　理解度一覧</div><div id="record-list"></div></div>
 </div>
 </div>
 <div class="modal-ov" id="modal" onclick="closeModal()">
@@ -904,7 +359,6 @@ function launchConfetti(){
 }
 document.addEventListener('DOMContentLoaded',()=>{buildCards();render();});
 </script>
-<script src="./c02_index_files/gamba-ai.js.ダウンロード" defer=""></script>
-
-
-<div id="gamba-ai-host" style="color-scheme: initial; forced-color-adjust: initial; math-depth: initial; position-anchor: initial; text-size-adjust: initial; appearance: initial; color: initial; font: initial; font-palette: initial; font-synthesis: initial; position-area: initial; text-orientation: initial; text-rendering: initial; text-spacing-trim: initial; -webkit-font-smoothing: initial; -webkit-locale: initial; -webkit-text-orientation: initial; -webkit-writing-mode: initial; writing-mode: initial; zoom: initial; accent-color: initial; place-content: initial; place-items: initial; place-self: initial; alignment-baseline: initial; anchor-name: initial; anchor-scope: initial; animation-composition: initial; animation: initial; animation-trigger: initial; app-region: initial; aspect-ratio: initial; backdrop-filter: initial; backface-visibility: initial; background: initial; background-blend-mode: initial; baseline-shift: initial; baseline-source: initial; block-size: initial; border-block: initial; border: initial; border-radius: initial; border-collapse: initial; border-end-end-radius: initial; border-end-start-radius: initial; border-inline: initial; border-shape: initial; border-start-end-radius: initial; border-start-start-radius: initial; inset: initial; box-decoration-break: initial; box-shadow: initial; box-sizing: initial; break-after: initial; break-before: initial; break-inside: initial; buffered-rendering: initial; caption-side: initial; caret-animation: initial; caret-color: initial; caret-shape: initial; clear: initial; clip: initial; clip-path: initial; clip-rule: initial; color-interpolation: initial; color-interpolation-filters: initial; color-rendering: initial; columns: initial; column-fill: initial; gap: initial; rule-break: initial; rule: initial; rule-inset: initial; rule-visibility-items: initial; column-span: initial; contain: initial; contain-intrinsic-block-size: initial; contain-intrinsic-size: initial; contain-intrinsic-inline-size: initial; container: initial; content: initial; content-visibility: initial; corner-shape: initial; corner-block-end-shape: initial; corner-block-start-shape: initial; counter-increment: initial; counter-reset: initial; counter-set: initial; cursor: initial; cx: initial; cy: initial; d: initial; display: initial; dominant-baseline: initial; dynamic-range-limit: initial; empty-cells: initial; field-sizing: initial; fill: initial; fill-opacity: initial; fill-rule: initial; filter: initial; flex: initial; flex-flow: initial; flex-line-count: initial; float: initial; flood-color: initial; flood-opacity: initial; grid: initial; grid-area: initial; height: initial; hyphenate-character: initial; hyphenate-limit-chars: initial; hyphens: initial; image-orientation: initial; image-rendering: initial; initial-letter: initial; inline-size: initial; inset-block: initial; inset-inline: initial; interactivity: initial; interest-delay: initial; interpolate-size: initial; isolation: initial; letter-spacing: initial; lighting-color: initial; line-break: initial; list-style: initial; margin-block: initial; margin: initial; margin-inline: initial; marker: initial; mask: initial; mask-type: initial; math-shift: initial; math-style: initial; max-block-size: initial; max-height: initial; max-inline-size: initial; max-width: initial; min-block-size: initial; min-height: initial; min-inline-size: initial; min-width: initial; mix-blend-mode: initial; object-fit: initial; object-position: initial; object-view-box: initial; offset: initial; opacity: initial; order: initial; orphans: initial; outline: initial; outline-offset: initial; overflow-anchor: initial; overflow-block: initial; overflow-clip-margin: initial; overflow-inline: initial; overflow-wrap: initial; overflow: initial; overlay: initial; overscroll-behavior-block: initial; overscroll-behavior-inline: initial; overscroll-behavior: initial; padding-block: initial; padding: initial; padding-inline: initial; page: initial; page-margin-safety: initial; page-orientation: initial; paint-order: initial; perspective: initial; perspective-origin: initial; pointer-events: initial; position-try: initial; position-visibility: initial; print-color-adjust: initial; quotes: initial; r: initial; reading-flow: initial; reading-order: initial; resize: initial; rotate: initial; ruby-align: initial; ruby-overhang: initial; ruby-position: initial; rule-overlap: initial; rx: initial; ry: initial; scale: initial; scroll-behavior: initial; scroll-initial-target: initial; scroll-margin-block: initial; scroll-margin: initial; scroll-margin-inline: initial; scroll-marker-group: initial; scroll-padding-block: initial; scroll-padding: initial; scroll-padding-inline: initial; scroll-snap-align: initial; scroll-snap-stop: initial; scroll-snap-type: initial; scroll-target-group: initial; scroll-timeline: initial; scrollbar-color: initial; scrollbar-gutter: initial; scrollbar-width: initial; shape-image-threshold: initial; shape-margin: initial; shape-outside: initial; shape-rendering: initial; size: initial; speak: initial; stop-color: initial; stop-opacity: initial; stroke: initial; stroke-dasharray: initial; stroke-dashoffset: initial; stroke-linecap: initial; stroke-linejoin: initial; stroke-miterlimit: initial; stroke-opacity: initial; stroke-width: initial; tab-size: initial; table-layout: initial; text-align: initial; text-align-last: initial; text-anchor: initial; text-autospace: initial; text-box: initial; text-combine-upright: initial; text-decoration: initial; text-decoration-skip-ink: initial; text-emphasis: initial; text-emphasis-position: initial; text-fit: initial; text-indent: initial; text-justify: initial; text-overflow: initial; text-shadow: initial; text-transform: initial; text-underline-offset: initial; text-underline-position: initial; text-wrap: initial; timeline-scope: initial; timeline-trigger: initial; touch-action: initial; transform: initial; transform-box: initial; transform-origin: initial; transform-style: initial; transition: initial; translate: initial; trigger-scope: initial; user-select: initial; vector-effect: initial; vertical-align: initial; view-timeline: initial; view-transition-class: initial; view-transition-group: initial; view-transition-name: initial; view-transition-scope: initial; visibility: initial; border-spacing: initial; -webkit-box-align: initial; -webkit-box-decoration-break: initial; -webkit-box-direction: initial; -webkit-box-flex: initial; -webkit-box-ordinal-group: initial; -webkit-box-orient: initial; -webkit-box-pack: initial; -webkit-box-reflect: initial; -webkit-line-break: initial; -webkit-line-clamp: initial; -webkit-mask-box-image: initial; -webkit-rtl-ordering: initial; -webkit-ruby-position: initial; -webkit-tap-highlight-color: initial; -webkit-text-combine: initial; -webkit-text-decorations-in-effect: initial; -webkit-text-fill-color: initial; -webkit-text-security: initial; -webkit-text-stroke: initial; -webkit-user-drag: initial; white-space-collapse: initial; widows: initial; width: initial; will-change: initial; window-drag: initial; word-break: initial; word-spacing: initial; x: initial; y: initial; position: fixed; z-index: 2147483000;"><template shadowrootmode="open"><style>:host{all:initial;}*{box-sizing:border-box;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif;}.fab{position:fixed;right:16px;bottom:16px;display:flex;align-items:center;gap:8px;background:#2B5797;color:#fff;border:none;border-radius:999px;padding:13px 18px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(43,87,151,.4);}.fab:hover{background:#1F3864;}.panel{position:fixed;right:16px;bottom:16px;width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 32px));background:#fff;border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.28);border:1px solid #DCE1E8;}.panel.open{display:flex;}.hd{background:#2B5797;color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}.hd .t{font-size:15px;font-weight:700;}.hd button{background:transparent;border:none;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:0 4px;}.body{flex:1;overflow-y:auto;padding:14px;background:#F7F9FC;display:flex;flex-direction:column;gap:10px;}.m{max-width:88%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.8;white-space:pre-wrap;word-break:break-word;}.m.ai{background:#fff;border:1px solid #DCE1E8;align-self:flex-start;border-bottom-left-radius:4px;color:#2C3038;}.m.me{background:#E8EEF7;align-self:flex-end;border-bottom-right-radius:4px;color:#1F3864;}.m.think{background:#EDEFF2;color:#6B7280;font-style:italic;align-self:flex-start;}.ft{border-top:1px solid #DCE1E8;padding:10px;background:#fff;}.row{display:flex;gap:8px;}textarea{flex:1;resize:none;height:44px;padding:11px 12px;border:1px solid #DCE1E8;border-radius:10px;font-size:16px;line-height:1.4;outline:none;color:#2C3038;}textarea:focus{border-color:#2B5797;}.send{background:#E8802B;color:#fff;border:none;border-radius:10px;padding:0 16px;font-size:14px;font-weight:700;cursor:pointer;}.send:disabled{background:#C3C8D0;cursor:default;}.line{display:block;text-align:center;margin-top:9px;font-size:13px;color:#06663a;text-decoration:none;background:#E6F7EE;border:1px solid #A7E3C4;border-radius:8px;padding:8px;}.note{font-size:11.5px;color:#8A9099;text-align:center;margin-top:7px;line-height:1.6;}@media (max-width:480px){.panel{right:8px;left:8px;bottom:8px;width:auto;height:calc(100vh - 16px);}}</style><button class="fab" id="fab">🤖 <span>わからないときは</span></button><div class="panel" id="panel">  <div class="hd"><span class="t">GAMBA 学習サポート</span><button id="close" aria-label="閉じる">×</button></div>  <div class="body" id="body"></div>  <div class="ft">    <div class="row">      <textarea id="ta" placeholder="質問を入力してください"></textarea>      <button class="send" id="send">送信</button>    </div>    <a class="line" id="lineBtn" href="https://line.me/R/ti/p/@735itfta" target="_blank" rel="noopener">解決しないときは 野田先生に聞く（LINE）</a>    <div class="note">答えが合っているか不安なときは、先生に確認してください。</div>  </div></div></template></div></body></html>
+<script src="https://realizefield.github.io/gamba-kounin-seito/gamba-ai.js" defer></script>
+</body>
+</html>
