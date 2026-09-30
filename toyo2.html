@@ -328,5 +328,6 @@ function _stopConf(){if(_raf){cancelAnimationFrame(_raf);_raf=null;}_ctx.clearRe
 (function(){try{var d=JSON.parse(localStorage.getItem('koukyo_index_v1')||'{}');var ID='toyo2';d[ID+'_count']=(d[ID+'_count']||0)+1;d[ID+'_last']=new Date().toISOString().slice(0,10);localStorage.setItem('koukyo_index_v1',JSON.stringify(d));var cal=JSON.parse(localStorage.getItem('koukyo_calendar_v1')||'{}');var today=new Date().toISOString().slice(0,10);cal[today]=(cal[today]||0)+1;localStorage.setItem('koukyo_calendar_v1',JSON.stringify(cal));}catch(e){}}());
 if(new URLSearchParams(location.search).get('mode')==='quiz'){goQuizDirect();}
 </script>
+<script src="https://realizefield.github.io/gamba-kounin-seito/gamba-ai.js" defer></script>
 </body>
 </html>
